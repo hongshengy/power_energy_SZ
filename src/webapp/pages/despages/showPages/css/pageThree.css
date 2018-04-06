@@ -1,0 +1,1120 @@
+@CHARSET "UTF-8";
+
+.left_div {
+    float: left;
+    margin-left: 125px;
+}
+
+.left_div .item_div {
+	margin-top: 40px;
+	overflow: hidden;
+	margin-bottom: 50px;
+}
+
+.left_div .item_div .title_div {
+	
+}
+
+.left_div .item_div .title_div .icon_div {
+	width: 55px;
+    height: 55px;
+    float: left;
+    -webkit-transform: scale(0.2); 
+    -moz-transform: scale(0.2); 
+    opacity: 0;
+    margin-left: 20px;
+}
+
+.left_div .item_div .title_div .txt_div {
+    color: #4e4e4e;
+    font-size: 28px;
+    font-family: normalMainFont;
+    margin-top: 7px;
+    float: left;
+    cursor: pointer;
+    opacity: 0;
+    margin-left: 25px;
+}
+
+.left_div .item_div .title_div .line_div {
+	opacity: 0;
+    height: 5px;
+    width: 100%;
+}
+
+.left_div .item_div .content_div {
+	margin-top: 55px;
+	opacity: 0;
+	display:none;
+}
+
+.left_div .item_div .content_div .line_div {
+    float: left;
+    width: 2px;
+    background: #7F7F7F;
+    margin-left: 20px;
+    height: 190px;
+}
+
+.left_div .item_div .content_div .txt_div {
+    padding: 15px 0px 0px 50px;
+    text-indent: 2em;
+    width: 480px;
+    font-size: 18px;
+    text-align: justify;
+    color: #4e4e4e;
+    line-height: 29px;
+}
+
+.right_div {
+	
+}
+
+.right_div .tab_one {
+    float: left;
+    margin-left: 300px;
+    margin-top: 30px;
+}
+
+.right_div .tab_one .item_div {
+    height: 90px;
+}
+
+.right_div .tab_one .item_div .name_div {
+    font-size: 28px;
+    color: #4e4e4e;
+    float: left;
+    width: 260px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.right_div .tab_one .item_div .num_div {
+	float: left;
+    font-family: numberFont;
+    font-size: 48px;
+    color: #4e4e4e;
+    width: 160px;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.right_div .tab_one .item_div .icon_div {
+    float: left;
+    margin-left: 65px;
+    width: 70px;
+    height: 70px;
+}
+
+.right_div .tab_one .item_div .unit_div {
+    float: left;
+    font-size: 28px;
+    color: #4e4e4e;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.right_div .tab_two {
+    float: left;
+    margin-left: 180px;
+    margin-top: -40px;
+}
+
+.right_div .btn_div {
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background: #BFBFBF;
+    float: left;
+    cursor: pointer;
+    margin-top: 60px;
+}
+
+.right_div .tab_two .item_div {
+    margin-top: 40px;
+}
+
+.right_div .tab_two .item_div .title_div {
+    font-size: 24px;
+	color: #ff9738;
+	position: absolute;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.right_div .tab_three {
+	float: left;
+}
+
+
+
+.right_div .tab_three .img_one_div {
+    margin-left: 510px;
+    margin-top: 40px;
+    width: 240px;
+    height: 335px;
+}
+
+.right_div .tab_three .img_two_div {
+	width: 515px;
+    height: 80px;
+    margin-left: 380px;
+}
+
+.right_div .tab_three .img_three_div {
+	
+}
+
+.right_div .tab_three .content_div_1 {
+	
+}
+
+.right_div .tab_three .content_div_1 .item_div {
+	float: left;
+    margin-left: 250px;
+}
+
+.right_div .tab_three .content_div_1 .item_div .txt_div {
+    float: left;
+    font-size: 22px;
+    color: #128fd4;
+    margin-left: -160px;
+    margin-top: 20px;
+}
+
+.right_div .tab_three .content_div_2 {
+	
+}
+
+.right_div .tab_three .content_div_2 .item_div {
+    float: left;
+    width: 70px;
+    height: 175px;
+}
+
+.right_div .tab_three .content_div_2 .item_div .txt_div {
+    float: left;
+    width: 10px;
+    margin-left: -45px;
+    margin-top: 20px;
+    color: white;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+.right_div .tab_four {
+    float: left;
+}
+
+.right_div .tab_four .bg_div {
+    float: left;
+    width: 500px;
+    height: 720px;
+    margin-left: 370px;
+}
+
+.right_div .tab_four .content_div {
+    float: left;
+    position: absolute;
+    top: -130px;
+    width:1200px;
+}
+
+.right_div .tab_four .content_div .top_div {
+	height: 350px;
+}
+
+.right_div .tab_four .content_div .top_div .item_div {
+    float: left;
+    width: 120px;
+    height: 120px;
+    margin-left: 220px;
+    margin-top: 200px;
+}
+
+.right_div .tab_four .content_div .top_div .item_div .txt_div {
+    text-align: center;
+    font-size: 22px;
+    color: #303030;
+}
+
+.right_div .tab_four .content_div .bottom_div {
+    
+}
+
+.right_div .tab_four .content_div .bottom_div .item_div {
+	position: relative;
+    width: 240px;
+    height: 215px;
+    float: left;
+}
+
+.right_div .tab_four .content_div .bottom_div .item_div .txt_div {
+    float: left;
+    position: relative;
+    top: 0px;
+    left: 75px;
+    top: -83px;
+    font-size: 18px;
+    color: black;
+}
+
+.out{
+	-moz-animation: opacityInAnimation 0.8s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityInAnimation 0.8s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityInAnimation 0.8s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.in{
+	-moz-animation: opacityOutAnimation 0.8s ease;
+    -moz-animation-delay: 0.5s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 0.8s ease;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 0.8s ease;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+/*动画样式列表*/
+#a_1 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#c_1,#d_1 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+#a_2 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#c_2,#d_2 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+#a_3 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#c_3,#d_3 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay:  1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay:  1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay:  1s;
+    animation-fill-mode: forwards;
+}
+
+#a_4 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#c_4,#d_4 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+#g_1 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+#g_2 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+#g_3 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1.2s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1.2s;
+    animation-fill-mode: forwards;
+}
+
+#g_4 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1.4s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1.4s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1.4s;
+    animation-fill-mode: forwards;
+}
+
+#g_5 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1.6s;
+    animation-fill-mode: forwards;
+}
+
+#g_6 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1.8s;
+    animation-fill-mode: forwards;
+}
+
+#g_7 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 2s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+}
+
+#g_8 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 2.2s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 2.2s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 2.2s;
+    animation-fill-mode: forwards;
+}
+
+#h_1,#h_2 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+#i_1 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+#i_2 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.1s;
+    animation-fill-mode: forwards;
+}
+
+#i_3 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.2s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.2s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+#i_4 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.3s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.3s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+#i_5 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.4s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.4s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+#i_6 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.5s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+#i_7 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#i_8 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.7s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.7s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
+}
+
+#i_9 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+#i_10,#i_11 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+#i_12 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1.2s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay:1.2s;
+    animation-fill-mode: forwards;
+}
+
+#i_13 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 1.4s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 1.4s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 1.4s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes jAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 1;
+        height:0px;
+        transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-moz-keyframes jAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:0px;
+        -moz-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-webkit-keyframes jAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:0px;
+        -webkit-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-o-keyframes jAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:0px;
+        -o-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+#j_1 {
+    -moz-animation: jAnimation 1s ease;
+    -moz-animation-delay: 1.4s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: jAnimation 1s ease;
+    -webkit-animation-delay: 1.4s;
+    -webkit-animation-fill-mode: forwards;
+    animation: jAnimation 1s ease;
+    animation-delay: 1.4s;
+    animation-fill-mode: forwards;
+}
+
+#j_2 {
+    -moz-animation: opacityOutAnimation 0.6s ease;
+    -moz-animation-delay: 1.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 0.6s ease;
+    -webkit-animation-delay: 1.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 0.6s ease;
+    animation-delay: 1.6s;
+    animation-fill-mode: forwards;
+}
+
+#j_3 {
+    -moz-animation: opacityOutAnimation 0.6s ease;
+    -moz-animation-delay: 1.7s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 0.6s ease;
+    -webkit-animation-delay: 1.7s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 0.6s ease;
+    animation-delay: 1.7s;
+    animation-fill-mode: forwards;
+}
+
+#j_4 {
+    -moz-animation: opacityOutAnimation 0.6s ease;
+    -moz-animation-delay: 1.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 0.6s ease;
+    -webkit-animation-delay: 1.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 0.6s ease;
+    animation-delay: 1.8s;
+    animation-fill-mode: forwards;
+}
+
+#l_1 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+#l_2 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.2s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.2s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+#l_3 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.4s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.4s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+#l_4 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#l_5 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay:0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay:0.8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes eOutAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        height:60px;
+    }
+}
+
+@-moz-keyframes eOutAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        height:60px;
+    }
+}
+
+@-webkit-keyframes eOutAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        height:60px;
+    }
+}
+
+@-o-keyframes eOutAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        height:60px;
+    }
+}
+
+.menuOut{
+	-moz-animation: eOutAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: eOutAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: eOutAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes eOneAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 1;
+        height:255px;
+        transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-moz-keyframes eOneAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:255px;
+        -moz-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-webkit-keyframes eOneAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:255px;
+        -webkit-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-o-keyframes eOneAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:255px;
+        -o-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@keyframes eTwoAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 1;
+        height:220px;
+        transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-moz-keyframes eTwoAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:220px;
+        -moz-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-webkit-keyframes eTwoAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:220px;
+        -webkit-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-o-keyframes eTwoAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:220px;
+        -o-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@keyframes eThreeAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 1;
+        height:300px;
+        transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-moz-keyframes eThreeAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:300px;
+        -moz-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-webkit-keyframes eThreeAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:300px;
+        -webkit-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-o-keyframes eThreeAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:300px;
+        -o-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@keyframes eFourAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 1;
+        height:250px;
+        transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-moz-keyframes eFourAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:250px;
+        -moz-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-webkit-keyframes eFourAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:250px;
+        -webkit-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-o-keyframes eFourAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        height:250px;
+        -o-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+.menuFirstOneIn {
+    -moz-animation: eOneAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: eOneAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: eOneAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.menuOneIn {
+    -moz-animation: eOneAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: eOneAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: eOneAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.menuTwoIn {
+    -moz-animation: eTwoAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: eTwoAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: eTwoAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.menuThreeIn {
+    -moz-animation: eThreeAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: eThreeAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: eThreeAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.menuFourIn {
+    -moz-animation: eFourAnimation 1s ease;
+    -moz-animation-delay: 0s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: eFourAnimation 1s ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    animation: eFourAnimation 1s ease;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+#o_1,#o_2,#o_3,#o_4 {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.6s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmvc.dataSource2dao.SystemMapper2">
+
+	<insert id="insertLog" parameterType="map">
+		INSERT INTO TASK_LOG
+           (TASK_START_DATE
+           ,TASK_END_DATE
+           ,TASK_NAME)
+     VALUES
+           (#{TASK_START_DATE}
+           ,#{TASK_END_DATE}
+           ,#{TASK_NAME})
+	</insert>
+	
+	<select id="getLastTaskInfoByParams" parameterType="map" resultType="map">
+		SELECT 
+		TOP 1
+		*
+		FROM TASK_LOG
+		
+		<where>
+			<if test="TASK_NAME != '' and TASK_NAME != null">
+				TASK_NAME = #{TASK_NAME}
+			</if>
+		</where>
+		ORDER BY TASK_END_DATE DESC
+	</select>
+	
+</mapper>

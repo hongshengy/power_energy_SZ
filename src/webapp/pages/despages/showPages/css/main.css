@@ -1,0 +1,128 @@
+@CHARSET "UTF-8";
+
+@font-face {
+    font-family: numberFont;
+    src:url('../font/helveticaneue_blackcond.ttf');
+}
+
+@font-face {
+    font-family: normalMainFont;
+    src:url('../font/sourcehansanscnlight.ttf') format('truetype');
+    src:url('../font/SourceHanSansCN-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: boldMainFont;
+    src:url('../font/sourcehansanscnbold.ttf') format('truetype');
+    src:url('../font/SourceHanSansCN-Bold.otf') format('opentype');
+}
+
+body{
+	font-family: normalMainFont,Microsoft YaHei;
+	/*background-image: -moz-linear-gradient(270deg, #f6fcfc, #e7f1fa);
+    background-image:-webkit-gradient(linear, 0 0%, 0% 100%, color-stop(0.0, #f6fcfc), color-stop(1, #e7f1fa));*/
+    background : white;
+    height:840px;
+}
+
+.search_div {
+	position: absolute;
+	right: 50px;
+	top: 20px;
+	float: left;
+	display: inline-block;
+	z-index: 1001;
+}
+
+.search_div .txt_div {
+	color: black;
+	font-size: 18px;
+	line-height: 66px;
+	float: left;
+	margin-right: 10px;
+}
+
+.search_div .btn_content_div {
+	float: left;
+}
+
+.search_div .btn_content_div .txt_div {
+	float: left;
+	width: 350px;
+	border: #d4d4d4 solid 2px;
+	border-radius: 38px;
+	padding-left: 15px;
+	padding-top: 2px;
+	background: white;
+}
+
+.search_div .btn_content_div .txt_div input {
+	width: 290px;
+	height: 35px;
+	border: none;
+	font-size: 18px;
+}
+
+.search_div .btn_content_div .txt_div input:focus {
+	border:none;
+	outline:none;
+}
+
+.search_div .btn_content_div .img_div {
+	float: left;
+	margin-top: -35px;
+	cursor: pointer;
+	margin-left: 310px;
+}
+
+#menuTop{
+	height:90px;
+	background: white;
+	z-index: 1000;
+	position: relative;
+}
+
+.meunTop_home{
+    height: 60px;
+    width: 60px;
+    float: left;
+    margin-top: 30px;
+    margin-left: 55px;
+}
+
+.meunTop_home img{
+    height: 60px;
+    width: 60px;
+}
+
+.menuTop_menuItem{
+    float: left;
+    font-size: 18px;
+    color: #999999;
+    margin-top: 20px;
+    margin-left: 60px;
+    cursor: pointer;
+    position:relative;
+    z-index:10;
+}
+
+.menuTop_menuItem .txt_div{
+    padding: 0px 10px;
+    font-family: boldMainFont;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.menuTop_menuItem .line_div {
+    background-image: url(../images/menu_line.png);
+    background-repeat: no-repeat;
+    background-size: 100% 6px;
+    height: 6px;
+   	margin-top: 32px;
+	width: 110%;
+	margin-left: -6%;
+}
+
+#searchResultUl li:hover {
+	background:#C3F2F4;
+}

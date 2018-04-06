@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RetireInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND retire_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND retire_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != retire_Date and retire_Date != ''">
+                AND retire_info.retire_Date = #{retire_Date}
+            </if>
+            <if test="null != retire_Reason and retire_Reason != ''">
+                AND retire_info.retire_Reason = #{retire_Reason}
+            </if>
+            <if test="null != approver_organization and approver_organization != ''">
+                AND retire_info.approver_organization = #{approver_organization}
+            </if>
+            <if test="null != approver_User_Name and approver_User_Name != ''">
+                AND retire_info.approver_User_Name = #{approver_User_Name}
+            </if>
+            <if test="null != apply_organization and apply_organization != ''">
+                AND retire_info.apply_organization = #{apply_organization}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND retire_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND retire_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.retire_Date and pd.retire_Date != ''">
+                AND retire_info.retire_Date = #{pd.retire_Date}
+            </if>
+            <if test="null != pd.retire_Reason and pd.retire_Reason != ''">
+                AND retire_info.retire_Reason = #{pd.retire_Reason}
+            </if>
+            <if test="null != pd.approver_organization and pd.approver_organization != ''">
+                AND retire_info.approver_organization = #{pd.approver_organization}
+            </if>
+            <if test="null != pd.approver_User_Name and pd.approver_User_Name != ''">
+                AND retire_info.approver_User_Name = #{pd.approver_User_Name}
+            </if>
+            <if test="null != pd.apply_organization and pd.apply_organization != ''">
+                AND retire_info.apply_organization = #{pd.apply_organization}
+            </if>
+
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        retire_info.id AS id
+        ,retire_info.dog_Id AS dog_Id
+        ,retire_info.retire_Date AS retire_Date
+        ,retire_info.retire_Reason AS retire_Reason
+        ,retire_info.approver_organization AS approver_organization
+        ,retire_info.approver_User_Name AS approver_User_Name
+        ,retire_info.apply_organization AS apply_organization
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != retire_Date and retire_Date != ''">
+                retire_Date = #{retire_Date},
+            </if>
+            <if test="null != retire_Reason and retire_Reason != ''">
+                retire_Reason = #{retire_Reason},
+            </if>
+            <if test="null != approver_organization and approver_organization != ''">
+                approver_organization = #{approver_organization},
+            </if>
+            <if test="null != approver_User_Name and approver_User_Name != ''">
+                approver_User_Name = #{approver_User_Name},
+            </if>
+            <if test="null != apply_organization and apply_organization != ''">
+                apply_organization = #{apply_organization},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM retire_info AS retire_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM retire_info AS retire_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = retire_info.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM retire_info
+        <where>
+            dog_Id = #{dog_Id}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO retire_info
+        (
+        dog_Id
+        <if test="null != retire_Date and retire_Date != ''">
+            ,retire_Date
+        </if>
+        <if test="null != retire_Reason and retire_Reason != ''">
+            ,retire_Reason
+        </if>
+        <if test="null != approver_organization and approver_organization != ''">
+            ,approver_organization
+        </if>
+        <if test="null != approver_User_Name and approver_User_Name != ''">
+            ,approver_User_Name
+        </if>
+        <if test="null != apply_organization and apply_organization != ''">
+            ,apply_organization
+        </if>
+
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != retire_Date and retire_Date != ''">
+            ,#{retire_Date}
+        </if>
+        <if test="null != retire_Reason and retire_Reason != ''">
+            ,#{retire_Reason}
+        </if>
+        <if test="null != approver_organization and approver_organization != ''">
+            ,#{approver_organization}
+        </if>
+        <if test="null != approver_User_Name and approver_User_Name != ''">
+            ,#{approver_User_Name}
+        </if>
+        <if test="null != apply_organization and apply_organization != ''">
+            ,#{apply_organization}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE retire_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM retire_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

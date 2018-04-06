@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DemandPlanningInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND demand_planning_info.id = #{id}
+            </if>
+            <if test="null != demand_Planning_Name and demand_Planning_Name != ''">
+                AND demand_planning_info.demand_Planning_Name = #{demand_Planning_Name}
+            </if>
+            <if test="null != demand_Planning_Content and demand_Planning_Content != ''">
+                AND demand_planning_info.demand_Planning_Content = #{demand_Planning_Content}
+            </if>
+            <if test="null != auditor and auditor != ''">
+                AND demand_planning_info.auditor = #{auditor}
+            </if>
+            <if test="null != auditing_Date and auditing_Date != ''">
+                AND demand_planning_info.auditing_Date = #{auditing_Date}
+            </if>
+            <if test="null != demand_planning_Remark and demand_planning_Remark != ''">
+                AND demand_planning_info.demand_planning_Remark = #{demand_planning_Remark}
+            </if>
+            <if test="null != demand_planning_Status and demand_planning_Status != ''">
+                AND demand_planning_info.demand_planning_Status = #{demand_planning_Status}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND demand_planning_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.demand_Planning_Name and pd.demand_Planning_Name != ''">
+                AND demand_planning_info.demand_Planning_Name = #{pd.demand_Planning_Name}
+            </if>
+            <if test="null != pd.demand_Planning_Content and pd.demand_Planning_Content != ''">
+                AND demand_planning_info.demand_Planning_Content = #{pd.demand_Planning_Content}
+            </if>
+            <if test="null != pd.auditor and pd.auditor != ''">
+                AND demand_planning_info.auditor = #{pd.auditor}
+            </if>
+            <if test="null != pd.auditing_Date and pd.auditing_Date != ''">
+                AND demand_planning_info.auditing_Date = #{pd.auditing_Date}
+            </if>
+            <if test="null != pd.demand_planning_Remark and pd.demand_planning_Remark != ''">
+                AND demand_planning_info.demand_planning_Remark = #{pd.demand_planning_Remark}
+            </if>
+            <if test="null != pd.demand_planning_Status and pd.demand_planning_Status != ''">
+                AND demand_planning_info.demand_planning_Status = #{pd.demand_planning_Status}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        demand_planning_info.id AS id
+        ,demand_planning_info.demand_Planning_Name AS demand_Planning_Name
+        ,demand_planning_info.demand_Planning_Content AS demand_Planning_Content
+        ,demand_planning_info.auditor AS auditor
+        ,demand_planning_info.auditing_Date AS auditing_Date
+        ,demand_planning_info.demand_planning_Remark AS demand_planning_Remark
+        ,demand_planning_info.demand_planning_Status AS demand_planning_Status
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != demand_Planning_Name and demand_Planning_Name != ''">
+                demand_Planning_Name = #{demand_Planning_Name},
+            </if>
+            <if test="null != demand_Planning_Content and demand_Planning_Content != ''">
+                demand_Planning_Content = #{demand_Planning_Content},
+            </if>
+            <if test="null != auditor and auditor != ''">
+                auditor = #{auditor},
+            </if>
+            <if test="null != auditing_Date and auditing_Date != ''">
+                auditing_Date = #{auditing_Date},
+            </if>
+            <if test="null != demand_planning_Remark and demand_planning_Remark != ''">
+                demand_planning_Remark = #{demand_planning_Remark},
+            </if>
+            <if test="null != demand_planning_Status and demand_planning_Status != ''">
+                demand_planning_Status = #{demand_planning_Status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,user_info.user_Real_Name AS user_Real_Name
+        FROM demand_planning_info AS demand_planning_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = demand_planning_info.demand_planning_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        LEFT JOIN user_info AS user_info ON demand_planning_info.auditor = user_info.id
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,user_info.user_Real_Name AS user_Real_Name
+        FROM demand_planning_info AS demand_planning_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = demand_planning_info.demand_planning_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        LEFT JOIN user_info AS user_info ON demand_planning_info.auditor = user_info.id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM demand_planning_info
+        <where>
+            demand_Planning_Name = #{demand_Planning_Name}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO demand_planning_info
+        (
+        demand_Planning_Name
+        <if test="null != demand_Planning_Content and demand_Planning_Content != ''">
+            ,demand_Planning_Content
+        </if>
+        <if test="null != auditor and auditor != ''">
+            ,auditor
+        </if>
+        <if test="null != auditing_Date and auditing_Date != ''">
+            ,auditing_Date
+        </if>
+        <if test="null != demand_planning_Remark and demand_planning_Remark != ''">
+            ,demand_planning_Remark
+        </if>
+        <if test="null != demand_planning_Status and demand_planning_Status != ''">
+            ,demand_planning_Status
+        </if>
+
+        ) VALUES (
+        #{demand_Planning_Name}
+        <if test="null != demand_Planning_Content and demand_Planning_Content != ''">
+            ,#{demand_Planning_Content}
+        </if>
+        <if test="null != auditor and auditor != ''">
+            ,#{auditor}
+        </if>
+        <if test="null != auditing_Date and auditing_Date != ''">
+            ,#{auditing_Date}
+        </if>
+        <if test="null != demand_planning_Remark and demand_planning_Remark != ''">
+            ,#{demand_planning_Remark}
+        </if>
+        <if test="null != demand_planning_Status and demand_planning_Status != ''">
+            ,#{demand_planning_Status}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE demand_planning_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM demand_planning_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

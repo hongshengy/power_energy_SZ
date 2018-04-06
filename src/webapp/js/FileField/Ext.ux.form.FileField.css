@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+.ux-cabinet {
+	position: relative;
+}
+.ux-input-file-wrapper {
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 18px;
+	overflow: hidden;
+}
+
+.ux-file {
+	position: absolute;
+	height: 22px;
+	width: auto;
+	right: 0px;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter: progid : DXImageTransform . Microsoft . Alpha(opacity = 0);
+}

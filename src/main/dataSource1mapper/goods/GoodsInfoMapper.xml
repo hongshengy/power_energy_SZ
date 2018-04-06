@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND goods_info.id = #{id}
+            </if>
+            <if test="null != goods_Type_Id and goods_Type_Id != ''">
+                AND goods_info.goods_Type_Id = #{goods_Type_Id}
+            </if>
+            <if test="null != storage_Room_Id and storage_Room_Id != ''">
+                AND goods_info.storage_Room_Id = #{storage_Room_Id}
+            </if>
+            <if test="null != goods_Name and goods_Name != ''">
+                AND goods_info.goods_Name = #{goods_Name}
+            </if>
+            <if test="null != place_Of_Origin and place_Of_Origin != ''">
+                AND goods_info.place_Of_Origin = #{place_Of_Origin}
+            </if>
+            <if test="null != goods_Content and goods_Content != ''">
+                AND goods_info.goods_Content = #{goods_Content}
+            </if>
+            <if test="null != goods_Status and goods_Status != ''">
+                AND goods_info.goods_Status = #{goods_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND goods_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.goods_Type_Id and pd.goods_Type_Id != ''">
+                AND goods_info.goods_Type_Id = #{pd.goods_Type_Id}
+            </if>
+            <if test="null != pd.storage_Room_Id and pd.storage_Room_Id != ''">
+                AND goods_info.storage_Room_Id = #{pd.storage_Room_Id}
+            </if>
+            <if test="null != pd.goods_Name and pd.goods_Name != ''">
+                AND goods_info.goods_Name = #{pd.goods_Name}
+            </if>
+            <if test="null != pd.place_Of_Origin and pd.place_Of_Origin != ''">
+                AND goods_info.place_Of_Origin = #{pd.place_Of_Origin}
+            </if>
+            <if test="null != pd.goods_Content and pd.goods_Content != ''">
+                AND goods_info.goods_Content = #{pd.goods_Content}
+            </if>
+            <if test="null != pd.goods_Status and pd.goods_Status != ''">
+                AND goods_info.goods_Status = #{pd.goods_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        goods_info.id
+        ,goods_info.goods_Type_Id
+        ,goods_info.storage_Room_Id
+        ,goods_info.goods_Name
+        ,goods_info.place_Of_Origin
+        ,goods_info.goods_Content
+        ,goods_info.goods_Status
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != goods_Type_Id and goods_Type_Id != ''">
+            goods_Type_Id = #{goods_Type_Id},
+            </if>
+            <if test="null != storage_Room_Id and storage_Room_Id != ''">
+            storage_Room_Id = #{storage_Room_Id},
+            </if>
+            <if test="null != goods_Name and goods_Name != ''">
+            goods_Name = #{goods_Name},
+            </if>
+            <if test="null != place_Of_Origin and place_Of_Origin != ''">
+            place_Of_Origin = #{place_Of_Origin},
+            </if>
+            <if test="null != goods_Content and goods_Content != ''">
+            goods_Content = #{goods_Content},
+            </if>
+            <if test="null != goods_Status and goods_Status != ''">
+            goods_Status = #{goods_Status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,goods_type_info.goods_Type_Name AS goods_Type_Name
+        ,goods_storage_room_info.storage_Room_Name AS storage_Room_Name
+
+        FROM goods_info AS goods_info
+
+        LEFT JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = goods_info.goods_Status
+        LEFT JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        LEFT JOIN goods_type_info AS goods_type_info ON goods_type_info.id = goods_info.goods_Type_Id
+        LEFT JOIN goods_storage_room_info AS goods_storage_room_info ON goods_storage_room_info.id = goods_info.storage_Room_Id
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,goods_type_info.goods_Type_Name AS goods_Type_Name
+        ,goods_storage_room_info.storage_Room_Name AS storage_Room_Name
+        FROM goods_info AS goods_info
+        LEFT JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = goods_info.goods_Status
+        LEFT JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        LEFT JOIN goods_type_info AS goods_type_info ON goods_type_info.id = goods_info.goods_Type_Id
+        LEFT JOIN goods_storage_room_info AS goods_storage_room_info ON goods_storage_room_info.id = goods_info.storage_Room_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM goods_info
+        <where>
+            goods_Name = #{goods_Name}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO goods_info
+        (
+        goods_Name
+        <if test="null != goods_Type_Id and goods_Type_Id != ''">
+            ,goods_Type_Id
+        </if>
+        <if test="null != storage_Room_Id and storage_Room_Id != ''">
+            ,storage_Room_Id
+        </if>
+        <if test="null != place_Of_Origin and place_Of_Origin != ''">
+            ,place_Of_Origin
+        </if>
+        <if test="null != goods_Content and goods_Content != ''">
+            ,goods_Content
+        </if>
+        <if test="null != goods_Status and goods_Status != ''">
+            ,goods_Status
+        </if>
+        ) VALUES (
+        #{goods_Name}
+        <if test="null != goods_Type_Id and goods_Type_Id != ''">
+            ,#{goods_Type_Id}
+        </if>
+        <if test="null != storage_Room_Id and storage_Room_Id != ''">
+            ,#{storage_Room_Id}
+        </if>
+        <if test="null != place_Of_Origin and place_Of_Origin != ''">
+            ,#{place_Of_Origin}
+        </if>
+        <if test="null != goods_Content and goods_Content != ''">
+            ,#{goods_Content}
+        </if>
+        <if test="null != goods_Status and goods_Status != ''">
+            ,#{goods_Status}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE goods_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM goods_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

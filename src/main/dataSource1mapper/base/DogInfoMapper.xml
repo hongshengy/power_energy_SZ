@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DogInfoMapper">
+
+	<!--所有表的ID要带mapper文件的前缀名-->
+
+	<sql id="where">
+		<where>
+
+			<if test="pd.dog_Name != null and pd.dog_Name != ''">
+				AND dog_Name = #{pd.dog_Name}
+			</if>
+			<if test="null != pd.dog_Sex and pd.dog_Sex != ''">
+				AND dog_Sex = #{pd.dog_Sex}
+			</if>
+			<if test="null != pd.dog_Birthday and pd.dog_Birthday != ''">
+				AND dog_Birthday = #{pd.dog_Birthday}
+			</if>
+			<if test="null != pd.dog_Variety and pd.dog_Variety != ''">
+				AND dog_Variety = #{pd.dog_Variety}
+			</if>
+			<if test="null != pd.dog_Coat_Colour and pd.dog_Coat_Colour != ''">
+				AND dog_Coat_Colour = #{pd.dog_Coat_Colour}
+			</if>
+			<if test="null != pd.dog_Appearance_Features and pd.dog_Appearance_Features != ''">
+				AND dog_Appearance_Features = #{pd.dog_Appearance_Features}
+			</if>
+			<if test="null != pd.dog_Service_Unit and pd.dog_Service_Unit != ''">
+				AND dog_Service_Unit = #{pd.dog_Service_Unit}
+			</if>
+			<if test="null != pd.dog_Image and pd.dog_Image != ''">
+				AND dog_Image = #{pd.dog_Image}
+			</if>
+			<if test="null != pd.dog_Chip_Number and pd.dog_Chip_Number != ''">
+				AND dog_Chip_Number = #{pd.dog_Chip_Number}
+			</if>
+			<if test="null != pd.dog_Service_StartTime and pd.dog_Service_StartTime != ''">
+				AND dog_Service_StartTime = #{pd.dog_Service_StartTime}
+			</if>
+			<if test="null != pd.dog_Service_EndTime and pd.dog_Service_EndTime != ''">
+				AND dog_Service_EndTime = #{pd.dog_Service_EndTime}
+			</if>
+			<if test="null != pd.dog_Army_Date and pd.dog_Army_Date != ''">
+				AND dog_Army_Date = #{pd.dog_Army_Date}
+			</if>
+			<if test="null != pd.dog_Service_Type and pd.dog_Service_Type != ''">
+				AND dog_Service_Type = #{pd.dog_Service_Type}
+			</if>
+			<if test="null != pd.dog_Exploit_Type and pd.dog_Exploit_Type != ''">
+				AND dog_Exploit_Type = #{pd.dog_Exploit_Type}
+			</if>
+			<if test="null != pd.dog_Winning_Info and pd.dog_Winning_Info != ''">
+				AND dog_Winning_Info = #{pd.dog_Winning_Info}
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="where2">
+		<where>
+
+			<if test="dog_Name != null and dog_Name != ''">
+				AND dog_Name = #{dog_Name}
+			</if>
+			<if test="null != dog_Sex and dog_Sex != ''">
+				AND dog_Sex = #{dog_Sex}
+			</if>
+			<if test="null != dog_Birthday and dog_Birthday != ''">
+				AND dog_Birthday = #{dog_Birthday}
+			</if>
+			<if test="null != dog_Variety and dog_Variety != ''">
+				AND dog_Variety = #{dog_Variety}
+			</if>
+			<if test="null != dog_Coat_Colour and dog_Coat_Colour != ''">
+				AND dog_Coat_Colour = #{dog_Coat_Colour}
+			</if>
+			<if test="null != dog_Appearance_Features and dog_Appearance_Features != ''">
+				AND dog_Appearance_Features = #{dog_Appearance_Features}
+			</if>
+			<if test="null != dog_Service_Unit and dog_Service_Unit != ''">
+				AND dog_Service_Unit = #{dog_Service_Unit}
+			</if>
+			<if test="null != dog_Image and dog_Image != ''">
+				AND dog_Image = #{dog_Image}
+			</if>
+			<if test="null != dog_Chip_Number and dog_Chip_Number != ''">
+				AND dog_Chip_Number = #{dog_Chip_Number}
+			</if>
+			<if test="null != dog_Service_StartTime and dog_Service_StartTime != ''">
+				AND dog_Service_StartTime = #{dog_Service_StartTime}
+			</if>
+			<if test="null != dog_Service_EndTime and dog_Service_EndTime != ''">
+				AND dog_Service_EndTime = #{dog_Service_EndTime}
+			</if>
+			<if test="null != dog_Army_Date and dog_Army_Date != ''">
+				AND dog_Army_Date = #{dog_Army_Date}
+			</if>
+			<if test="null != dog_Service_Type and dog_Service_Type != ''">
+				AND dog_Service_Type = #{dog_Service_Type}
+			</if>
+			<if test="null != dog_Exploit_Type and dog_Exploit_Type != ''">
+				AND dog_Exploit_Type = #{dog_Exploit_Type}
+			</if>
+			<if test="null != dog_Winning_Info and dog_Winning_Info != ''">
+				AND dog_Winning_Info = #{dog_Winning_Info}
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="field">
+		id
+		,dog_Name
+		,dog_Sex
+		,date_format(dog_Birthday,'%Y-%m-%d') AS dog_Birthday
+		,dog_Variety
+		,dog_Coat_Colour
+		,dog_Appearance_Features
+		,dog_Service_Unit
+		,dog_Image
+		,dog_Chip_Number
+		,date_format(dog_Service_StartTime,'%Y-%m-%d') AS dog_Service_StartTime
+		,date_format(dog_Service_EndTime,'%Y-%m-%d') AS dog_Service_EndTime
+		,date_format(dog_Army_Date,'%Y-%m-%d') AS dog_Army_Date
+		,dog_Service_Type
+		,dog_Exploit_Type
+		,dog_Winning_Info
+	</sql>
+
+	<select id="selectInfoByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+		SELECT
+		<include refid="field"></include>
+		FROM quarantinedog_base_info
+		<include refid="where"></include>
+	</select>
+
+	<select id="selectInfo" parameterType="map" resultType="map">
+		SELECT
+		<include refid="field"></include>
+		,CASE WHEN dog_Sex = '0' THEN '雌性' ELSE '雄性' END AS SEX_SHOW
+		,CASE WHEN dog_Service_Type = 'Y' THEN '在役' ELSE '退役' END AS SEX_SERVICE_TYPE
+		,CASE WHEN dog_Exploit_Type = 'Y' THEN '功勋犬' ELSE '非功勋犬' END AS SEX_EXPLOIT_TYPE
+		FROM quarantinedog_base_info
+		<include refid="where2"></include>
+	</select>
+
+	<!--<select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">-->
+		<!--SELECT-->
+		<!--<include refid="field"></include>-->
+		<!--FROM menu_info-->
+	<!--</select>-->
+
+	<insert id="insertInfo" parameterType="map">
+		INSERT INTO quarantinedog_base_info
+		(
+		<if test="null != dog_Name and dog_Name != ''">
+			dog_Name
+		</if>
+		<if test="null != dog_Sex and dog_Sex != ''">
+			,dog_Sex
+		</if>
+		<if test="null != dog_Birthday and dog_Birthday != ''">
+			,dog_Birthday
+		</if>
+		<if test="null != dog_Variety and dog_Variety != ''">
+			,dog_Variety
+		</if>
+		<if test="null != dog_Coat_Colour and dog_Coat_Colour != ''">
+			,dog_Coat_Colour
+		</if>
+		<if test="null != dog_Appearance_Features and dog_Appearance_Features != ''">
+			,dog_Appearance_Features
+		</if>
+		<if test="null != dog_Service_Unit and dog_Service_Unit != ''">
+			,dog_Service_Unit
+		</if>
+		<if test="null != dog_Image and dog_Image != ''">
+			,dog_Image
+		</if>
+		<if test="null != dog_Chip_Number and dog_Chip_Number != ''">
+			,dog_Chip_Number
+		</if>
+		<if test="null != dog_Service_StartTime and dog_Service_StartTime != ''">
+			,dog_Service_StartTime
+		</if>
+		<if test="null != dog_Service_EndTime and dog_Service_EndTime != ''">
+			,dog_Service_EndTime
+		</if>
+		<if test="null != dog_Army_Date and dog_Army_Date != ''">
+			,dog_Army_Date
+		</if>
+		<if test="null != dog_Service_Type and dog_Service_Type != ''">
+			,dog_Service_Type
+		</if>
+		<if test="null != dog_Exploit_Type and dog_Exploit_Type != ''">
+			,dog_Exploit_Type
+		</if>
+		<if test="null != dog_Winning_Info and dog_Winning_Info != ''">
+			,dog_Winning_Info
+		</if>
+		) VALUES (
+		<if test="null != dog_Name and dog_Name != ''">
+			#{dog_Name}
+		</if>
+		<if test="null != dog_Sex and dog_Sex != ''">
+			,#{dog_Sex}
+		</if>
+		<if test="null != dog_Birthday and dog_Birthday != ''">
+			,#{dog_Birthday}
+		</if>
+		<if test="null != dog_Variety and dog_Variety != ''">
+			,#{dog_Variety}
+		</if>
+		<if test="null != dog_Coat_Colour and dog_Coat_Colour != ''">
+			,#{dog_Coat_Colour}
+		</if>
+		<if test="null != dog_Appearance_Features and dog_Appearance_Features != ''">
+			,#{dog_Appearance_Features}
+		</if>
+		<if test="null != dog_Service_Unit and dog_Service_Unit != ''">
+			,#{dog_Service_Unit}
+		</if>
+		<if test="null != dog_Image and dog_Image != ''">
+			,#{dog_Image}
+		</if>
+		<if test="null != dog_Chip_Number and dog_Chip_Number != ''">
+			,#{dog_Chip_Number}
+		</if>
+		<if test="null != dog_Service_StartTime and dog_Service_StartTime != ''">
+			,#{dog_Service_StartTime}
+		</if>
+		<if test="null != dog_Service_EndTime and dog_Service_EndTime != ''">
+			,#{dog_Service_EndTime}
+		</if>
+		<if test="null != dog_Army_Date and dog_Army_Date != ''">
+			,#{dog_Army_Date}
+		</if>
+		<if test="null != dog_Service_Type and dog_Service_Type != ''">
+			,#{dog_Service_Type}
+		</if>
+		<if test="null != dog_Exploit_Type and dog_Exploit_Type != ''">
+			,#{dog_Exploit_Type}
+		</if>
+		<if test="null != dog_Winning_Info and dog_Winning_Info != ''">
+			,#{dog_Winning_Info}
+		</if>
+		)
+	</insert>
+
+
+
+</mapper>

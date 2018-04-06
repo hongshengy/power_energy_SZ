@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DictionaryInfoMapper">
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+            <if test="null != code_en and code_en != ''">
+                AND code_en = #{code_en}
+            </if>
+            <if test="null != code_cn and code_cn != ''">
+                AND code_cn = #{code_cn}
+            </if>
+            <if test="null != code_value and code_value != ''">
+                AND code_value = #{code_value}
+            </if>
+            <if test="null != code_status and code_status != ''">
+                AND code_status = #{code_status}
+            </if>
+            <if test="null != create_date and create_date != ''">
+                AND create_date = #{create_date}
+            </if>
+            <if test="null != parent_id and parent_id != ''">
+                AND parent_id = #{parent_id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="whereLeft">
+        <where>
+            <if test="null != id and id != ''">
+                AND dictionary.id = #{id}
+            </if>
+            <if test="null != code_en and code_en != ''">
+                AND dictionary.code_en = #{code_en}
+            </if>
+            <if test="null != code_cn and code_cn != ''">
+                AND dictionary.code_cn = #{code_cn}
+            </if>
+            <if test="null != code_value and code_value != ''">
+                AND dictionary.code_value = #{code_value}
+            </if>
+            <if test="null != code_status and code_status != ''">
+                AND dictionary.code_status = #{code_status}
+            </if>
+            <if test="null != create_date and create_date != ''">
+                AND dictionary.create_date = #{create_date}
+            </if>
+            <if test="null != parent_id and parent_id != ''">
+                AND dictionary.parent_id = #{parent_id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="whereCheckPro">
+        <where>
+            <if test="null != parent_id and parent_id != ''">
+            AND parent_id = #{parent_id}
+            </if>
+            AND ( code_en = #{code_en}  OR code_value = #{code_value} )
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND dictionary.id = #{pd.id}
+            </if>
+            <if test="null != pd.code_en and pd.code_en != ''">
+                AND dictionary.code_en = #{pd.code_en}
+            </if>
+            <if test="null != pd.code_cn and pd.code_cn != ''">
+                AND dictionary.code_cn = #{pd.code_cn}
+            </if>
+            <if test="null != pd.code_value and pd.code_value != ''">
+                AND dictionary.code_value = #{pd.code_value}
+            </if>
+            <if test="null != pd.code_status and pd.code_status != ''">
+                AND dictionary.code_status = #{pd.code_status}
+            </if>
+            <if test="null != pd.create_date and pd.create_date != ''">
+                AND dictionary.create_date = #{pd.create_date}
+            </if>
+            <if test="null != pd.parent_id and pd.parent_id != ''">
+                AND dictionary.parent_id = #{pd.parent_id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="field">
+        id
+        , code_en
+        , code_cn
+        , code_value
+        , code_status
+        , create_date
+        , parent_id
+    </sql>
+
+    <sql id="fieldLeft">
+        dictionary.id AS id
+        , dictionary.code_en AS code_en
+        , dictionary.code_cn AS code_cn
+        , dictionary.code_value AS code_value
+        , dictionary.code_status AS code_status
+        , dictionary.create_date AS create_date
+        , dictionary.parent_id AS parent_id
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != code_en and code_en != ''">
+                code_en = #{code_en},
+            </if>
+            <if test="null != code_cn and code_cn != ''">
+                code_cn = #{code_cn},
+            </if>
+            <if test="null != code_value and code_value != ''">
+                code_value = #{code_value},
+            </if>
+            <if test="null != code_status and code_status != ''">
+                code_status = #{code_status},
+            </if>
+            <if test="null != create_date and create_date != ''">
+                create_date = #{create_date},
+            </if>
+            <if test="null != parent_id and parent_id != ''">
+                parent_id = #{parent_id},
+            </if>
+        </set>
+    </sql>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM dictionary AS dictionary
+        LEFT JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = dictionary.code_status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        <include refid="wherePage"></include>
+    </select>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM dictionary
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsForSonTablePro" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM dictionary AS dictionary
+        LEFT JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = dictionary.code_status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        <include refid="whereLeft"></include>
+    </select>
+
+    <select id="selectCheckPro" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM dictionary
+        <include refid="whereCheckPro"></include>
+    </select>
+
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM dictionary
+        <where>
+            code_en = #{code_en} OR code_value = #{code_value}
+        </where>
+        GROUP BY id
+    </select>
+
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO dictionary
+        (
+            code_en
+            , code_cn
+            , code_value
+            , code_status
+            , parent_id
+        ) VALUES (
+            #{code_en}
+            , #{code_cn}
+            , #{code_value}
+            , #{code_status}
+            , #{parent_id}
+        )
+    </insert>
+
+    <update id="updateinfo" parameterType="map">
+        UPDATE dictionary
+        <include refid="setUpd"></include>
+        <where>
+            AND id = #{id}
+        </where>
+    </update>
+
+    <delete id="deleteByid" parameterType="map">
+        DELETE FROM dictionary
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+    <select id="getChildInfo" parameterType="map" resultType="map">
+        SELECT a0.* FROM dictionary a0
+        LEFT JOIN dictionary a1 ON a0.parent_id = a1.id
+        <where>
+            a1.code_en = #{code_en} AND a1.parent_id = '0'
+        </where>
+    </select>
+
+</mapper>

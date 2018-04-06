@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoleInfoMapper">
+
+	<!--所有表的ID要带mapper文件的前缀名-->
+
+	<sql id="where">
+		<where>
+			<if test="null != id and id != ''">
+			AND id = #{id}
+			</if>
+			<if test="null != role_Name and role_Name != ''">
+			AND role_Name = #{role_Name}
+			</if>
+			<if test="null != role_Content and role_Content != ''">
+			AND role_Content = #{role_Content}
+			</if>
+			<if test="null != role_Creator and role_Creator != ''">
+			AND role_Creator = #{role_Creator}
+			</if>
+			<if test="null != role_Date and role_Date != ''">
+			AND role_Date = #{role_Date}
+			</if>
+			<if test="null != role_Status and role_Status != ''">
+			AND role_Status = #{role_Status}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="wherePage">
+		<where>
+			<if test="null != pd.id and pd.id != ''">
+				AND role_info.id = #{pd.id}
+			</if>
+			<if test="null != pd.role_Name and pd.role_Name != ''">
+				AND role_info.role_Name = #{pd.role_Name}
+			</if>
+			<if test="null != pd.role_Content and pd.role_Content != ''">
+				AND role_info.role_Content = #{pd.role_Content}
+			</if>
+			<if test="null != pd.role_Creator and pd.role_Creator != ''">
+				AND role_info.role_Creator = #{pd.role_Creator}
+			</if>
+			<if test="null != pd.role_Date and pd.role_Date != ''">
+				AND role_info.role_Date = #{pd.role_Date}
+			</if>
+			<if test="null != pd.role_Status and pd.role_Status != ''">
+				AND role_info.role_Status = #{pd.role_Status}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="field2">
+		id
+		,role_Name
+		,role_Content
+		,role_Creator
+		,role_Date
+		,role_Status
+	</sql>
+
+	<sql id="fieldLeft">
+		role_info.id AS id
+		,role_info.role_Name AS role_Name
+		,role_info.role_Content AS role_Content
+		,role_info.role_Creator AS role_Creator
+		,role_info.role_Date AS role_Date
+		,role_info.role_Status AS role_Status
+	</sql>
+
+	<sql id="setUpd">
+		<set>
+			<if test="null != role_Name and role_Name != ''">
+				role_Name = #{role_Name},
+			</if>
+			<if test="null != role_Content and role_Content != ''">
+				role_Content = #{role_Content},
+			</if>
+			<if test="null != role_Creator and role_Creator != ''">
+				role_Creator = #{role_Creator},
+			</if>
+			<if test="null != role_Date and role_Date != ''">
+				role_Date = #{role_Date},
+			</if>
+			<if test="null != role_Status and role_Status != ''">
+				role_Status = #{role_Status},
+			</if>
+		</set>
+	</sql>
+
+	<!--<sql id="field">-->
+		<!--id-->
+		<!--,user_Id-->
+		<!--,role_Id-->
+		<!--,jurisdiction_Remark-->
+	<!--</sql>-->
+
+	<!--<select id="selectInfo" parameterType="map" resultType="map">-->
+		<!--SELECT-->
+		<!--<include refid="field"></include>-->
+		<!--FROM user_jurisdiction-->
+		<!--<include refid="where"></include>-->
+	<!--</select>-->
+
+	<select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+		SELECT
+		<include refid="fieldLeft"></include>
+		,dictionary_stat.code_cn AS ZHUANGTAI
+		FROM role_info AS role_info
+		LEFT JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = role_info.role_Status
+		INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+		<include refid="wherePage"></include>
+	</select>
+
+	<select id="getCountByParams" parameterType="map" resultType="map">
+		SELECT COUNT(1) AS COUNT,id FROM role_info
+		<where>
+			role_Name = #{role_Name}
+		</where>
+	</select>
+
+	<insert id="insertInfo" parameterType="map">
+		INSERT INTO role_info
+		(
+		role_Name
+		,role_Content
+		,role_Creator
+		,role_Date
+		,role_Status
+		) VALUES (
+		#{role_Name}
+		,#{role_Content}
+		,#{role_Creator}
+		,now()
+		,#{role_Status}
+		)
+	</insert>
+
+	<select id="selectInfo" parameterType="map" resultType="map">
+		SELECT
+		<include refid="field2"></include>
+		FROM role_info
+		<include refid="where"></include>
+	</select>
+
+	<select id="selectOneInfo" parameterType="map" resultType="map">
+		SELECT
+		<include refid="field2"></include>
+		FROM role_info
+		<include refid="where"></include>
+	</select>
+
+	<update id="updateinfo" parameterType="map">
+		UPDATE role_info
+		<include refid="setUpd"></include>
+		<where>
+			<if test="null != id and id != ''">
+				AND id = #{id}
+			</if>
+		</where>
+
+	</update>
+
+	<delete id="deleteByid" parameterType="map">
+		DELETE FROM role_info
+		<where>
+			AND id = #{id}
+		</where>
+	</delete>
+
+</mapper>

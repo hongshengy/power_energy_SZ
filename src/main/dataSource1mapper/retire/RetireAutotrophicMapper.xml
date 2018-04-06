@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RetireAutotrophicMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND retire_autotrophic.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND retire_autotrophic.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != autotrophic_admin and autotrophic_admin != ''">
+                AND retire_autotrophic.autotrophic_admin = #{autotrophic_admin}
+            </if>
+            <if test="null != autotrophic_address and autotrophic_address != ''">
+                AND retire_autotrophic.autotrophic_address = #{autotrophic_address}
+            </if>
+            <if test="null != report and report != ''">
+                AND retire_autotrophic.report = #{report}
+            </if>
+            <if test="null != retire_date and retire_date != ''">
+                AND retire_autotrophic.retire_date = #{retire_date}
+            </if>
+            <if test="null != management and management != ''">
+                AND retire_autotrophic.management = #{management}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND retire_autotrophic.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND retire_autotrophic.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.autotrophic_admin and pd.autotrophic_admin != ''">
+                AND retire_autotrophic.autotrophic_admin = #{pd.autotrophic_admin}
+            </if>
+            <if test="null != pd.autotrophic_address and pd.autotrophic_address != ''">
+                AND retire_autotrophic.autotrophic_address = #{pd.autotrophic_address}
+            </if>
+            <if test="null != pd.report and pd.report != ''">
+                AND retire_autotrophic.report = #{pd.report}
+            </if>
+            <if test="null != pd.retire_date and pd.retire_date != ''">
+                AND retire_autotrophic.retire_date = #{pd.retire_date}
+            </if>
+            <if test="null != pd.management and pd.management != ''">
+                AND retire_autotrophic.management = #{pd.management}
+            </if>
+
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        retire_autotrophic.id AS id
+        ,retire_autotrophic.dog_Id AS dog_Id
+        ,retire_autotrophic.autotrophic_admin AS autotrophic_admin
+        ,retire_autotrophic.autotrophic_address AS autotrophic_address
+        ,retire_autotrophic.report AS report
+        ,retire_autotrophic.retire_date AS retire_date
+        ,retire_autotrophic.management AS management
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != autotrophic_admin and autotrophic_admin != ''">
+                autotrophic_admin = #{autotrophic_admin},
+            </if>
+            <if test="null != autotrophic_address and autotrophic_address != ''">
+                autotrophic_address = #{autotrophic_address},
+            </if>
+            <if test="null != report and report != ''">
+                report = #{report},
+            </if>
+            <if test="null != retire_date and retire_date != ''">
+                retire_date = #{retire_date},
+            </if>
+            <if test="null != management and management != ''">
+                management = #{management},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM retire_autotrophic AS retire_autotrophic
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM retire_autotrophic AS retire_autotrophic
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = retire_autotrophic.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM retire_autotrophic
+        <where>
+            dog_Id = #{dog_Id}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO retire_autotrophic
+        (
+        dog_Id
+        <if test="null != autotrophic_admin and autotrophic_admin != ''">
+            ,autotrophic_admin
+        </if>
+        <if test="null != autotrophic_address and autotrophic_address != ''">
+            ,autotrophic_address
+        </if>
+        <if test="null != report and report != ''">
+            ,report
+        </if>
+        <if test="null != retire_date and retire_date != ''">
+            ,retire_date
+        </if>
+        <if test="null != management and management != ''">
+            ,management
+        </if>
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != autotrophic_admin and autotrophic_admin != ''">
+            ,#{autotrophic_admin}
+        </if>
+        <if test="null != autotrophic_address and autotrophic_address != ''">
+            ,#{autotrophic_address}
+        </if>
+        <if test="null != report and report != ''">
+            ,#{report}
+        </if>
+        <if test="null != retire_date and retire_date != ''">
+            ,#{retire_date}
+        </if>
+        <if test="null != management and management != ''">
+            ,#{management}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE retire_autotrophic
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM retire_autotrophic
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EpidemicEpidemicTreatmentMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND epidemic_treatment_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND epidemic_treatment_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != chip_No and chip_No != ''">
+                AND epidemic_treatment_info.chip_No = #{chip_No}
+            </if>
+            <if test="null != epidemic_Type and epidemic_Type != ''">
+                AND epidemic_treatment_info.epidemic_Type = #{epidemic_Type}
+            </if>
+            <if test="null != epidemic_Effect and epidemic_Effect != ''">
+                AND epidemic_treatment_info.epidemic_Effect = #{epidemic_Effect}
+            </if>
+            <if test="null != epidemic_location and epidemic_location != ''">
+                AND epidemic_treatment_info.epidemic_location = #{epidemic_location}
+            </if>
+            <if test="null != epidemic_Date and epidemic_Date != ''">
+                AND epidemic_treatment_info.epidemic_Date = #{epidemic_Date}
+            </if>
+            <if test="null != treatment_Date and treatment_Date != ''">
+                AND epidemic_treatment_info.treatment_Date = #{treatment_Date}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND epidemic_treatment_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND epidemic_treatment_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.chip_No and pd.chip_No != ''">
+                AND epidemic_treatment_info.chip_No = #{pd.chip_No}
+            </if>
+            <if test="null != pd.epidemic_Type and pd.epidemic_Type != ''">
+                AND epidemic_treatment_info.epidemic_Type = #{pd.epidemic_Type}
+            </if>
+            <if test="null != pd.epidemic_Effect and pd.epidemic_Effect != ''">
+                AND epidemic_treatment_info.epidemic_Effect = #{pd.epidemic_Effect}
+            </if>
+            <if test="null != pd.epidemic_location and pd.epidemic_location != ''">
+                AND epidemic_treatment_info.epidemic_location = #{pd.epidemic_location}
+            </if>
+            <if test="null != pd.epidemic_Date and pd.epidemic_Date != ''">
+                AND epidemic_treatment_info.epidemic_Date = #{pd.epidemic_Date}
+            </if>
+            <if test="null != pd.treatment_Date and pd.treatment_Date != ''">
+                AND epidemic_treatment_info.treatment_Date = #{pd.treatment_Date}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        epidemic_treatment_info.id AS id
+        ,epidemic_treatment_info.dog_Id AS dog_Id
+        ,epidemic_treatment_info.chip_No AS chip_No
+        ,epidemic_treatment_info.epidemic_Type AS epidemic_Type
+        ,epidemic_treatment_info.epidemic_Effect AS epidemic_Effect
+        ,epidemic_treatment_info.epidemic_location AS epidemic_location
+        ,epidemic_treatment_info.epidemic_Date AS epidemic_Date
+        ,epidemic_treatment_info.treatment_Date AS treatment_Date
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != epidemic_Name and epidemic_Name != ''">
+                epidemic_Name = #{epidemic_Name},
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != chip_No and chip_No != ''">
+                chip_No = #{chip_No},
+            </if>
+            <if test="null != epidemic_Type and epidemic_Type != ''">
+                epidemic_Type = #{epidemic_Type},
+            </if>
+            <if test="null != epidemic_Effect and epidemic_Effect != ''">
+                epidemic_Effect = #{epidemic_Effect},
+            </if>
+            <if test="null != epidemic_location and epidemic_location != ''">
+                epidemic_location = #{epidemic_location},
+            </if>
+            <if test="null != epidemic_Date and epidemic_Date != ''">
+                epidemic_Date = #{epidemic_Date},
+            </if>
+            <if test="null != treatment_Date and treatment_Date != ''">
+                treatment_Date = #{treatment_Date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,epidemic_prevention_info.epidemic_Name AS epidemicName
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM epidemic_treatment_info AS epidemic_treatment_info
+        LEFT JOIN epidemic_prevention_info AS epidemic_prevention_info ON 1 = 1 AND epidemic_prevention_info.id = epidemic_treatment_info.epidemic_Type
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = epidemic_treatment_info.dog_Id
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,epidemic_prevention_info.epidemic_Name AS epidemicName
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM epidemic_treatment_info AS epidemic_treatment_info
+        LEFT JOIN epidemic_prevention_info AS epidemic_prevention_info ON 1 = 1 AND epidemic_prevention_info.id = epidemic_treatment_info.epidemic_Type
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = epidemic_treatment_info.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM epidemic_treatment_info-->
+        <!--<where>-->
+            <!--epidemic_Name = #{epidemic_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO epidemic_treatment_info
+        (
+        dog_Id
+        <if test="null != chip_No and chip_No != ''">
+            ,chip_No
+        </if>
+        <if test="null != epidemic_Type and epidemic_Type != ''">
+            ,epidemic_Type
+        </if>
+        <if test="null != epidemic_Effect and epidemic_Effect != ''">
+            ,epidemic_Effect
+        </if>
+        <if test="null != epidemic_location and epidemic_location != ''">
+            ,epidemic_location
+        </if>
+        <if test="null != epidemic_Date and epidemic_Date != ''">
+            ,epidemic_Date
+        </if>
+        <if test="null != treatment_Date and treatment_Date != ''">
+            ,treatment_Date
+        </if>
+
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != chip_No and chip_No != ''">
+            ,#{chip_No}
+        </if>
+        <if test="null != epidemic_Type and epidemic_Type != ''">
+            ,#{epidemic_Type}
+        </if>
+        <if test="null != epidemic_Effect and epidemic_Effect != ''">
+            ,#{epidemic_Effect}
+        </if>
+        <if test="null != epidemic_location and epidemic_location != ''">
+            ,#{epidemic_location}
+        </if>
+        <if test="null != epidemic_Date and epidemic_Date != ''">
+            ,#{epidemic_Date}
+        </if>
+        <if test="null != treatment_Date and treatment_Date != ''">
+            ,#{treatment_Date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE epidemic_treatment_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM epidemic_treatment_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

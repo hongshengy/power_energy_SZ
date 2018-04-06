@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrganizationInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND organization_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.organization_Name and pd.organization_Name != ''">
+                AND organization_info.organization_Name = #{pd.organization_Name}
+            </if>
+            <if test="null != pd.organization_Code and pd.organization_Code != ''">
+                AND organization_info.organization_Code = #{pd.organization_Code}
+            </if>
+            <if test="null != pd.organization_Company_Type and pd.organization_Company_Type != ''">
+                AND organization_info.organization_Company_Type = #{pd.organization_Company_Type}
+            </if>
+            <if test="null != pd.organization_Administration_Zoning and pd.organization_Administration_Zoning != ''">
+                AND organization_info.organization_Administration_Zoning = #{pd.organization_Administration_Zoning}
+            </if>
+            <if test="null != pd.organization_Phone and pd.organization_Phone != ''">
+                AND organization_info.organization_Phone = #{pd.organization_Phone}
+            </if>
+            <if test="null != pd.organization_Company_Content and pd.organization_Company_Content != ''">
+                AND organization_info.organization_Company_Content = #{pd.organization_Company_Content}
+            </if>
+            <if test="null != pd.organization_Remark and pd.organization_Remark != ''">
+                AND organization_info.organization_Remark = #{pd.organization_Remark}
+            </if>
+            <if test="null != pd.parent_id and pd.parent_id != ''">
+                AND organization_info.parent_id = #{pd.parent_id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+            <if test="null != organization_Name and organization_Name != ''">
+                AND organization_Name = #{organization_Name}
+            </if>
+            <if test="null != organization_Code and organization_Code != ''">
+                AND organization_Code = #{organization_Code}
+            </if>
+            <if test="null != organization_Company_Type and organization_Company_Type != ''">
+                AND organization_Company_Type = #{organization_Company_Type}
+            </if>
+            <if test="null != organization_Administration_Zoning and organization_Administration_Zoning != ''">
+                AND organization_Administration_Zoning = #{organization_Administration_Zoning}
+            </if>
+            <if test="null != organization_Phone and organization_Phone != ''">
+                AND organization_Phone = #{organization_Phone}
+            </if>
+            <if test="null != organization_Company_Content and organization_Company_Content != ''">
+                AND organization_Company_Content = #{organization_Company_Content}
+            </if>
+            <if test="null != organization_Remark and organization_Remark != ''">
+                AND organization_Remark = #{organization_Remark}
+            </if>
+            <if test="null != parent_id and parent_id != ''">
+                AND parent_id = #{parent_id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="whereLeft">
+        <where>
+            <if test="null != id and id != ''">
+                AND organization_info.id = #{id}
+            </if>
+            <if test="null != organization_Name and organization_Name != ''">
+                AND organization_info.organization_Name = #{organization_Name}
+            </if>
+            <if test="null != organization_Code and organization_Code != ''">
+                AND organization_info.organization_Code = #{organization_Code}
+            </if>
+            <if test="null != organization_Company_Type and organization_Company_Type != ''">
+                AND organization_info.organization_Company_Type = #{organization_Company_Type}
+            </if>
+            <if test="null != organization_Administration_Zoning and organization_Administration_Zoning != ''">
+                AND organization_info.organization_Administration_Zoning = #{organization_Administration_Zoning}
+            </if>
+            <if test="null != organization_Phone and organization_Phone != ''">
+                AND organization_info.organization_Phone = #{organization_Phone}
+            </if>
+            <if test="null != organization_Company_Content and organization_Company_Content != ''">
+                AND organization_info.organization_Company_Content = #{organization_Company_Content}
+            </if>
+            <if test="null != organization_Remark and organization_Remark != ''">
+                AND organization_info.organization_Remark = #{organization_Remark}
+            </if>
+            <if test="null != parent_id and parent_id != ''">
+                AND organization_info.parent_id = #{parent_id}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="field">
+        id
+        ,organization_Name
+        ,organization_Code
+        ,organization_Company_Type
+        ,organization_Administration_Zoning
+        ,organization_Phone
+        ,organization_Company_Content
+        ,organization_Remark
+        ,parent_id
+    </sql>
+
+    <sql id="fieldPage">
+        organization_info.id AS id
+        ,organization_info.organization_Name AS organization_Name
+        ,organization_info.organization_Code AS organization_Code
+        ,organization_info.organization_Company_Type AS organization_Company_Type
+        ,organization_info.organization_Administration_Zoning AS organization_Administration_Zoning
+        ,organization_info.organization_Phone AS organization_Phone
+        ,organization_info.organization_Company_Content AS organization_Company_Content
+        ,organization_info.organization_Remark AS organization_Remark
+        ,organization_info.parent_id AS parent_id
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != id and id != ''">
+                id = #{id},
+            </if>
+            <if test="null != organization_Name and organization_Name != ''">
+                organization_Name = #{organization_Name},
+            </if>
+            <if test="null != organization_Code and organization_Code != ''">
+                organization_Code = #{organization_Code},
+            </if>
+            <if test="null != organization_Company_Type and organization_Company_Type != ''">
+                organization_Company_Type = #{organization_Company_Type},
+            </if>
+            <if test="null != organization_Administration_Zoning and organization_Administration_Zoning != ''">
+                organization_Administration_Zoning = #{organization_Administration_Zoning},
+            </if>
+            <if test="null != organization_Phone and organization_Phone != ''">
+                organization_Phone = #{organization_Phone},
+            </if>
+            <if test="null != organization_Company_Content and organization_Company_Content != ''">
+                organization_Company_Content = #{organization_Company_Content},
+            </if>
+            <if test="null != organization_Remark and organization_Remark != ''">
+                organization_Remark = #{organization_Remark},
+            </if>
+            <if test="null != parent_id and parent_id != ''">
+                parent_id = #{parent_id},
+            </if>
+        </set>
+    </sql>
+
+    <!--<select id="getUser" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS USERCOUNT FROM user_info-->
+        <!--<include refid="where"></include>-->
+    <!--</select>-->
+
+    <!--<select id="selectUserInfo" parameterType="map" resultType="map">-->
+        <!--SELECT-->
+        <!--<include refid="field"></include>-->
+        <!--FROM user_info-->
+        <!--<include refid="where"></include>-->
+    <!--</select>-->
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldPage"></include>
+        ,dictionary_node.code_cn AS DANWEI
+        FROM organization_info AS organization_info
+        LEFT JOIN dictionary AS dictionary_node ON 1 = 1 AND dictionary_node.code_value = organization_info.organization_Company_Type
+        LEFT JOIN dictionary AS dictionary_p_node ON dictionary_node.parent_id = dictionary_p_node.id AND dictionary_p_node.code_en = 'DWLX'
+        <include refid="wherePage"></include>
+    </select>
+
+    <select id="getListByParams" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM organization_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsForSonTablePro" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldPage"></include>
+        ,dictionary_node.code_cn AS DANWEI
+        FROM organization_info AS organization_info
+        LEFT JOIN dictionary AS dictionary_node ON 1 = 1 AND dictionary_node.code_value = organization_info.organization_Company_Type
+        LEFT JOIN dictionary AS dictionary_p_node ON dictionary_node.parent_id = dictionary_p_node.id AND dictionary_p_node.code_en = 'DWLX'
+        <include refid="whereLeft"></include>
+    </select>
+
+    <select id="getListOutSon" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM organization_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getCountByParams" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM organization_info
+        <where>
+            organization_Name = #{organization_Name} OR organization_Code = #{organization_Code}
+        </where>
+        GROUP BY id
+    </select>
+
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO organization_info
+        (
+            organization_Name
+            ,organization_Code
+            ,organization_Company_Type
+            ,organization_Administration_Zoning
+            ,organization_Phone
+            ,organization_Company_Content
+            ,organization_Remark
+            ,parent_id
+        ) VALUES (
+            #{organization_Name}
+            ,#{organization_Code}
+            ,#{organization_Company_Type}
+            ,#{organization_Administration_Zoning}
+            ,#{organization_Phone}
+            ,#{organization_Company_Content}
+            ,#{organization_Remark}
+            ,#{parent_id}
+        )
+    </insert>
+
+    <update id="updateinfo" parameterType="map">
+        UPDATE organization_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteByid" parameterType="map">
+        DELETE FROM organization_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

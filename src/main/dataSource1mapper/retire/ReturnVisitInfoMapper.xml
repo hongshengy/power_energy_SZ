@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReturnVisitInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND return_visit_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND return_visit_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != return_visit_Date and return_visit_Date != ''">
+                AND return_visit_info.return_visit_Date = #{return_visit_Date}
+            </if>
+            <if test="null != return_visit_User_Name and return_visit_User_Name != ''">
+                AND return_visit_info.return_visit_User_Name = #{return_visit_User_Name}
+            </if>
+            <if test="null != return_visit_Reason and return_visit_Reason != ''">
+                AND return_visit_info.return_visit_Reason = #{return_visit_Reason}
+            </if>
+            <if test="null != record_date and record_date != ''">
+                AND return_visit_info.record_date = #{record_date}
+            </if>
+            <if test="null != other_reason and other_reason != ''">
+                AND return_visit_info.other_reason = #{other_reason}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND return_visit_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND return_visit_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.return_visit_Date and pd.return_visit_Date != ''">
+                AND return_visit_info.return_visit_Date = #{pd.return_visit_Date}
+            </if>
+            <if test="null != pd.return_visit_User_Name and pd.return_visit_User_Name != ''">
+                AND return_visit_info.return_visit_User_Name = #{pd.return_visit_User_Name}
+            </if>
+            <if test="null != pd.return_visit_Reason and pd.return_visit_Reason != ''">
+                AND return_visit_info.return_visit_Reason = #{pd.return_visit_Reason}
+            </if>
+            <if test="null != pd.record_date and pd.record_date != ''">
+                AND return_visit_info.record_date = #{pd.record_date}
+            </if>
+            <if test="null != pd.other_reason and pd.other_reason != ''">
+                AND return_visit_info.other_reason = #{pd.other_reason}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        return_visit_info.id AS id
+        ,return_visit_info.dog_Id AS dog_Id
+        ,return_visit_info.return_visit_Date AS return_visit_Date
+        ,return_visit_info.return_visit_User_Name AS return_visit_User_Name
+        ,return_visit_info.return_visit_Reason AS return_visit_Reason
+        ,return_visit_info.record_date AS record_date
+        ,return_visit_info.other_reason AS other_reason
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != return_visit_Date and return_visit_Date != ''">
+                return_visit_Date = #{return_visit_Date},
+            </if>
+            <if test="null != return_visit_User_Name and return_visit_User_Name != ''">
+                return_visit_User_Name = #{return_visit_User_Name},
+            </if>
+            <if test="null != return_visit_Reason and return_visit_Reason != ''">
+                return_visit_Reason = #{return_visit_Reason},
+            </if>
+            <if test="null != record_date and record_date != ''">
+                record_date = #{record_date},
+            </if>
+            <if test="null != other_reason and other_reason != ''">
+                other_reason = #{other_reason},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        FROM return_visit_info AS return_visit_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = return_visit_info.dog_Id
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM return_visit_info AS return_visit_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = return_visit_info.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM retire_autotrophic-->
+        <!--<where>-->
+            <!--dog_Id = #{dog_Id}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO return_visit_info
+        (
+        dog_Id
+        <if test="null != return_visit_Date and return_visit_Date != ''">
+            ,return_visit_Date
+        </if>
+        <if test="null != return_visit_User_Name and return_visit_User_Name != ''">
+            ,return_visit_User_Name
+        </if>
+        <if test="null != return_visit_Reason and return_visit_Reason != ''">
+            ,return_visit_Reason
+        </if>
+
+        <if test="null != other_reason and other_reason != ''">
+            ,other_reason
+        </if>
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != return_visit_Date and return_visit_Date != ''">
+            ,#{return_visit_Date}
+        </if>
+        <if test="null != return_visit_User_Name and return_visit_User_Name != ''">
+            ,#{return_visit_User_Name}
+        </if>
+        <if test="null != return_visit_Reason and return_visit_Reason != ''">
+            ,#{return_visit_Reason}
+        </if>
+
+        <if test="null != other_reason and other_reason != ''">
+            ,#{other_reason}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE return_visit_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM return_visit_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

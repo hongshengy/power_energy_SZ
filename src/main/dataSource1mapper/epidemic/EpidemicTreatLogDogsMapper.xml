@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EpidemicTreatLogDogsMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND treat_log_dogs_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND treat_log_dogs_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != edc and edc != ''">
+                AND treat_log_dogs_info.edc = #{edc}
+            </if>
+            <if test="null != hospital_Id and hospital_Id != ''">
+                AND treat_log_dogs_info.hospital_Id = #{hospital_Id}
+            </if>
+            <if test="null != ill_Date and ill_Date != ''">
+                AND treat_log_dogs_info.ill_Date = #{}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND treat_log_dogs_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND treat_log_dogs_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.edc and pd.edc != ''">
+                AND treat_log_dogs_info.edc = #{pd.edc}
+            </if>
+            <if test="null != pd.hospital_Id and pd.hospital_Id != ''">
+                AND treat_log_dogs_info.hospital_Id = #{pd.hospital_Id}
+            </if>
+            <if test="null != pd.ill_Date and pd.ill_Date != ''">
+                AND treat_log_dogs_info.ill_Date = #{pd.ill_Date}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        treat_log_dogs_info.id AS id
+        ,treat_log_dogs_info.dog_Id AS dog_Id
+        ,treat_log_dogs_info.edc AS edc
+        ,treat_log_dogs_info.hospital_Id AS hospital_Id
+        ,treat_log_dogs_info.ill_Date AS ill_Date
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != edc and edc != ''">
+                edc = #{edc},
+            </if>
+            <if test="null != hospital_Id and hospital_Id != ''">
+                hospital_Id = #{hospital_Id},
+            </if>
+            <if test="null != ill_Date and ill_Date != ''">
+                ill_Date = #{ill_Date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,zoo_hospital_info.hospital_Name AS hospital_Name
+        FROM treat_log_dogs_info AS treat_log_dogs_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = treat_log_dogs_info.dog_Id
+        LEFT JOIN zoo_hospital_info AS zoo_hospital_info ON zoo_hospital_info.id = treat_log_dogs_info.hospital_Id
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,zoo_hospital_info.hospital_Name AS hospital_Name
+        FROM treat_log_dogs_info AS treat_log_dogs_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = treat_log_dogs_info.dog_Id
+        LEFT JOIN zoo_hospital_info AS zoo_hospital_info ON zoo_hospital_info.id = treat_log_dogs_info.hospital_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM demand_planning_info-->
+        <!--<where>-->
+            <!--demand_Planning_Name = #{demand_Planning_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO treat_log_dogs_info
+        (
+        dog_Id
+        <if test="null != edc and edc != ''">
+            ,edc
+        </if>
+        <if test="null != hospital_Id and hospital_Id != ''">
+            ,hospital_Id
+        </if>
+        <if test="null != ill_Date and ill_Date != ''">
+            ,ill_Date
+        </if>
+
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != edc and edc != ''">
+            ,#{edc}
+        </if>
+        <if test="null != hospital_Id and hospital_Id != ''">
+            ,#{hospital_Id}
+        </if>
+        <if test="null != ill_Date and ill_Date != ''">
+            ,#{ill_Date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE treat_log_dogs_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM treat_log_dogs_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

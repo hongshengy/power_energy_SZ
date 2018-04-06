@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PhysicalExaminationInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND physical_examination_info.id = #{id}
+            </if>
+            <if test="null != dog_Name and dog_Name != ''">
+                AND physical_examination_info.dog_Name = #{dog_Name}
+            </if>
+            <if test="null != mental_State and mental_State != ''">
+                AND physical_examination_info.mental_State = #{mental_State}
+            </if>
+            <if test="null != status and status != ''">
+                AND physical_examination_info.status = #{status}
+            </if>
+            <if test="null != examination_Date and examination_Date != ''">
+                AND physical_examination_info.examination_Date = #{examination_Date}
+            </if>
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND physical_examination_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Name and pd.dog_Name != ''">
+                AND physical_examination_info.dog_Name = #{pd.dog_Name}
+            </if>
+            <if test="null != pd.mental_State and pd.mental_State != ''">
+                AND physical_examination_info.mental_State = #{pd.mental_State}
+            </if>
+            <if test="null != pd.status and pd.status != ''">
+                AND physical_examination_info.status = #{pd.status}
+            </if>
+            <if test="null != pd.examination_Date and pd.examination_Date != ''">
+                AND physical_examination_info.examination_Date = #{pd.examination_Date}
+            </if>
+
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        physical_examination_info.id AS id
+        ,physical_examination_info.dog_Name AS dog_Name
+        ,physical_examination_info.mental_State AS mental_State
+        ,physical_examination_info.status AS status
+        ,physical_examination_info.examination_Date AS examination_Date
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Name and dog_Name != ''">
+                dog_Name = #{dog_Name},
+            </if>
+            <if test="null != mental_State and mental_State != ''">
+                mental_State = #{mental_State},
+            </if>
+            <if test="null != status and status != ''">
+                status = #{status},
+            </if>
+            <if test="null != examination_Date and examination_Date != ''">
+                examination_Date = #{examination_Date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM physical_examination_info AS physical_examination_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM physical_examination_info AS physical_examination_info
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM physical_examination_info-->
+        <!--<where>-->
+            <!--hospital_Name = #{hospital_Name} OR hospital_address = #{hospital_address}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO physical_examination_info
+        (
+        dog_Name
+        <if test="null != mental_State and mental_State != ''">
+            ,mental_State
+        </if>
+        <if test="null != status and status != ''">
+            ,status
+        </if>
+        <if test="null != examination_Date and examination_Date != ''">
+            ,examination_Date
+        </if>
+        ) VALUES (
+        #{dog_Name}
+        <if test="null != mental_State and mental_State != ''">
+            ,#{mental_State}
+        </if>
+        <if test="null != status and status != ''">
+            ,#{status}
+        </if>
+        <if test="null != examination_Date and examination_Date != ''">
+            ,#{examination_Date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE physical_examination_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM physical_examination_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

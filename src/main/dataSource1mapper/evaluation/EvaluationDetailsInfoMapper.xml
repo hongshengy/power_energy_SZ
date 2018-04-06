@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EvaluationDetailsInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND evaluation_details_info.id = #{id}
+            </if>
+            <if test="null != year and year != ''">
+                AND evaluation_details_info.year = #{year}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND evaluation_details_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != model_Id and model_Id != ''">
+                AND evaluation_details_info.model_Id
+            </if>
+            <if test="null != score and score != ''">
+                AND evaluation_details_info.score
+            </if>
+            <if test="null != evaluation_Content and evaluation_Content != ''">
+                AND evaluation_details_info.evaluation_Content
+            </if>
+            <if test="null != evaluation_Path and evaluation_Path != ''">
+                AND evaluation_details_info.evaluation_Path
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND evaluation_details_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.year and pd.year != ''">
+                AND evaluation_details_info.year = #{pd.year}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND evaluation_details_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.model_Id and pd.model_Id != ''">
+                AND evaluation_details_info.model_Id
+            </if>
+            <if test="null != pd.score and pd.score != ''">
+                AND evaluation_details_info.score
+            </if>
+            <if test="null != pd.evaluation_Content and pd.evaluation_Content != ''">
+                AND evaluation_details_info.evaluation_Content
+            </if>
+            <if test="null != pd.evaluation_Path and pd.evaluation_Path != ''">
+                AND evaluation_details_info.evaluation_Path
+            </if>
+
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        evaluation_details_info.id AS id
+        ,evaluation_details_info.year AS year
+        ,evaluation_details_info.dog_Id AS dog_Id
+        ,evaluation_details_info.model_Id AS model_Id
+        ,evaluation_details_info.score AS score
+        ,evaluation_details_info.evaluation_Content AS evaluation_Content
+        ,evaluation_details_info.evaluation_Path AS evaluation_Path
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != year and year != ''">
+                year = #{year},
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != model_Id and model_Id != ''">
+                model_Id = #{model_Id},
+            </if>
+            <if test="null != score and score != ''">
+                score = #{score},
+            </if>
+            <if test="null != evaluation_Content and evaluation_Content != ''">
+                evaluation_Content = #{evaluation_Content},
+            </if>
+            <if test="null != evaluation_Path and evaluation_Path != ''">
+                evaluation_Path = #{evaluation_Path},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        ,evaluation_model_info.model_Name AS model_Name
+        FROM evaluation_details_info AS evaluation_details_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = evaluation_details_info.dog_Id
+        LEFT JOIN evaluation_model_info AS evaluation_model_info ON 1 = 1 AND evaluation_model_info.id = evaluation_details_info.model_Id
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        ,evaluation_model_info.model_Name AS model_Name
+        FROM evaluation_details_info AS evaluation_details_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = evaluation_details_info.dog_Id
+        LEFT JOIN evaluation_model_info AS evaluation_model_info ON 1 = 1 AND evaluation_model_info.id = evaluation_details_info.model_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM evaluation_details_info
+        <where>
+            AND dog_Id = #{dog_Id}
+            AND model_Id = #{model_Id}
+            AND year = #{year}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO evaluation_details_info
+        (
+        dog_Id
+        <if test="null != year and year != ''">
+            ,year
+        </if>
+        <if test="null != model_Id and model_Id != ''">
+            ,model_Id
+        </if>
+        <if test="null != score and score != ''">
+            ,score
+        </if>
+        <if test="null != evaluation_Content and evaluation_Content != ''">
+            ,evaluation_Content
+        </if>
+        <if test="null != evaluation_Path and evaluation_Path != ''">
+            ,evaluation_Path
+        </if>
+
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != year and year != ''">
+            ,#{year}
+        </if>
+        <if test="null != model_Id and model_Id != ''">
+            ,#{model_Id}
+        </if>
+        <if test="null != score and score != ''">
+            ,#{score}
+        </if>
+        <if test="null != evaluation_Content and evaluation_Content != ''">
+            ,#{evaluation_Content}
+        </if>
+        <if test="null != evaluation_Path and evaluation_Path != ''">
+            ,#{evaluation_Path}
+        </if>
+
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE evaluation_details_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM evaluation_details_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

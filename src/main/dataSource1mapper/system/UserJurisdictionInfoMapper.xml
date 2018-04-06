@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserJurisdictionInfoMapper">
+
+	<!--所有表的ID要带mapper文件的前缀名-->
+
+	<sql id="where">
+		<where>
+
+			<if test="null != id and id != ''">
+				AND id = #{id}
+			</if>
+
+			<if test="null != user_Id and user_Id != ''">
+				AND user_Id = #{user_Id}
+			</if>
+
+			<if test="null != role_Id and role_Id != ''">
+				AND role_Id = #{role_Id}
+			</if>
+
+			<if test="null != jurisdiction_Remark and jurisdiction_Remark != ''">
+				AND jurisdiction_Remark = #{jurisdiction_Remark}
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="whereForEach">
+		<where>
+
+			<if test="$MoreFlg == 'more'">
+				AND
+				<foreach collection="role_Ids" item="item" open="role_Id in(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="field">
+		id
+		,user_Id
+		,role_Id
+		,jurisdiction_Remark
+	</sql>
+
+	<select id="selectInfo" parameterType="map" resultType="map">
+		SELECT
+		<include refid="field"></include>
+		FROM user_jurisdiction
+		<include refid="where"></include>
+	</select>
+
+	<!--<select id="selectInfoForEach" parameterType="map" resultType="map">-->
+		<!--SELECT-->
+		<!--<include refid="field"></include>-->
+		<!--FROM role_jurisdiction-->
+		<!--<include refid="where"></include>-->
+	<!--</select>-->
+
+	<delete id="deleteForeach" parameterType="map">
+		DELETE FROM user_jurisdiction
+		<where>
+			AND
+			<if test='$MoreFlg == "more"'>
+				<foreach collection="user_Ids" item="item" open="user_Id in(" close=")" separator=",">
+					#{item.id}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+
+	<insert id="insertInfoForForeache" parameterType="map">
+		INSERT INTO user_jurisdiction
+		(
+			user_Id
+			,role_Id
+			,jurisdiction_Remark
+		) VALUES 
+			<foreach collection="role_Info" item="item" open="" close=";" separator=",">
+				(#{item.user_Id},#{item.id},#{item.role_Name})
+			</foreach>
+	</insert>
+</mapper>

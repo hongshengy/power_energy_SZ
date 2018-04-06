@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KennelAntiepidemicMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND kennel_antiepidemic_info.id = #{id}
+            </if>
+            <if test="null != antiepidemic_Type and antiepidemic_Type != ''">
+                AND kennel_antiepidemic_info.antiepidemic_Type = #{antiepidemic_Type}
+            </if>
+            <if test="null != antiepidemic_Content and antiepidemic_Content != ''">
+                AND kennel_antiepidemic_info.antiepidemic_Content = #{antiepidemic_Content}
+            </if>
+            <if test="null != antiepidemic_User_Name and antiepidemic_User_Name != ''">
+                AND kennel_antiepidemic_info.antiepidemic_User_Name = #{antiepidemic_User_Name}
+            </if>
+            <if test="null != antiepidemic_Date and antiepidemic_Date != ''">
+                AND kennel_antiepidemic_info.antiepidemic_Date = #{antiepidemic_Date}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND kennel_antiepidemic_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.antiepidemic_Type and pd.antiepidemic_Type != ''">
+                AND kennel_antiepidemic_info.antiepidemic_Type = #{pd.antiepidemic_Type}
+            </if>
+            <if test="null != pd.antiepidemic_Content and pd.antiepidemic_Content != ''">
+                AND kennel_antiepidemic_info.antiepidemic_Content = #{pd.antiepidemic_Content}
+            </if>
+            <if test="null != pd.antiepidemic_User_Name and pd.antiepidemic_User_Name != ''">
+                AND kennel_antiepidemic_info.antiepidemic_User_Name = #{pd.antiepidemic_User_Name}
+            </if>
+            <if test="null != pd.antiepidemic_Date and pd.antiepidemic_Date != ''">
+                AND kennel_antiepidemic_info.antiepidemic_Date = #{pd.antiepidemic_Date}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        kennel_antiepidemic_info.id AS id
+        ,kennel_antiepidemic_info.antiepidemic_Type AS antiepidemic_Type
+        ,kennel_antiepidemic_info.antiepidemic_Content AS antiepidemic_Content
+        ,kennel_antiepidemic_info.antiepidemic_User_Name AS antiepidemic_User_Name
+        ,date_format(kennel_antiepidemic_info.antiepidemic_Date, '%Y-%m-%d') AS antiepidemic_Date
+        ,kennel_antiepidemic_info.antiepidemic_create_date AS antiepidemic_create_date
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != antiepidemic_Type and antiepidemic_Type != ''">
+            antiepidemic_Type = #{antiepidemic_Type},
+            </if>
+            <if test="null != antiepidemic_Content and antiepidemic_Content != ''">
+            antiepidemic_Content = #{antiepidemic_Content},
+            </if>
+            <if test="null != antiepidemic_User_Name and antiepidemic_User_Name != ''">
+            antiepidemic_User_Name = #{antiepidemic_User_Name},
+            </if>
+            <if test="null != antiepidemic_Date and antiepidemic_Date != ''">
+            antiepidemic_Date = #{antiepidemic_Date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS FANGYILEIXING
+        FROM kennel_antiepidemic_info AS kennel_antiepidemic_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = kennel_antiepidemic_info.antiepidemic_Type
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'FANGYILEIXING'
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        ,dictionary_stat.code_cn AS FANGYILEIXING
+
+        FROM kennel_antiepidemic_info AS kennel_antiepidemic_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = kennel_antiepidemic_info.antiepidemic_Type
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'FANGYILEIXING'
+
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO kennel_antiepidemic_info
+        (
+        antiepidemic_User_Name
+        <if test="null != antiepidemic_Type and antiepidemic_Type != ''">
+            ,antiepidemic_Type
+        </if>
+        <if test="null != antiepidemic_Content and antiepidemic_Content != ''">
+            ,antiepidemic_Content
+        </if>
+        <if test="null != antiepidemic_Date and antiepidemic_Date != ''">
+            ,antiepidemic_Date
+        </if>
+        ) VALUES (
+        #{antiepidemic_User_Name}
+        <if test="null != antiepidemic_Type and antiepidemic_Type != ''">
+            ,#{antiepidemic_Type}
+        </if>
+        <if test="null != antiepidemic_Content and antiepidemic_Content != ''">
+            ,#{antiepidemic_Content}
+        </if>
+        <if test="null != antiepidemic_Date and antiepidemic_Date != ''">
+            ,#{antiepidemic_Date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE kennel_antiepidemic_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM kennel_antiepidemic_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

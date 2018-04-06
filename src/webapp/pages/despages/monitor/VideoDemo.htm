@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<head >
+    <title>VIDEO TEST PAGE</title>
+    <script language="javascript">
+      var video= null;
+      var presetNo = 0;
+      video = document.getElementById( "VideoCtrl" );
+      
+      function createVideo()
+        {
+            if( video == null )
+            {                
+                video = document.getElementById( "VideoCtrl" );
+                video.InitVideo();
+                //video.SetScreenLayout(1);
+                //video.RefreshCtrl();
+            }
+                     
+        }
+        
+        function display()
+        {
+           createVideo();
+           //video.CloseVideo(video.GetCurSelectIndex());
+           var sdktype=parseInt(document.getElementById("sdktype").value);           
+           var ip =document.getElementById("ip").value ;
+           var port = document.getElementById("port").value ;
+           var nport = parseInt(port);
+           var smid =parseInt(document.getElementById("smid").value);
+           video.OpenVideo(sdktype,ip,nport,smid,video.GetCurSelectIndex());
+           video.ShowDrawText(0, "你好 摄像机", 255, 255, 0, 0.05, 0.05, 0.5, 0.5);
+        }
+        
+        function checkPresetNo()
+        {
+           presetNo = parseInt(document.getElementById("presetNo").value);
+           if(presetNo < 0 || presetNo > 255)
+           {
+                alert("输入的预置位编号不合法(0-255)");
+                return false;
+           }
+           
+           return true;
+        }
+                
+        
+        function closed()
+        {
+           createVideo();
+           video.CloseVideo(video.GetCurSelectIndex());
+           //video.CloseVideo(video.GetCurSelectIndex());
+           
+        }
+        
+        function load()
+        {
+           createVideo();
+        }        
+        
+        function leave()
+        {
+           createVideo();
+           var i = 0;
+           for(;i < 4;i++)
+           {
+           video.CloseVideo(i);
+           }
+           video.UnInitVideo();
+        }
+        
+        function btnMoveUp_onclick() {
+            createVideo();
+            video.MoveUp(video.GetCurSelectIndex());
+        }
+
+        function btnMoveLeft_onclick() {
+            createVideo();
+            video.MoveLeft(video.GetCurSelectIndex());
+        }
+
+        function btnMoveStop_onclick() {
+            createVideo();
+            video.MoveStop(video.GetCurSelectIndex());
+        }
+
+        function btnMoveRight_onclick() {
+            createVideo();
+            video.MoveRight(video.GetCurSelectIndex());
+        }
+
+        function btnMoveFar_onclick() {
+            createVideo();
+            video.MoveFar(video.GetCurSelectIndex());
+        }
+
+        function btnMoveDown_onclick() {
+            createVideo();
+            video.MoveDown(video.GetCurSelectIndex());
+        }
+
+        function btnMoveNear_onclick() {
+            createVideo();
+            video.MoveNear(video.GetCurSelectIndex());
+        }
+        
+        function btnSetPreset_onclick() {
+            createVideo();
+            if(checkPresetNo())
+            {
+                if(!video.SetPreset(0, presetNo))
+                {
+                    alert("设置预置位失败");
+                }
+            }
+        }        
+
+        function btnClearPreset_onclick() {
+            createVideo();
+            if(checkPresetNo())
+            {            
+                if(!video.ClearPreset(0, presetNo))
+                {
+                    alert("清除预置位失败");
+                }
+            }
+        } 
+        
+        function btnGotoPreset_onclick() {
+            createVideo();
+            if(checkPresetNo())
+            {             
+                if(!video.GotoPreset(0, presetNo))
+                {
+                    alert("调用预置位失败");
+                }
+            }
+        }
+        
+        function btnReplayClientFile_onclick() {
+        	createVideo();
+           var sdktype=parseInt(document.getElementById("sdktype").value);        	
+            var file =document.getElementById("file").value ;
+            video.ReplayClientFile(sdktype, file);
+        }   
+        
+        function btnSetScreenLayout_onclick() {
+        	createVideo();
+        	checkPresetNo();
+            video.SetScreenLayout(presetNo);
+        }    
+        
+        function btnBeginClientRecord_onclick() {
+        	createVideo();
+            var file =document.getElementById("file").value ;
+            video.BeginClientRecord(video.GetCurSelectIndex(), file);
+        }
+        
+        function btnStopClientRecord_onclick() {
+        	createVideo();
+            var file =document.getElementById("file").value ;
+            video.StopClientRecord(video.GetCurSelectIndex());
+        }
+        
+        function btnCaptureClientImage_onclick() {
+        	createVideo();
+            var file =document.getElementById("file").value ;
+            video.CaptureClientImage(video.GetCurSelectIndex(), file);
+        }   
+        
+        function btnSetCursorVisible_onclick() {
+        	createVideo();
+            video.SetCursorVisible(video.GetCurSelectIndex(), 0x3F);
+        }
+        
+        function btnOpenClientImage_onclick() {
+        	createVideo();
+            var file =document.getElementById("file").value ;
+            //video.SetFullScreenMode(0);
+            video.OpenClientImage( file);
+        }         
+        
+        function btnSetScreenScale_onclick() {
+        	createVideo();
+            var file =document.getElementById("file").value ;
+            //video.SetFullScreenMode(0);
+            video.SetScreenScale( file);
+        }
+        
+        function btnGetChannleNameList_onclick() {
+        	createVideo();
+           var sdktype=parseInt(document.getElementById("sdktype").value);           
+           var ip =document.getElementById("ip").value ;
+           var port = document.getElementById("port").value ;
+           var nport = parseInt(port);        	
+        	alert(video.GetChannleNameList(sdktype, ip, port, "admin", "admin"));
+        }        
+    </script>
+		<script language="JavaScript" for="VideoCtrl" event="ControlCamera(controltype)">
+		  if(controltype == 1)
+		  {
+		  	btnMoveUp_onclick();
+		  }		
+		  if(controltype == 7)
+		  {
+		  	btnMoveStop_onclick();
+		  }
+		</script>
+		<script language="JavaScript" for="VideoCtrl" event="ButtonClick(controltype)">
+		  //alert(controltype);
+		</script>		
+    
+</head>
+<body onload="load();" onunload="leave();">
+    <form id="form1">
+    <div>
+    <object classid="CLSID:135BE654-0A91-4C48-946F-CCE9CE6FDBC3" id="VideoCtrl" name="VideoCtrl" style="width: 670px; height: 487px"></object>
+        <div style="clear: none; left: 698px; width: 200px; position: absolute; top: 239px;
+            height: 197px">
+            <input id="btnMoveUp" style="left: 79px; position: absolute; top: 2px" type="button"
+                value="向上" onclick="return btnMoveUp_onclick()" />
+            <input id="btnMoveDown" style="left: 83px; position: absolute; top: 171px" type="button"
+                value="向下" onclick="return btnMoveDown_onclick()" />
+            <input id="btnMoveLeft" style="left: -1px; position: absolute; top: 83px" type="button"
+                value="向左" onclick="return btnMoveLeft_onclick()" />
+            <input id="btnMoveRight" style="left: 157px; position: absolute; top: 82px" type="button"
+                value="向右" onclick="return btnMoveRight_onclick()" />
+            <input id="btnMoveStop" style="left: 81px; position: absolute; top: 82px" type="button"
+                value="停止" onclick="return btnMoveStop_onclick()" />
+            <input id="btnMoveNear" style="left: 1px; position: absolute; top: 170px" type="button"
+                value="放大" onclick="return btnMoveNear_onclick()" />
+            <input id="btnMoveFar" style="left: 157px; position: absolute; top: 172px" type="button"
+                value="缩小" onclick="return btnMoveFar_onclick()" />
+        </div>
+        <br />
+        &nbsp;sdktype:<input id="sdktype" name="sdktype" type="text" value="4" />ip:
+        <input id="ip" name="ip" type="text" value="192.168.1.60" />port :<input id="port" name="port" type="text" value="8000" />smid:<input id="smid" name="smid" type="text" value="1" />file:<input id="file" name="file" type="text" value="c:\\file.jpeg" />
+        <input id="Button1" type="button" value="ok" onclick="display();" />
+        <input id="Button2" type="button" value="close" onclick="closed();" />
+        <br />
+        presetNo:<input id="presetNo" name="presetNo" type="text" value="1" style="width: 110px" />
+        <input id="btnSetPreset" type="button" value="设置预置位" onclick="btnSetPreset_onclick();" />
+        <input id="btnClearPreset" type="button" value="清除预置位" onclick="btnClearPreset_onclick();" />
+        <input id="btnGotoPreset" type="button" value="调用预置位" onclick="btnGotoPreset_onclick();" />
+        <input id="btnReplayClientFile" type="button" value="播放录像" onclick="btnReplayClientFile_onclick();" />
+        <input id="btnSetScreenLayout" type="button" value="四分屏" onclick="btnSetScreenLayout_onclick();" />
+        <br />
+        <input id="btnBeginClientRecord" type="button" value="开始录像" onclick="btnBeginClientRecord_onclick();" />
+        <input id="btnStopClientRecord" type="button" value="停止录像" onclick="btnStopClientRecord_onclick();" />
+        <input id="btnCaptureClientImage" type="button" value="本地抓图" onclick="btnCaptureClientImage_onclick();" />  
+        <br />
+        <input id="btnSetCursorVisible" type="button" value="设置光标" onclick="btnSetCursorVisible_onclick();" />      
+        <input id="btnOpenClientImage" type="button" value="打开本地照片" onclick="btnOpenClientImage_onclick();" />
+        <input id="btnSetScreenScale" type="button" value="设置比例" onclick="btnSetScreenScale_onclick();" />
+        <input id="btnGetChannleNameList" type="button" value="获取通道名称" onclick="btnGetChannleNameList_onclick();" />              
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MenuInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="whereForOne">
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+            <if test="null != parent_Id and parent_Id != ''">
+                AND parent_Id = #{parent_Id}
+            </if>
+            <if test="null != meun_Name and meun_Name != ''">
+                AND meun_Name = #{meun_Name}
+            </if>
+            <if test="null != meun_Url and meun_Url != ''">
+                AND meun_Url = #{meun_Url}
+            </if>
+            <if test="null != order_Id and order_Id != ''">
+                AND order_Id = #{order_Id}
+            </if>
+            <if test="null != show_If and show_If != ''">
+                AND show_If = #{show_If}
+            </if>
+            <if test="null != node_If and node_If != ''">
+                AND node_If = #{node_If}
+            </if>
+            <if test="null != menu_Content and menu_Content != ''">
+                AND menu_Content = #{menu_Content}
+            </if>
+            <if test="null != menu_Remark and menu_Remark != ''">
+                AND menu_Remark = #{menu_Remark}
+            </if>
+            <if test="null != menu_Status and menu_Status != ''">
+                AND menu_Status = #{menu_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="where">
+        <where>
+
+            <if test="null != $MoreFlg and $MoreFlg != ''">
+                <if test="$MoreFlg == 'one'">
+                    AND id = #{MenuInfo_id_one}
+                </if>
+
+                <if test="$MoreFlg == 'more'">
+                    AND
+                    <foreach collection="Menu_ids" item="item" open="id in(" close=")" separator=",">
+                        #{item.meun_Id}
+                    </foreach>
+                </if>
+
+            </if>
+
+            <if test="null != parent_Id and parent_Id != ''">
+                AND parent_Id = #{parent_Id}
+            </if>
+
+            <if test="null != meun_Name and meun_Name != ''">
+                AND meun_Name = #{meun_Name}
+            </if>
+
+            <if test="null != show_If and show_If != ''">
+                AND show_If = #{show_If}
+            </if>
+
+            <if test="null != node_If and node_If != ''">
+                AND node_If = #{node_If}
+            </if>
+
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+
+            <if test="null != pd.$MoreFlg and pd.$MoreFlg != ''">
+                <if test="pd.$MoreFlg == 'one'">
+                    AND menu_info.id = #{pd.MenuInfo_id_one}
+                </if>
+
+                <if test="pd.$MoreFlg == 'more'">
+                    AND
+                    <foreach collection="pd.Menu_ids" item="item" open="menu_info.id in(" close=")" separator=",">
+                        #{item.meun_Id}
+                    </foreach>
+                </if>
+
+            </if>
+
+            <if test="null != pd.parent_Id and pd.parent_Id != ''">
+                AND menu_info.parent_Id = #{pd.parent_Id}
+            </if>
+
+            <if test="null != pd.meun_Name and pd.meun_Name != ''">
+                AND menu_info.meun_Name = #{pd.meun_Name}
+            </if>
+
+            <if test="null != pd.show_If and pd.show_If != ''">
+                AND menu_info.show_If = #{pd.show_If}
+            </if>
+
+            <if test="null != pd.node_If and pd.node_If != ''">
+                AND menu_info.node_If = #{pd.node_If}
+            </if>
+
+        </where>
+    </sql>
+
+    <sql id="field">
+        id
+                , parent_Id
+                , meun_Name
+                , meun_Url
+                , order_Id
+                , show_If
+                , node_If
+                , menu_Content
+                , menu_Remark
+                , menu_Status
+    </sql>
+
+    <sql id="fieldPage">
+        menu_info.id
+                , menu_info.parent_Id
+        , menu_info.meun_Name
+        , menu_info.meun_Url
+        , menu_info.order_Id
+        , menu_info.show_If
+        , menu_info.node_If
+        , menu_info.menu_Content
+        , menu_info.menu_Remark
+        , menu_info.menu_Status
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != parent_Id and parent_Id != ''">
+                parent_Id = #{parent_Id},
+            </if>
+            <if test="null != meun_Name and meun_Name != ''">
+                meun_Name = #{meun_Name},
+            </if>
+            <if test="null != meun_Url and meun_Url != ''">
+                meun_Url = #{meun_Url},
+            </if>
+            <if test="null != order_Id and order_Id != ''">
+                order_Id = #{order_Id},
+            </if>
+            <if test="null != show_If and show_If != ''">
+                show_If = #{show_If},
+            </if>
+            <if test="null != node_If and node_If != ''">
+                node_If = #{node_If},
+            </if>
+            <if test="null != menu_Content and menu_Content != ''">
+                menu_Content = #{menu_Content},
+            </if>
+            <if test="null != menu_Remark and menu_Remark != ''">
+                menu_Remark = #{menu_Remark},
+            </if>
+            <if test="null != menu_Status and menu_Status != ''">
+                menu_Status = #{menu_Status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM menu_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="selectOneInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM menu_info
+        <include refid="whereForOne"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldPage"></include>
+        ,dictionary_node.code_cn AS JIEDIAN
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,dictionary_show.code_cn AS XIANSHI
+        FROM menu_info AS menu_info
+        INNER JOIN dictionary AS dictionary_node ON 1 = 1 AND dictionary_node.code_value = menu_info.node_If
+        INNER JOIN dictionary AS dictionary_p_node ON dictionary_node.parent_id = dictionary_p_node.id AND dictionary_p_node.code_en = 'SHIFOUJIEDIAN'
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND dictionary_stat.code_value = menu_info.menu_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+
+        INNER JOIN dictionary AS dictionary_show ON 1 = 1 AND dictionary_show.code_value = menu_info.show_If
+        INNER JOIN dictionary AS dictionary_p_show ON dictionary_show.parent_id = dictionary_p_show.id AND dictionary_p_show.code_en = 'SHIFOUXIANSHI'
+
+        <include refid="wherePage"></include>
+
+        ORDER BY menu_info.id ASC
+
+    </select>
+
+    <select id="getCountByParams" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM menu_info
+        <where>
+            meun_Name = #{meun_Name} OR meun_Url = #{meun_Url}
+        </where>
+        GROUP BY id
+    </select>
+
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO menu_info
+        (
+        parent_Id
+        ,meun_Name
+        ,meun_Url
+        ,order_Id
+        <if test="null != show_If and show_If != ''">
+            ,show_If
+        </if>
+        <if test="null != node_If and node_If != ''">
+            ,node_If
+        </if>
+        <if test="null != menu_Content and menu_Content != ''">
+            ,menu_Content
+        </if>
+        <if test="null != menu_Remark and menu_Remark != ''">
+            ,menu_Remark
+        </if>
+        <if test="null != menu_Status and menu_Status != ''">
+            ,menu_Status
+        </if>
+
+        ) VALUES (
+        #{parent_Id}
+        ,#{meun_Name}
+        ,#{meun_Url}
+        ,#{order_Id}
+        <if test="null != show_If and show_If != ''">
+            ,#{show_If}
+        </if>
+        <if test="null != node_If and node_If != ''">
+            ,#{node_If}
+        </if>
+        <if test="null != menu_Content and menu_Content != ''">
+            ,#{menu_Content}
+        </if>
+        <if test="null != menu_Remark and menu_Remark != ''">
+            ,#{menu_Remark}
+        </if>
+        <if test="null != menu_Status and menu_Status != ''">
+            ,#{menu_Status}
+        </if>
+
+        )
+    </insert>
+
+    <update id="updateinfo" parameterType="map">
+        UPDATE menu_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <delete id="deleteByid" parameterType="map">
+        DELETE FROM menu_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

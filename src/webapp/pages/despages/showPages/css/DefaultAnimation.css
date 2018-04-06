@@ -1,0 +1,445 @@
+﻿/* 基本动画样式表 */
+
+/* 透明度(渐现) 2D转换 */
+@keyframes opacityOutAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 1;
+        transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-moz-keyframes opacityOutAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        -moz-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-webkit-keyframes opacityOutAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        -webkit-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+@-o-keyframes opacityOutAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 1;
+        -o-transform: translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+        background-position: 0px 0px;
+    }
+}
+
+/* 透明度（渐隐）2D转换 */
+@keyframes opacityInAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes opacityInAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes opacityInAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 0;
+    }
+}
+
+@-o-keyframes opacityInAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        opacity: 0;
+    }
+}
+
+
+/* 高度动画（配合背景图使用） */
+@keyframes heightAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        height: 850px;
+    }
+}
+
+@-moz-keyframes heightAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        height: 850px;
+    }
+}
+
+@-webkit-keyframes heightAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        height: 850px;
+    }
+}
+
+@-o-keyframes heightAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        height: 850px;
+    }
+}
+
+
+/* 高度动画（配合背景图使用） */
+@keyframes strokeAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        stroke-dashoffset: 0px;
+    }
+}
+
+@-moz-keyframes strokeAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        stroke-dashoffset: 0px;
+    }
+}
+
+@-webkit-keyframes strokeAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        stroke-dashoffset: 0px;
+    }
+}
+
+@-o-keyframes strokeAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        stroke-dashoffset: 0px;
+    }
+}
+
+
+
+@keyframes menuShowAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        background-position: 0px 120px;
+    }
+}
+
+@-moz-keyframes menuShowAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        background-position: 0px 120px;
+    }
+}
+
+@-webkit-keyframes menuShowAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        background-position: 0px 120px;
+    }
+}
+
+@-o-keyframes menuShowAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        background-position: 0px 120px;
+    }
+}
+
+@keyframes menuHideAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        background-position: -5600px 120px;
+    }
+}
+
+@-moz-keyframes menuHideAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        background-position: -5600px 120px;
+    }
+}
+
+@-webkit-keyframes menuHideAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        background-position: -5600px 120px;
+    }
+}
+
+@-o-keyframes menuHideAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        background-position: -5600px 120px;
+    }
+}
+
+@keyframes menuItemHideAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+@-moz-keyframes menuItemHideAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+         opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+@-webkit-keyframes menuItemHideAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+         opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+@-o-keyframes menuItemHideAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+         opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+.childMenuBgShow {
+    -moz-animation: menuShowAnimation 1s ease;
+    -moz-animation-delay: 0.5s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: menuShowAnimation 1s ease;
+    -webkit-animation-delay:  0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: menuShowAnimation 1s ease;
+    animation-delay:  0.5s;
+    animation-fill-mode: forwards;
+}
+
+.childMenuBgHide {
+    -moz-animation: menuHideAnimation 1s ease;
+    -moz-animation-delay: 0.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: menuHideAnimation 1s ease;
+    -webkit-animation-delay:  0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: menuHideAnimation 1s ease;
+    animation-delay:  0.8s;
+    animation-fill-mode: forwards;
+}
+
+.childMenuItemShow {
+    -moz-animation: opacityOutAnimation 1s ease;
+    -moz-animation-delay: 0.8s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: opacityOutAnimation 1s ease;
+    -webkit-animation-delay: 0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: opacityOutAnimation 1s ease;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+.childMenuItemHide {
+    -moz-animation: menuItemHideAnimation 1s ease;
+    -moz-animation-delay: 0.5s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: menuItemHideAnimation 1s ease;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: menuItemHideAnimation 1s ease;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes menuImgShowAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        transform : rotateY(180deg);
+    }
+}
+
+@-moz-keyframes menuImgShowAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        -moz-transform : rotateY(180deg);
+    }
+}
+
+@-webkit-keyframes menuImgShowAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        -webkit-transform : rotateY(180deg);
+    }
+}
+
+@-o-keyframes menuImgShowAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        -o-transform : rotateY(180deg);
+    }
+}
+
+.menuImgShow {
+    -moz-animation: menuImgShowAnimation 1s linear;
+    -moz-animation-delay: 0.5s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: menuImgShowAnimation 1s linear;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: menuImgShowAnimation 1s linear;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes menuImgHideAnimation {
+    /*from {
+        filter:alpha(opacity=0);
+    }*/
+    to {
+        transform : rotateY(0deg);
+    }
+}
+
+@-moz-keyframes menuImgHideAnimation /* Firefox */
+{
+    /*from {
+        -moz-opacity : 0;
+    }*/
+    to {
+        -moz-transform : rotateY(0deg);
+    }
+}
+
+@-webkit-keyframes menuImgHideAnimation /* Safari and Chrome */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        -webkit-transform : rotateY(0deg);
+    }
+}
+
+@-o-keyframes menuImgHideAnimation /* Opera */
+{
+    /*from {
+        opacity : 0;
+    }*/
+    to {
+        -o-transform : rotateY(0deg);
+    }
+}
+
+.menuImgHide {
+    -moz-animation: menuImgHideAnimation 1s linear;
+    -moz-animation-delay: 0.5s;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation: menuImgHideAnimation 1s linear;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: menuImgHideAnimation 1s linear;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}

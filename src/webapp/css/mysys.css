@@ -1,0 +1,346 @@
+@CHARSET "UTF-8";
+
+.search-item {
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    padding:3px 10px 3px 10px;
+    border:1px solid #fff;
+    border-bottom:1px solid #eeeeee;
+    white-space:normal;
+}
+.search-item h3 {
+    display:block;
+    font:inherit;
+    font-weight:bold;
+}
+
+.search-item h3 span {
+    float: right;
+    font-weight:normal;
+    margin:0 0 5px 5px;
+    width:100px;
+    display:block;
+    clear:none;
+}
+
+.tabs_login {
+    background-image:url(../images/rss.gif ) !important;
+}
+
+.tabs_sysinfor {
+    background-image:url(../images/sysinfor.gif ) !important;
+}
+
+.ss {
+	text-align: left;;
+}
+
+.icon-grid {
+	background-image: url(../images/grid.png) !important;
+}
+
+.add {
+	background-image: url(../images/t_add.gif) !important;
+}
+
+.edit {
+	background-image: url(../images/tools_edit.gif) !important;
+}
+
+.update {
+	background-image: url(../images/tools_edit.gif) !important;
+}
+
+.remove {
+	background-image: url(../images/t_sub.gif) !important;
+}
+
+.save {
+	background-image: url(../images/tools_save.gif) !important;
+}
+
+.sys {
+	background-image: url(../images/tools_ok.gif) !important;
+}
+
+.more{
+	background-image: url(../images/ds-collapse.gif) !important;
+}
+
+.search {
+	background-image: url(../images/tools_search.gif) !important;
+}
+
+.import {
+	background-image:url(../images/tools_import.gif) !important;
+}
+
+.export {
+	background-image:url(../images/tools_export.gif) !important;
+}
+
+.print{
+ 	background-image:url(../images/tools-print.gif) !important;
+ }
+
+.export_excel {
+	background-image:url(../images/tools-exporttoexcel.gif) !important;
+}
+
+.sort{
+	background-image:url(../images/tools_sort.gif) !important;
+}
+
+.moveup{
+	background-image:url(../images/tools-moveup.gif) !important;
+}
+
+.movedown{
+	background-image:url(../images/tools-movedown.gif) !important;
+}
+
+.close{
+	background-image:url(../images/tools_close.gif) !important;
+}
+
+.reset{
+	background-image:url(../images/tools_clear.gif) !important;
+}
+
+.ok{
+	background-image:url(../images/tools_ok.gif) !important;
+}
+.transact{
+	background-image:url(../images/tools-transact.gif) !important;
+}
+.refresh{
+	background-image:url(../images/tools-refresh.gif) !important;
+}
+.checkOut{
+	background-image:url(../images/tools-checkOut.gif) !important;
+}
+.checkIn{
+	background-image:url(../images/tools-checkIn.gif) !important;
+}
+.callBack{
+	background-image:url(../images/tools-callBack.gif) !important;
+}
+.reject{
+	background-image:url(../images/tools-reject.gif) !important;
+}
+.skip{
+	background-image:url(../images/tools-skip.gif) !important;
+}
+.submit{
+	background-image:url(../images/tools-submit.gif) !important;
+}
+.viewMain{
+	background-image:url(../images/tools-viewMain.gif) !important;
+}
+.viewSub{
+	background-image:url(../images/tools-viewSub.gif) !important;
+}
+.action{
+	background-image:url(../images/tools-action.gif) !important;
+}
+.user{
+	background-image:url(../images/tools-user.gif) !important;
+}
+.userConfig{
+	background-image:url(../images/tools-userUserConfig.gif) !important;
+}
+.changepwd{
+	background-image:url(../images/tools-changepwd.gif) !important;
+}
+.view{
+ 	background-image:url(../images/tools_check.gif) !important;
+}
+
+.plant {
+	background: blue;
+	background-attachment: inherit;
+}
+.publicPlant {
+	background: yellow;
+}
+.selfPlant {
+	background: green;
+}
+.rcompute {
+	background-image: url(../images/rcompute.gif) !important;
+}
+.station_icon_area {
+	background-image: url(../images/station_icon_area.gif) !important;
+}
+.station_icon_b500 {
+	background-image: url(../images/station_icon_b500.gif) !important;
+}
+.station_icon_b220 {
+	background-image: url(../images/station_icon_b220.gif) !important;
+}
+.station_icon_b110 {
+	background-image: url(../images/station_icon_b110.gif) !important;
+}
+.station_icon_t500 {
+	background-image: url(../images/station_icon_t500.gif) !important;
+}
+.station_icon_t220 {
+	background-image: url(../images/station_icon_t220.gif) !important;
+}
+.station_icon_t110 {
+	background-image: url(../images/station_icon_t110.gif) !important;
+}
+.station_icon_F110 {
+	background-image: url(../images/station_icon_F110.gif) !important;
+}
+.station_icon_F35 {
+	background-image: url(../images/station_icon_F35.gif) !important;
+}
+.station_icon_F10 {
+	background-image: url(../images/station_icon_F10.gif) !important;
+}
+.mp_icon {
+	background-image: url(../images/mp.gif) !important;
+}
+.mp_icon_10 {
+	background-image: url(../images/mp_icon_10.gif) !important;
+}
+.mp_icon_35 {
+	background-image: url(../images/mp_icon_35.gif) !important;
+}
+.mp_icon_110 {
+	background-image: url(../images/mp_icon_110.gif) !important;
+}
+.mp_icon_220 {
+	background-image: url(../images/mp_icon_220.gif) !important;
+}
+.mp_icon_500 {
+	background-image: url(../images/mp_icon_500.gif) !important;
+}
+.tools_infooverrule {
+	background-image: url(../images/tools_infooverrule.gif) !important;
+}
+.checkdata_icon_0 {
+	background-image: url(../images/checkdata_icon_0.gif) !important;
+}
+.checkdata_icon_1 {
+	background-image: url(../images/checkdata_icon_1.gif) !important;
+}
+.mytree .x-tree-root-ct {
+	position: absolute;
+}
+.textOnly {
+	border-width: 0px;
+	background-color: transparent;
+}
+.tableInfo {
+	BORDER-COLLAPSE: collapse
+}
+.tableInfo TD {
+	BORDER-RIGHT: #cecece 1px solid; BORDER-TOP: #cecece 1px solid; BORDER-LEFT: #cecece 1px solid; COLOR: #666666; BORDER-BOTTOM: #cecece 1px solid
+}
+.tableInfo TH {
+	BORDER-RIGHT: #cecece 1px solid; BORDER-TOP: #cecece 1px solid; BACKGROUND: #dcf3f0; BORDER-LEFT: #cecece 1px solid; COLOR: #333; BORDER-BOTTOM: #cecece 1px solid
+}
+.tableInfo .tdLabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #e2f6f4; FONT-FAMILY: 宋体; TEXT-ALIGN: right
+}
+.tableInfo .category {
+	BACKGROUND: #f7f7f7; COLOR: #333
+}
+.tableInfo .warn {
+	BACKGROUND: #ffac68; COLOR: white
+}
+.tableInfo .error {
+	BACKGROUND: #ff6868; COLOR: white
+}
+.VOLT_LEVEL_500kV {
+    background-image: url(../images/volt_level_500.gif) !important;
+}
+.VOLT_LEVEL_330kV {
+    background-image: url(../images/volt_level_330.gif) !important;
+}
+.VOLT_LEVEL_220kV {
+    background-image: url(../images/volt_level_220.gif) !important;
+}
+.VOLT_LEVEL_110kV {
+    background-image: url(../images/volt_level_110.gif) !important;
+}
+.VOLT_LEVEL_35kV {
+    background-image: url(../images/volt_level_35.gif) !important;
+}
+.VOLT_LEVEL_20kV {
+    background-image: url(../images/volt_level_20.gif) !important;
+}
+.VOLT_LEVEL_10kV {
+    background-image: url(../images/volt_level_10.gif) !important;
+}
+.VOLT_LEVEL_6kV {
+    background-image: url(../images/volt_level_6.gif) !important;
+}
+.VOLT_LEVEL_038kV {
+    background-image: url(../images/volt_level_038.gif) !important;
+}
+.DEV_TRANSFORMER_WIND {
+    background-image: url(../images/dev_transformer_wind.gif) !important;
+}
+.DEV_LINE_DOT {
+    background-image: url(../images/dev_line_dot.gif) !important;
+}
+.DEV_OTHERWAY {
+    background-image: url(../images/dev_otherway.gif) !important;
+}
+.DEV_SWITCHES_BREAKER {
+    background-image: url(../images/dev_switches_breaker.gif) !important;
+}
+.DEV_BREAKER {
+    background-image: url(../images/dev_breaker.gif) !important;
+}
+.DEV_SWITCH {
+    background-image: url(../images/dev_switch.gif) !important;
+}
+.DEV_OTHERWAY_BREAKER {
+    background-image: url(../images/dev_otherway_breaker.gif) !important;
+}
+.DEV_RC_DEVICE {
+    background-image: url(../images/dev_rc_device.gif) !important;
+}
+.DEV_GENERATOR {
+    background-image: url(../images/dev_generator.gif) !important;
+}
+.DEV_OTHERDEVICE {
+    background-image: url(../images/dev_otherdevice.gif) !important;
+}
+.DEV_TRANSFORMER {
+    background-image: url(../images/dev_transformer.gif) !important;
+}
+.R_CP_CSS {
+    background-image: url(../images/cp.gif) !important;
+}
+.NEW_WINDOW {
+    background-image: url(../images/new_window.gif) !important;
+}
+.time_day {
+    background-image: url(../images/time_day.gif) !important;
+}
+.time_month {
+    background-image: url(../images/time_month.gif) !important;
+}
+.time_year {
+    background-image: url(../images/time_year.gif) !important;
+}
+.time_period {
+    background-image: url(../images/time_period.gif) !important;
+}
+.node_leaf {
+    background-image: url(../images/leaf.gif) !important;
+}
+..btnIconArrowLeft {
+    background-image: url(../images/tools-moveleft.gif) !important;
+}
+..btnIconArrowRight {
+    background-image: url(../images/tools-moveright.gif) !important;
+}
+.x-grid-back-red {background: khaki;}
+.picture {
+	background-image: url(../images/picture.png) !important;
+}

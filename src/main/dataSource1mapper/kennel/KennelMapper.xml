@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KennelMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND kennel_info.id = #{id}
+            </if>
+            <if test="null != kennel_Name and kennel_Name != ''">
+                AND kennel_info.kennel_Name = #{kennel_Name}
+            </if>
+            <if test="null != kennel_Code and kennel_Code != ''">
+                AND kennel_info.kennel_Code = #{kennel_Code}
+            </if>
+            <if test="null != kennel_Content and kennel_Content != ''">
+                AND kennel_info.kennel_Content = #{kennel_Content}
+            </if>
+            <if test="null != kennel_Remark and kennel_Remark != ''">
+                AND kennel_info.kennel_Remark = #{kennel_Remark}
+            </if>
+            <if test="null != kennel_Status and kennel_Status != ''">
+                AND kennel_info.kennel_Status = #{kennel_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND kennel_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.kennel_Name and pd.kennel_Name != ''">
+                AND kennel_info.kennel_Name = #{pd.kennel_Name}
+            </if>
+            <if test="null != pd.kennel_Code and pd.kennel_Code != ''">
+                AND kennel_info.kennel_Code = #{pd.kennel_Code}
+            </if>
+            <if test="null != pd.kennel_Content and pd.kennel_Content != ''">
+                AND kennel_info.kennel_Content = #{pd.kennel_Content}
+            </if>
+            <if test="null != pd.kennel_Remark and pd.kennel_Remark != ''">
+                AND kennel_info.kennel_Remark = #{pd.kennel_Remark}
+            </if>
+            <if test="null != pd.kennel_Status and pd.kennel_Status != ''">
+                AND kennel_info.kennel_Status = #{pd.kennel_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        kennel_info.id AS id
+        ,kennel_info.kennel_Name AS kennel_Name
+        ,kennel_info.kennel_Code AS kennel_Code
+        ,kennel_info.kennel_Content AS kennel_Content
+        ,kennel_info.kennel_Remark AS kennel_Remark
+        ,kennel_info.kennel_Status AS kennel_Status
+        ,kennel_info.kennel_create_date AS kennel_create_date
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != kennel_Code and kennel_Code != ''">
+                kennel_Code = #{kennel_Code},
+            </if>
+            <if test="null != kennel_Code and kennel_Code != ''">
+                kennel_Code = #{kennel_Code},
+            </if>
+            <if test="null != kennel_Content and kennel_Content != ''">
+                kennel_Content = #{kennel_Content},
+            </if>
+            <if test="null != kennel_Remark and kennel_Remark != ''">
+                kennel_Remark = #{kennel_Remark},
+            </if>
+            <if test="null != kennel_Status and kennel_Status != ''">
+                kennel_Status = #{kennel_Status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM kennel_info AS kennel_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = kennel_info.kennel_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+
+        FROM kennel_info AS kennel_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = kennel_info.kennel_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM kennel_info
+        <where>
+            kennel_Name = #{kennel_Name} OR kennel_Code = #{kennel_Code}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO kennel_info
+        (
+        kennel_Name
+        <if test="null != kennel_Code and kennel_Code != ''">
+            ,kennel_Code
+        </if>
+        <if test="null != kennel_Content and kennel_Content != ''">
+            ,kennel_Content
+        </if>
+        <if test="null != kennel_Remark and kennel_Remark != ''">
+            ,kennel_Remark
+        </if>
+        <if test="null != kennel_Status and kennel_Status != ''">
+            ,kennel_Status
+        </if>
+        ) VALUES (
+        #{kennel_Name}
+        <if test="null != kennel_Code and kennel_Code != ''">
+            ,#{kennel_Code}
+        </if>
+        <if test="null != kennel_Content and kennel_Content != ''">
+            ,#{kennel_Content}
+        </if>
+        <if test="null != kennel_Remark and kennel_Remark != ''">
+            ,#{kennel_Remark}
+        </if>
+        <if test="null != kennel_Status and kennel_Status != ''">
+            ,#{kennel_Status}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE kennel_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM kennel_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

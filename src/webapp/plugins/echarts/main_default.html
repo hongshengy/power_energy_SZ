@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/>
+
+    <!--<link rel="stylesheet" type="text/css" href="../plugins/bootstrap/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="../plugins/bootstrap/css/bootstrap-theme.css">-->
+
+    <!--&lt;!&ndash;bootstrap-table&ndash;&gt;-->
+    <!--<link rel="stylesheet" type="text/css" href="../plugins/bootstrap-table/bootstrap-table.min.css">-->
+
+    <!--<link rel="stylesheet" type="text/css" href="../plugins/select2/select2-bootstrap.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="../plugins/select2/select2.min.css">-->
+
+    <style type="text/css">
+
+        #headerD {
+            height: 30px;width: 300px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        *{text-decoration: none;margin: 0;padding: 0;list-style: none;}
+
+        #tableCenter a{font-weight: normal;color: black;}
+        #tableCenter li{text-align: center;float: left;}
+        #tableCenter li:nth-of-type(1){width: 33%;float: left;}
+        #tableCenter li:nth-of-type(2){width: 33%;float: left;}
+        #tableCenter li:nth-of-type(3){width: 34%;float: right;}
+
+        .showRL {
+            border-bottom: 2px solid red;
+        }
+
+        #divtop{
+            margin-bottom: 10px;
+            width:100%;
+        }
+        #divbottom{
+            width:100%;
+        }
+        .am-panel {
+            margin-bottom: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+            display: inline-block;
+            width:32.8%;
+        }
+        .am-panel-default {
+            border-color: #ddd;
+
+        }
+        .am-panel-default>.am-panel-hd {
+            padding: 1px;
+            display: block;
+        }
+        .am-panel-title {
+            margin: 5px;
+            font-size: 100%;
+            color: inherit;
+            display: block;
+            padding-left:10px
+        }
+        .am-panel-bd {
+            padding: .25rem;
+        }
+
+        table {
+            padding:0;
+            margin:0;
+            width:100%;
+        }
+        .info{
+            background:  #4cae4c;
+            border-color: #4cae4c;
+            color:#fff;
+        }
+        .danger{
+            background:  #ff3e23;
+            border-color: #ff3e23;
+            color:#fff;
+        }
+        .warn{
+            background:  #ffa90b;
+            border-color: #ffa90b;
+            color:#fff;
+        }
+        .purple{
+            background:  #dd25ff;
+            border-color: #dd25ff;
+            color:#fff;
+        }
+        .blue{
+            background:  #679BCC;
+            border-color: #679BCC;
+            color:#fff;
+        }
+
+    </style>
+</head>
+
+<body>
+<!--<div id="headerD">-->
+    <!--<ul id="tableCenter" style="margin:0px;padding: 0px;">-->
+        <!--<li activequery="count"><a href="JavaScript:void(0)" onclick="changeTableData('count');">分析统计</a></li>-->
+        <!--<li activequery="map"><a href="JavaScript:void(0)" onclick="changeTableData('map');">关区地图</a></li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<div id="countTable">
+    <div id="divtop" >
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd info"><h3 class="am-panel-title">检疫犬历年数量统计</h3></div>
+            <div class="am-panel-bd wzyn">
+                <div id="monitorCharts" style='width:100%; height:100%;'></div>
+            </div>
+
+        </div>
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd danger"><h3 class="am-panel-title">检疫犬评分统计榜</h3></div>
+            <div class="am-panel-bd wzyn">
+                <div id="dispatchedCharts" style='width:100%; height:100%;'></div>
+            </div>
+
+        </div>
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd warn"><h3 class="am-panel-title">物资统计</h3></div>
+            <div class="am-panel-bd wzyn">
+                <div id="analysisMonitorCharts" style='width:100%; height:100%;'></div>
+            </div>
+        </div>
+    </div>
+    <div id="divbottom" >
+        <div class="am-panel am-panel-default" style="width:48%;margin-right:20px;">
+            <div class="am-panel-hd purple"><h3 class="am-panel-title">检疫犬每周训练科目统计</h3></div>
+            <div class="am-panel-bd wzyn">
+                <div id="summaryCharts" style='width:100%; height:100%;'></div>
+            </div>
+
+        </div>
+        <div class="am-panel am-panel-default" style="width:48%;">
+            <div class="am-panel-hd blue"><h3 class="am-panel-title">训导员总体训练分数统计</h3></div>
+            <div class="am-panel-bd wzyn">
+                <div id="reserveCharts" style='width:100%; height:100%;'></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mapTable" style="position:relative; width:100%;">
+    <div id="main" style='position:absolute; z-index:2; width:100%; height:100%; left:0px; top:0px; '></div>
+</div>
+
+</body>
+
+<!--jquery-->
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="echarts_source.js"></script>
+
+<script type="text/javascript">
+    //var getDataUrl = "${basePath}/system/data";
+    //echarts对象
+    var echartsOption;
+    var myChart;
+    var series = [];
+    var legend = new Object();
+    legend.orient = 'vertical';
+    legend.top = 'top';
+    legend.left = 'left';
+    legend.data = [];
+    legend.textStyle = {color:'#FFF'};
+
+    //分析统计echarts对象
+    var monitorCharts;
+    var dispatchedCharts;
+    var analysisMonitorCharts;
+    var summaryCharts;
+    var reserveCharts;
+
+    var monitorChartsOption;
+    var dispatchedChartsOption;
+    var analysisMonitorChartsOption;
+    var summaryChartsOption;
+    var reserveChartsOption;
+
+    //管区数据
+    var customsDataList;
+    var customsAlarmCount;
+
+    $(function(){
+        //alert(window.screen.availHeight);
+        var height=(window.screen.availHeight)/2 -20;
+        var width=(window.innerWidth)/2-20;
+        //alert(height);
+        $("#divtop").height(height);
+        $('#divtop .wzyn').height(height-45);
+
+        $("#divbottom").height(height);
+        $('#divbottom .wzyn').height(height-45);
+
+        $('#tableCenter li:first').attr('class','showRL');
+        $('#countTable').show();
+
+        $('#mapTable').height(window.innerHeight-30);
+
+        //各图表数据封装
+
+        monitorCharts = echarts.init($('#monitorCharts').get(0));
+        dispatchedCharts = echarts.init($('#dispatchedCharts').get(0));
+        analysisMonitorCharts = echarts.init($('#analysisMonitorCharts').get(0));
+        summaryCharts = echarts.init($('#summaryCharts').get(0));
+        reserveCharts = echarts.init($('#reserveCharts').get(0));
+
+        /* *************************************************************************************************** */
+        var data = [
+            [[286,77,17096869,'Australia',1990],[311,77.4,27662440,'Canada',1990],[15,68,1154605773,'China',1990],[136,74.7,10582082,'Cuba',1990],[285,75,4986705,'Finland',1990],[294,77.1,56943299,'France',1990],[314,75.4,78958237,'Germany',1990],[286,78.1,254830,'Iceland',1990],[177,57.7,870601776,'India',1990],[295,79.1,122249285,'Japan',1990],[20,67.9,20194354,'North Korea',1990],[120,72,42972254,'South Korea',1990],[240,75.4,3397534,'New Zealand',1990],[432,76.8,4240375,'Norway',1990],[100,70.8,38195258,'Poland',1990],[193,69.6,147568552,'Russia',1990],[106,67.3,53994605,'Turkey',1990],[264,75.7,57110117,'United Kingdom',1990],[370,75.4,252847810,'United States',1990]],
+            [[440,81.8,23968973,'Australia',2015],[432,81.7,35939927,'Canada',2015],[133,76.9,1376048943,'China',2015],[212,78.5,11389562,'Cuba',2015],[389,80.8,5503457,'Finland',2015],[375,81.9,64395345,'France',2015],[440,81.1,80688545,'Germany',2015],[421,82.8,329425,'Iceland',2015],[59,66.8,1311050527,'India',2015],[361,83.5,126573481,'Japan',2015],[13,71.4,25155317,'North Korea',2015],[346,80.7,50293439,'South Korea',2015],[341,80.6,4528526,'New Zealand',2015],[643,81.6,5210967,'Norway',2015],[247,77.3,38611794,'Poland',2015],[230,73.13,143456918,'Russia',2015],[193,76.5,78665830,'Turkey',2015],[382,81.4,64715810,'United Kingdom',2015],[533,79.1,321773631,'United States',2015]]
+        ];
+
+        monitorChartsOption = {
+            backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+                offset: 0,
+                color: '#f7f8fa'
+            }, {
+                offset: 1,
+                color: '#cdd0d5'
+            }]),
+            title: {
+                text: ''
+            },
+            grid: {
+                left: '1%',
+                right: '4%',
+                bottom: '1%',
+                top:'3%',
+                containLabel: true
+            },
+            xAxis: {
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
+            },
+            yAxis: {
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                },
+                scale: true
+            },
+            series: [{
+                name: '1990',
+                data: data[0],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) / 5e2;
+                },
+                label: {
+                    emphasis: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 36, 50, 0.5)',
+                        shadowOffsetY: 5,
+                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                            offset: 0,
+                            color: 'rgb(251, 118, 123)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(204, 46, 72)'
+                        }])
+                    }
+                }
+            }, {
+                name: '2015',
+                data: data[1],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) / 5e2;
+                },
+                label: {
+                    emphasis: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(25, 100, 150, 0.5)',
+                        shadowOffsetY: 5,
+                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                            offset: 0,
+                            color: 'rgb(129, 227, 238)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(25, 183, 207)'
+                        }])
+                    }
+                }
+            }]
+        };
+
+
+        /* *************************************************************************************************** */
+        dispatchedChartsOption = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            grid: {
+                left: '1%',
+                right: '3%',
+                bottom: '1%',
+                top:'3%',
+                containLabel: true
+            },
+            radar: {
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                indicator: [
+                    { name: '速度', max: 6500},
+                    { name: '反应', max: 16000},
+                    { name: '障碍通过', max: 30000},
+                    { name: '违禁品检查', max: 38000},
+                    { name: '忠诚度', max: 52000},
+                    { name: '定力', max: 25000}
+                ]
+            },
+            series: [{
+                name: '综合表现',
+                type: 'radar',
+                // areaStyle: {normal: {}},
+                data : [
+                    {
+                        value : [4300, 10000, 28000, 35000, 50000, 19000],
+                        name : '北京饲养基地1号检疫犬预测分数'
+                    },
+                    {
+                        value : [5000, 14000, 28000, 31000, 42000, 21000],
+                        name : '北京饲养基地1号检疫犬实际分数'
+                    }
+                ]
+            }]
+        };
+
+
+
+        /* *************************************************************************************************** */
+        analysisMonitorChartsOption = {
+            backgroundColor: '#2c343c',
+
+            title: {
+                text: '',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    name:'数量',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:[
+                        {value:335, name:'犬舍'},
+                        {value:310, name:'犬类用品'},
+                        {value:274, name:'流行病疫苗'},
+                        {value:235, name:'饲料'},
+                        {value:400, name:'普通疫苗'}
+                    ].sort(function (a, b) { return a.value - b.value; }),
+                    roseType: 'radius',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#c23531',
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };
+
+
+
+        /* *************************************************************************************************** */
+        summaryChartsOption = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '1%',
+                right: '3%',
+                bottom: '1%',
+                top:'3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'水上训练',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'障碍训练',
+                    type:'bar',
+                    stack: '分配',
+                    data:[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name:'救援训练',
+                    type:'bar',
+                    stack: '分配',
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name:'体能训练',
+                    type:'bar',
+                    stack: '分配',
+                    data:[150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name:'训导员配合度',
+                    type:'bar',
+                    data:[862, 1018, 964, 1026, 1679, 1600, 1570],
+                    markLine : {
+                        lineStyle: {
+                            normal: {
+                                type: 'dashed'
+                            }
+                        },
+                        data : [
+                            [{type : 'min'}, {type : 'max'}]
+                        ]
+                    }
+                },
+                {
+                    name:'训导员',
+                    type:'bar',
+                    barWidth : 5,
+                    stack: '',
+                    data:[620, 732, 701, 734, 1090, 1130, 1120]
+                },
+                {
+                    name:'第二训导员',
+                    type:'bar',
+                    stack: '',
+                    data:[120, 132, 101, 134, 290, 230, 220]
+                },
+                {
+                    name:'评分1',
+                    type:'bar',
+                    stack: '',
+                    data:[60, 72, 71, 74, 190, 130, 110]
+                },
+                {
+                    name:'评分2',
+                    type:'bar',
+                    stack: '',
+                    data:[62, 82, 91, 84, 109, 110, 120]
+                }
+            ]
+        };
+
+
+
+        /* *************************************************************************************************** */
+        reserveChartsOption = {
+            title: {
+                text: ''
+            },
+            tooltip : {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+
+
+            grid: {
+                left: '1%',
+                right: '3%',
+                bottom: '1%',
+                top:'3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['周一','周二','周三','周四','周五']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'水上搜救',
+                    type:'line',
+                    stack: '总时间',
+                    areaStyle: {normal: {}},
+                    data:[120, 132, 101, 134, 90]
+                },
+                {
+                    name:'障碍物通过',
+                    type:'line',
+                    stack: '总时间',
+                    areaStyle: {normal: {}},
+                    data:[220, 182, 191, 234, 290]
+                },
+                {
+                    name:'违禁品发现',
+                    type:'line',
+                    stack: '总时间',
+                    areaStyle: {normal: {}},
+                    data:[150, 232, 201, 154, 190]
+                },
+                {
+                    name:'巡逻',
+                    type:'line',
+                    stack: '总时间',
+                    areaStyle: {normal: {}},
+                    data:[320, 332, 301, 334, 390]
+                },
+                {
+                    name:'执勤',
+                    type:'line',
+                    stack: '总时间',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    areaStyle: {normal: {}},
+                    data:[820, 932, 901, 934, 1290]
+                }
+            ]
+        };
+
+
+        monitorCharts.setOption(monitorChartsOption);
+        dispatchedCharts.setOption(dispatchedChartsOption);
+        analysisMonitorCharts.setOption(analysisMonitorChartsOption);
+        summaryCharts.setOption(summaryChartsOption);
+        reserveCharts.setOption(reserveChartsOption);
+
+    });
+
+    //echarts示例方法S
+
+
+
+    //echarts示例方法E
+
+
+//    function changeTableData(type){
+//        if(type == 'count'){
+//            $('#tableCenter [activeQuery="count"]').attr('class','showRL');
+//            $('#tableCenter [activeQuery="map"]').removeAttr('class');
+//            $('#mapTable').hide();
+//            $('#countTable').show();
+//        }else{
+//            $('#tableCenter [activeQuery="count"]').removeAttr('class');
+//            $('#tableCenter [activeQuery="map"]').attr('class','showRL');
+//            $('#countTable').hide();
+//            $('#mapTable').show();
+//        }
+//    }
+</script>
+
+</html>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TrainLogInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND train_log_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND train_log_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != train_Type and train_Type != ''">
+                AND train_log_info.train_Type = #{train_Type}
+            </if>
+            <if test="null != train_Subject and train_Subject != ''">
+                AND train_log_info.train_Subject = #{train_Subject}
+            </if>
+            <if test="null != train_Date and train_Date != ''">
+                AND train_log_info.train_Date = #{train_Date}
+            </if>
+            <if test="null != train_Time and train_Time != ''">
+                AND train_log_info.train_Time = #{train_Time}
+            </if>
+            <if test="null != train_Location and train_Location != ''">
+                AND train_log_info.train_Location = #{train_Location}
+            </if>
+            <if test="null != train_Content and train_Content != ''">
+                AND train_log_info.train_Content = #{train_Content}
+            </if>
+            <if test="null != supervisor and supervisor != ''">
+                AND train_log_info.supervisor = #{supervisor}
+            </if>
+            <if test="null != supervisor_Teacher and supervisor_Teacher != ''">
+                AND train_log_info.supervisor_Teacher = #{supervisor_Teacher}
+            </if>
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND train_log_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND train_log_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.train_Type and pd.train_Type != ''">
+                AND train_log_info.train_Type = #{pd.train_Type}
+            </if>
+            <if test="null != pd.train_Subject and pd.train_Subject != ''">
+                AND train_log_info.train_Subject = #{pd.train_Subject}
+            </if>
+            <if test="null != pd.train_Date and pd.train_Date != ''">
+                AND train_log_info.train_Date = #{pd.train_Date}
+            </if>
+            <if test="null != pd.train_Time and pd.train_Time != ''">
+                AND train_log_info.train_Time = #{pd.train_Time}
+            </if>
+            <if test="null != pd.train_Location and pd.train_Location != ''">
+                AND train_log_info.train_Location = #{pd.train_Location}
+            </if>
+            <if test="null != pd.train_Content and pd.train_Content != ''">
+                AND train_log_info.train_Content = #{pd.train_Content}
+            </if>
+            <if test="null != pd.supervisor and pd.supervisor != ''">
+                AND train_log_info.supervisor = #{pd.supervisor}
+            </if>
+            <if test="null != pd.supervisor_Teacher and pd.supervisor_Teacher != ''">
+                AND train_log_info.supervisor_Teacher = #{pd.supervisor_Teacher}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        train_log_info.id AS id
+        ,train_log_info.dog_Id AS dog_Id
+        ,train_log_info.train_Type AS train_Type
+        ,train_log_info.train_Subject AS train_Subject
+        ,train_log_info.train_Date AS train_Date
+        ,train_log_info.train_Time AS train_Time
+        ,train_log_info.train_Location AS train_Location
+        ,train_log_info.train_Content AS train_Content
+        ,train_log_info.supervisor AS supervisor
+        ,train_log_info.supervisor_Teacher AS supervisor_Teacher
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != train_Type and train_Type != ''">
+                train_Type = #{train_Type},
+            </if>
+            <if test="null != train_Subject and train_Subject != ''">
+                train_Subject = #{train_Subject},
+            </if>
+            <if test="null != train_Date and train_Date != ''">
+                train_Date = #{train_Date},
+            </if>
+            <if test="null != train_Time and train_Time != ''">
+                train_Time = #{train_Time},
+            </if>
+            <if test="null != train_Location and train_Location != ''">
+                train_Location = #{train_Location},
+            </if>
+            <if test="null != train_Content and train_Content != ''">
+                train_Content = #{train_Content},
+            </if>
+            <if test="null != supervisor and supervisor != ''">
+                supervisor = #{supervisor},
+            </if>
+            <if test="null != supervisor_Teacher and supervisor_Teacher != ''">
+                supervisor_Teacher = #{supervisor_Teacher},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS trainType
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,supervisor_base_info.supervisor_Name AS supervisor_Name
+        ,train_subject_info.train_subject_Name AS train_subject_Name
+        FROM train_log_info AS train_log_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = train_log_info.train_Type
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'TRAINTP'
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = train_log_info.dog_Id
+        LEFT JOIN supervisor_base_info AS supervisor_base_info ON supervisor_base_info.id = train_log_info.supervisor
+        LEFT JOIN train_subject_info AS train_subject_info ON train_subject_info.id = train_log_info.train_Subject
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS trainType
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,supervisor_base_info.supervisor_Name AS supervisor_Name
+        ,train_subject_info.train_subject_Name AS train_subject_Name
+        FROM train_log_info AS train_log_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = train_log_info.train_Type
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'TRAINTP'
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = train_log_info.dog_Id
+        LEFT JOIN supervisor_base_info AS supervisor_base_info ON supervisor_base_info.id = train_log_info.supervisor
+        LEFT JOIN train_subject_info AS train_subject_info ON train_subject_info.id = train_log_info.train_Subject
+
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM train_log_info-->
+        <!--<where>-->
+            <!--train_subject_Name = #{train_subject_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO train_log_info
+        (
+        dog_Id
+        <if test="null != train_Type and train_Type != ''">
+            ,train_Type
+        </if>
+        <if test="null != train_Subject and train_Subject != ''">
+            ,train_Subject
+        </if>
+        <if test="null != train_Date and train_Date != ''">
+            ,train_Date
+        </if>
+        <if test="null != train_Time and train_Time != ''">
+            ,train_Time
+        </if>
+        <if test="null != train_Location and train_Location != ''">
+            ,train_Location
+        </if>
+        <if test="null != train_Content and train_Content != ''">
+            ,train_Content
+        </if>
+        <if test="null != supervisor and supervisor != ''">
+            ,supervisor
+        </if>
+        <if test="null != supervisor_Teacher and supervisor_Teacher != ''">
+            ,supervisor_Teacher
+        </if>
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != train_Type and train_Type != ''">
+            ,#{train_Type}
+        </if>
+        <if test="null != train_Subject and train_Subject != ''">
+            ,#{train_Subject}
+        </if>
+        <if test="null != train_Date and train_Date != ''">
+            ,#{train_Date}
+        </if>
+        <if test="null != train_Time and train_Time != ''">
+            ,#{train_Time}
+        </if>
+        <if test="null != train_Location and train_Location != ''">
+            ,#{train_Location}
+        </if>
+        <if test="null != train_Content and train_Content != ''">
+            ,#{train_Content}
+        </if>
+        <if test="null != supervisor and supervisor != ''">
+            ,#{supervisor}
+        </if>
+        <if test="null != supervisor_Teacher and supervisor_Teacher != ''">
+            ,#{supervisor_Teacher}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE train_log_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM train_log_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

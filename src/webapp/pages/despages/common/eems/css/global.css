@@ -1,0 +1,94 @@
+.body-style
+{
+	padding: 0;
+	margin: 0;
+}
+
+.toolbar-style
+{
+	background-color: #efefef;
+	border-bottom: 1px solid #cec9c3;
+	padding:3px;
+}
+
+
+
+.page-title
+{
+	padding: 8px;
+	background-color: #229673;
+}
+
+.page-title-font
+{
+	color: #f4fffb;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: "Î¢ÈíÑÅºÚ";
+}
+
+.tabpage
+{
+	padding: 15px 20px;
+}
+
+
+.table-style
+{
+	border-collapse: collapse;
+}
+
+.table-title-td
+{
+	background-color: #efefef;
+	color: #433f33;
+}
+
+.talbe-noborder .textbox
+{
+	border: none;
+}
+
+.table-bordered > tbody > tr > td, 
+.table-bordered > tbody > tr > th, 
+.table-bordered > tfoot > tr > td, 
+.table-bordered > tfoot > tr > th, 
+.table-bordered > thead > tr > td, 
+.table-bordered > thead > tr > th {
+	border: 1px solid #bfbfbf;
+}
+
+.ft-panel
+{
+	border:1px solid #b4b29c;
+}
+
+.echart-panel
+{
+	padding:0 2px 0 0;
+}
+
+.easyui-panel-white .panel-header
+{
+	border-color: #b4b29c;
+	background-color: #dbd9c2 !important;
+	padding: 6px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.easyui-panel-white .panel-body
+{
+	border-color: #b4b29c;
+}
+
+.easyui-panel-white .panel-title
+{
+	color: #1f1f1f;
+	font-size: 12px;
+	text-shadow:none;
+}
+
+.easyui-dialog-white
+{
+	border: none !important;
+}

@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+.tabBG_title {
+background-color:#CAE8EA; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; border-right:#d0d0d0 solid 1px; height:22px;
+padding:0 5px 0 5px; font-weight:bold;
+}
+.tabBG_title_next {
+background-color:#CAE8EA; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; border-right:#d0d0d0 solid 1px; height:32px;
+padding:0 5px 0 5px; font-weight:bold;
+}
+.tabBG_title_noRight {
+background-color:#CAE8EA; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; height:22px;
+padding:0 5px 0 5px; font-weight:bold;
+}
+.tabBG_gray {
+background-color:#EEEEEE; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; border-right:#d0d0d0 solid 1px; height:22px;
+padding:0 5px 0 5px;
+}
+.tabBG_gray_noRight {
+background-color:#EEEEEE; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; height:22px;
+padding:0 5px 0 5px;
+}
+.tabBG_green {
+background-color:#EEEEEE; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; border-right:#d0d0d0 solid 1px; height:22px;
+padding:0 5px 0 5px;
+}
+.tabBG_green_noRight {
+background-color:#EEEEEE; border-bottom:#d0d0d0 solid 1px; border-top:#fff solid 1px; height:22px;
+padding:0 5px 0 5px;
+}
+input {height:20px;}
+
+a:link {color:#000; text-decoration:none;}
+a:visited {color:#000; text-decoration:none;}
+a:hover {color:#000; text-decoration:none;}
+a:avtive {color:#000; text-decoration:none;}

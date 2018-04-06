@@ -1,0 +1,262 @@
+h1,h2,h3,label,form {
+	margin: 0;
+	padding: 0;
+}
+
+.fontfamilySet {
+	font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande",
+		"Helvetica Neue", "Helvetica", "Arial", "Hiragino Sans GB",
+		"Hiragino Sans GB    W3", "Microsoft YaHei UI", "Microsoft YaHei",
+		"WenQuanYi Micro Hei", sans-serif;
+}
+
+.globalBlock {
+	padding: 15px;
+	background-color: #d5cebb;
+	border: 1px solid #bab4a3;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	-webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.content_titleStyle {
+	padding: 5px 20px 2px 8px;
+	background-color: #36ae93;
+	border-top-right-radius: 20px;
+	border-left: 1px solid #319d85;
+	/*border-bottom:1px solid #298b75;*/
+	-webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.25);
+}
+
+.content_titleTextStyle {
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.content_titleLineStyle {
+	height: 4px;
+	background-color: #36ae93;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom: 1px solid #298b75;
+	-webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.content_controlBarContains {
+	padding: 5px;
+	margin: 6px 0 0 0;
+	background-color: #f0eee7;
+	border: 1px solid #d5ceba;
+	border-radius: 3px;
+	font-size: 12px !important;
+}
+
+.content_controlBar {
+	
+}
+
+.content_blockStyle {
+	background-color: #f8f8f8;
+	border: 1px solid #eeeeee;
+	padding: 15px 20px;
+}
+
+.formLeftOffset {
+	margin: 0 0 0 5px !important;
+}
+
+.leftOffset {
+	margin: 0 0 0 8px !important;
+}
+
+.addSplitLineDiv {
+	border-left: 1px solid #c3b5a0;
+	padding: 0 0 0 10px;
+	display: inline-block;
+}
+
+.rightDisplay {
+	float: right;
+}
+
+.customButtonStyle {
+	background-color: #EEE;
+}
+
+.group_combo{
+	}
+		
+.group_combo .textbox{
+	height: 30px !important;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.orgNo_btn{
+		display: none;
+	}
+	
+/*����� ѡ��������ʽ*/
+.row{
+	margin: 0 0 2px 0;
+}
+	
+.row_regiontitle{
+	margin:0 0 5px 0;
+}
+
+.row_regiontitle .row-regionbutton{
+	font-weight: bold;
+	color: #222;
+	font-size: 12px !important;
+}
+
+.row_region{
+	padding: 1px 0;
+	border-top:1px dashed #eee;
+}
+	
+.row-regionbutton{
+	padding: 1px 5px;
+	background-color: inherit;
+	color: #666;
+	font-size: 12px !important;
+}
+
+.row-regionbutton:hover{
+	background-color: #e2e2e2;
+}
+
+.row-regionbutton.active, .row-regionbutton:active{
+	background-color: #009b9b;
+	color:#fff;
+}
+.org_col
+{
+	padding-left: 1px; 
+	padding-right: 1px;
+}
+.close{
+    background-image:url() !important;
+}
+
+.gridtitle{
+	width:100%;
+	padding-left: 0px;
+	height: 25px;
+	line-height:25px;
+	text-align: center;
+	border-top: 1px solid rgb(209,209,209);
+	border-left: 1px solid rgb(209,209,209);
+	border-right: 1px solid rgb(209,209,209);
+	decoration: none;
+    font-family: '微软雅黑, Arial, Verdana, sans-serif';
+    font-size: 16px;
+    font-style:normal;
+    font-weight: normal;
+    color: #0375cd;
+    padding-left:10px;
+}
+ 
+  .SlowFast {
+ 
+  padding: 0;
+ 
+  margin: 0 2px;
+ 
+  float: left;
+ 
+  position: relative;
+ 
+  text-align: center;
+ 
+ }
+ 
+ 
+  .SlowFast em {
+  
+  background-color: #f4f4f4;
+		
+  border: 1px solid #e2e2e2;
+  
+  position: absolute;
+  
+  left:  0px;
+ 
+  text-align: left;
+ 
+  font-style: normal;
+ 
+  z-index: 2;
+ 
+  display: none;
+		
+	padding: 5px;
+ 
+ }
+
+.nav-pills li a
+{
+	padding: 3px 8px 3px 8px;
+	color: #656565;
+	outline: none;
+}
+.nav-tabs li a
+{
+	padding: 5px 15px 7px 15px;
+	color: #656565;
+	outline: none;
+}
+/*调整tab标签在pills状态下的样式*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover
+{
+	color: #fff;
+	background-color: #28b298;
+}
+/*调整tab标签在tabs状态下的样式*/
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover
+{
+	font-weight: bold;
+	color: #28b298;
+}
+
+.label-title
+{
+	
+}
+
+.label-value
+{
+	color: #777;
+}
+
+ .dialog-Movetitle
+ {
+    cursor:move;
+ }
+
+
+/** 去掉按钮焦点**/
+ .btn-success:focus,
+ .open > .dropdown-toggle.btn-success {
+  color: #fff !important;
+  background-color: #5CB85C !important;
+  border-color: #5CB85C !important;
+}
+
+/** 去掉下拉框焦点**/
+.bootstrap-select .dropdown-toggle:focus{
+	outline :none !important;
+}
+
+/** 控件设置不可编辑或失效背景白色**/
+.form-control[disabled], 
+.form-control[readonly], 
+fieldset[disabled] .form-control{
+	background-color: #fff !important;
+}
+

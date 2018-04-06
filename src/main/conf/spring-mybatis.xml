@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	">
+
+    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
+
+    <context:annotation-config />
+
+    <bean name="dataSource1" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName">
+            <value>${driverClassName1}</value>
+        </property>
+        <property name="url">
+            <value>${url1}</value>
+        </property>
+        <property name="username">
+            <value>${username1}</value>
+        </property>
+        <property name="password">
+            <value>${password1}</value>
+        </property>
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="20" />
+        <property name="minIdle" value="3" />
+        <property name="maxWait" value="60000" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat" />
+
+    </bean>
+
+    <bean id="sqlSessionFactory_c" class="com.springmvc.mybatisInterceptor.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource1" />
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <!--多数据源共用一个配置文件-->
+        <property name="configLocation" value="classpath:conf/mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath:dataSource1mapper/**/*.xml" />
+
+        <!--拦截器-->
+        <property name="plugins">
+            <array>
+                <bean class="com.springmvc.mybatisInterceptor.MybatisInterceptor"><property name="properties">                                                                                                                                          <value>  property-key=property-value </value>
+                </property>
+                    <property name="dialect" value="mysql"></property>
+                    <property name="pageSqlId" value=".*ByPage"></property>
+                </bean>
+
+            </array>
+
+        </property>
+
+    </bean>
+
+    <bean id="sqlSessionTemplate_C" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory_c" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com/com.springmvc/dataSource1dao" />
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate_C" />
+    </bean>
+    <!-- 配置事务管理器 gx_data 默认事物 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource1" />
+        <qualifier value="gx_data" />
+    </bean>
+
+    <!-- 全注解方式 <tx:annotation-driven transaction-manager="transactionManager"
+        /> -->
+
+    <tx:advice id="userTxAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="del*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="batch*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="bach*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="cancel*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="dis*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="en*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="query*" read-only="true" />
+
+            <tx:method name="find*" read-only="true" />
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="select*" read-only="true" />
+            <tx:method name="count*" read-only="true" />
+
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.springmvc.dataSource1service.*.*.*(..))" /> <!--把事务控制在Service层 -->
+        <aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />
+    </aop:config>
+
+    <!-- 第二数据源 -->
+    <bean name="dataSource2" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName">
+            <value>${driverClassName2}</value>
+        </property>
+        <property name="url">
+            <value>${url2}</value>
+        </property>
+        <property name="username">
+            <value>${username2}</value>
+        </property>
+        <property name="password">
+            <value>${password2}</value>
+        </property>
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="20" />
+        <!-- <property name="maxIdle" value="20" /> -->
+        <property name="minIdle" value="3" />
+        <property name="maxWait" value="60000" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat" />
+
+    </bean>
+
+    <!-- myBatis文件 -->
+    <bean id="sqlSessionFactory" class="com.springmvc.mybatisInterceptor.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource2" />
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="mapperLocations" value="classpath:dataSource2mapper/**/*.xml" />
+        <property name="configLocation" value="classpath:conf/mybatis-config.xml"></property>
+
+        <!--拦截器-->
+        <property name="plugins">
+            <array>
+                <bean class="com.springmvc.mybatisInterceptor.MybatisInterceptor">                                                                             <property name="properties">                                                                                                                                          <value>  property-key=property-value </value>
+                </property>
+                    <property name="dialect" value="sqlServer"></property>
+                    <property name="pageSqlId" value=".*ByPage"></property>
+                </bean>
+
+            </array>
+
+        </property>
+    </bean>
+
+    <bean id="sqlSessionTemplate_O" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com/com.springmvc/dataSource2dao" />
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate_O" />
+    </bean>
+
+    <!-- 配置事务管理器 gx -->
+    <bean id="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource2" />
+        <qualifier value="gx" />
+    </bean>
+    <!-- 全注解方式 需加上@Transactional <tx:annotation-driven transaction-manager="transactionManager2" /> -->
+    <tx:advice id="userTxAdviceB" transaction-manager="transactionManager2">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="del*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="batch*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="bach*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="cancel*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="dis*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="en*" propagation="REQUIRED" read-only="false" rollback-for="Exception" />
+            <tx:method name="query*" read-only="true" />
+
+            <tx:method name="find*" read-only="true" />
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="select*" read-only="true" />
+            <tx:method name="count*" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pc2" expression="execution(* com.springmvc.dataSource2service.*.*.*(..))" />
+        <!--把事务控制在Service层 -->
+        <aop:advisor pointcut-ref="pc2" advice-ref="userTxAdviceB" />
+    </aop:config>
+
+</beans>

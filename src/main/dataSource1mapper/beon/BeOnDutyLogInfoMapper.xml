@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BeOnDutyLogInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND be_on_duty_log_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND be_on_duty_log_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != be_Date and be_Date != ''">
+                AND be_on_duty_log_info.be_Date = #{be_Date}
+            </if>
+            <if test="null != be_Time and be_Time != ''">
+                AND be_on_duty_log_info.be_Time = #{be_Time}
+            </if>
+            <if test="null != be_Location and be_Location != ''">
+                AND be_on_duty_log_info.be_Location = #{be_Location}
+            </if>
+            <if test="null != be_Content and be_Content != ''">
+                AND be_on_duty_log_info.be_Content = #{be_Content}
+            </if>
+            <if test="null != supervisor and supervisor != ''">
+                AND be_on_duty_log_info.supervisor = #{supervisor}
+            </if>
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND be_on_duty_log_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND be_on_duty_log_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.be_Date and pd.be_Date != ''">
+                AND be_on_duty_log_info.be_Date = #{pd.be_Date}
+            </if>
+            <if test="null != pd.be_Time and pd.be_Time != ''">
+                AND be_on_duty_log_info.be_Time = #{pd.be_Time}
+            </if>
+            <if test="null != pd.be_Location and pd.be_Location != ''">
+                AND be_on_duty_log_info.be_Location = #{pd.be_Location}
+            </if>
+            <if test="null != pd.be_Content and pd.be_Content != ''">
+                AND be_on_duty_log_info.be_Content = #{pd.be_Content}
+            </if>
+            <if test="null != pd.supervisor and pd.supervisor != ''">
+                AND be_on_duty_log_info.supervisor = #{pd.supervisor}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        be_on_duty_log_info.id AS id
+        ,be_on_duty_log_info.dog_Id AS dog_Id
+        ,be_on_duty_log_info.be_Date AS be_Date
+        ,be_on_duty_log_info.be_Time AS be_Time
+        ,be_on_duty_log_info.be_Location AS be_Location
+        ,be_on_duty_log_info.be_Content AS be_Content
+        ,be_on_duty_log_info.supervisor AS supervisor
+
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != be_Date and be_Date != ''">
+                be_Date = #{be_Date},
+            </if>
+            <if test="null != be_Time and be_Time != ''">
+                be_Time = #{be_Time},
+            </if>
+            <if test="null != be_Location and be_Location != ''">
+                be_Location = #{be_Location},
+            </if>
+            <if test="null != be_Content and be_Content != ''">
+                be_Content = #{be_Content},
+            </if>
+            <if test="null != supervisor and supervisor != ''">
+                supervisor = #{supervisor},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,supervisor_base_info.supervisor_Name AS supervisor_Name
+        FROM be_on_duty_log_info AS be_on_duty_log_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = be_on_duty_log_info.dog_Id
+        LEFT JOIN supervisor_base_info AS supervisor_base_info ON supervisor_base_info.id = be_on_duty_log_info.supervisor
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,supervisor_base_info.supervisor_Name AS supervisor_Name
+        FROM be_on_duty_log_info AS be_on_duty_log_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = be_on_duty_log_info.dog_Id
+        LEFT JOIN supervisor_base_info AS supervisor_base_info ON supervisor_base_info.id = be_on_duty_log_info.supervisor
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM train_log_info-->
+        <!--<where>-->
+            <!--train_subject_Name = #{train_subject_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO be_on_duty_log_info
+        (
+        dog_Id
+        <if test="null != be_Date and be_Date != ''">
+            ,be_Date
+        </if>
+        <if test="null != be_Time and be_Time != ''">
+            ,be_Time
+        </if>
+        <if test="null != be_Location and be_Location != ''">
+            ,be_Location
+        </if>
+        <if test="null != be_Content and be_Content != ''">
+            ,be_Content
+        </if>
+        <if test="null != supervisor and supervisor != ''">
+            ,supervisor
+        </if>
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != be_Date and be_Date != ''">
+            ,#{be_Date}
+        </if>
+        <if test="null != be_Time and be_Time != ''">
+            ,#{be_Time}
+        </if>
+        <if test="null != be_Location and be_Location != ''">
+            ,#{be_Location}
+        </if>
+        <if test="null != be_Content and be_Content != ''">
+            ,#{be_Content}
+        </if>
+        <if test="null != supervisor and supervisor != ''">
+            ,#{supervisor}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE be_on_duty_log_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM be_on_duty_log_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

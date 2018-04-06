@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TrainSubjectInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND train_subject_info.id = #{id}
+            </if>
+            <if test="null != train_subject_Name and train_subject_Name != ''">
+                AND train_subject_info.train_subject_Name = #{train_subject_Name}
+            </if>
+            <if test="null != train_subject_Type and train_subject_Type != ''">
+                AND train_subject_info.train_subject_Type = #{train_subject_Type}
+            </if>
+            <if test="null != trainer and trainer != ''">
+                AND train_subject_info.trainer = #{trainer}
+            </if>
+            <if test="null != train_subject_local and train_subject_local != ''">
+                AND train_subject_info.train_subject_local = #{train_subject_local}
+            </if>
+            <if test="null != train_subject_Content and train_subject_Content != ''">
+                AND train_subject_info.train_subject_Content = #{train_subject_Content}
+            </if>
+            <if test="null != train_subject_status and train_subject_status != ''">
+                AND train_subject_info.train_subject_status = #{train_subject_status}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND train_subject_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.train_subject_Name and pd.train_subject_Name != ''">
+                AND train_subject_info.train_subject_Name = #{pd.train_subject_Name}
+            </if>
+            <if test="null != pd.train_subject_Type and pd.train_subject_Type != ''">
+                AND train_subject_info.train_subject_Type = #{pd.train_subject_Type}
+            </if>
+            <if test="null != pd.trainer and pd.trainer != ''">
+                AND train_subject_info.trainer = #{pd.trainer}
+            </if>
+            <if test="null != pd.train_subject_local and pd.train_subject_local != ''">
+                AND train_subject_info.train_subject_local = #{pd.train_subject_local}
+            </if>
+            <if test="null != pd.train_subject_Content and pd.train_subject_Content != ''">
+                AND train_subject_info.train_subject_Content = #{pd.train_subject_Content}
+            </if>
+            <if test="null != pd.train_subject_status and pd.train_subject_status != ''">
+                AND train_subject_info.train_subject_status = #{pd.train_subject_status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        train_subject_info.id AS id
+        ,train_subject_info.train_subject_Name AS train_subject_Name
+        ,train_subject_info.train_subject_Type AS train_subject_Type
+        ,train_subject_info.trainer AS trainer
+        ,train_subject_info.train_subject_local AS train_subject_local
+        ,train_subject_info.train_subject_Content AS train_subject_Content
+        ,train_subject_info.train_subject_status AS train_subject_status
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != train_subject_Name and train_subject_Name != ''">
+                train_subject_Name = #{train_subject_Name},
+            </if>
+            <if test="null != train_subject_Type and train_subject_Type != ''">
+                train_subject_Type = #{train_subject_Type},
+            </if>
+            <if test="null != trainer and trainer != ''">
+                trainer = #{trainer},
+            </if>
+            <if test="null != train_subject_local and train_subject_local != ''">
+                train_subject_local = #{train_subject_local},
+            </if>
+            <if test="null != train_subject_Content and train_subject_Content != ''">
+                train_subject_Content = #{train_subject_Content},
+            </if>
+            <if test="null != train_subject_status and train_subject_status != ''">
+                train_subject_status = #{train_subject_status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM train_subject_info AS train_subject_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM train_subject_info AS train_subject_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = train_subject_info.train_subject_status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM train_subject_info
+        <where>
+            train_subject_Name = #{train_subject_Name}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO train_subject_info
+        (
+        train_subject_Name
+        <if test="null != train_subject_Type and train_subject_Type != ''">
+            ,train_subject_Type
+        </if>
+        <if test="null != trainer and trainer != ''">
+            ,trainer
+        </if>
+        <if test="null != train_subject_local and train_subject_local != ''">
+            ,train_subject_local
+        </if>
+        <if test="null != train_subject_Content and train_subject_Content != ''">
+            ,train_subject_Content
+        </if>
+        <if test="null != train_subject_status and train_subject_status != ''">
+            ,train_subject_status
+        </if>
+        ) VALUES (
+        #{train_subject_Name}
+        <if test="null != train_subject_Type and train_subject_Type != ''">
+            ,#{train_subject_Type}
+        </if>
+        <if test="null != trainer and trainer != ''">
+            ,#{trainer}
+        </if>
+        <if test="null != train_subject_local and train_subject_local != ''">
+            ,#{train_subject_local}
+        </if>
+        <if test="null != train_subject_Content and train_subject_Content != ''">
+            ,#{train_subject_Content}
+        </if>
+        <if test="null != train_subject_status and train_subject_status != ''">
+            ,#{train_subject_status}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE train_subject_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM train_subject_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

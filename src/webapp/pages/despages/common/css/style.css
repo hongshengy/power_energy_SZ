@@ -1,0 +1,380 @@
+/*-------------- �������� ��ʼ --------------*/
+* {
+	padding: 0px;
+	/*font-size: 12px;*/
+	margin: auto 0px;
+}
+
+html,body,form {
+	padding: 0px;
+	margin: 0px auto;
+	text-align: center;
+	/*min-width: 1670px  !important;*/
+	width:100%;
+	background-color: #FBFBFB;
+	font-family: ΢���ź�;
+	
+}
+ul,li {
+	list-style: none;
+}
+
+img {
+	border: none;
+	vertical-align: text-top;
+}
+
+.clear {
+	clear: both;
+}
+
+.mgl20 {
+	margin-left: 20px;
+}
+
+.mgl36 {
+	margin-left: 36px;
+}
+.mgl12 {
+	margin-left: 12px;
+}
+
+/*-------------- �ı��Ű� ��ʼ --------------*/
+.vTop {
+	vertical-align: top;
+}
+
+.vBottom {
+	vertical-align: bottom;
+}
+
+.lt {
+	text-align: left;
+}
+
+.ct {
+	text-align: center;
+}
+
+.rt {
+	text-align: right;
+}
+
+.noWrap {
+	white-space: nowrap;
+}
+
+.ofHidden {
+	overflow: hidden;
+}
+
+.ofHiddenX {
+	overflow-x: hidden;
+}
+
+.ofHiddenY {
+	overflow-y: hidden;
+}
+
+.flt {
+	float: left;
+}
+
+.frt {
+	float: right;
+}
+
+.breakWord {
+	table-layout: fixed;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+/*-------------- �ı��Ű� ���� --------------*/
+/*-------------- �����ʽ ��ʼ --------------*/ /*-----����ʽ----*/
+.normal {
+	cursor: default;
+}
+
+/*-----ˮƽ�����----*/
+.colResize {
+	cursor: col-resize;
+}
+
+/*-----��ֱ�����----*/
+.eResize {
+	cursor: e-resize;
+}
+
+/*-----����----*/
+.hand {
+	cursor: pointer;
+}
+
+/*-------------- �����ʽ ���� --------------*/
+/*-------------- ������ʽ ��ʼ --------------*/
+.hidden {
+	display: none;
+}
+
+.visible {
+	visibility: hidden;
+}
+
+/*-------------- ������ʽ ���� --------------*/ /* �ǵ�ͼƬҪ�޸� */
+
+/*---------------------�б������ʼ---------------------*/
+ #slide{position:absolute;height:160px;width:240px;font-size: 16px; color: white;overflow:hidden;}
+ #slide p{height:15px;line-height:15px;overflow:hidden}
+/*---------------------�б��������---------------------*/
+
+/*---------------------�б?ʼ---------------------*/
+.backgroundgreen{
+	background-color: transparent;
+}
+.backgroundchar{
+font-size: 16px;
+color: #FFFEFF;
+font-family: ΢���ź�;
+height: 40px;
+line-height: 38px;
+vertical-align: middle;
+padding-left: 20px;
+font-weight: bold;
+}
+#SBGK{
+width: 100%;
+margin-bottom: 10px;
+}
+
+.sbgknumtext{
+	font-size: 16px; 
+	color: #F2F2F2;
+	height: 32px;
+	line-height:32px;
+	vertical-align: middle;
+}
+/*---------------------�б����---------------------*/
+/*---------------------��Ƶ������ʼ---------------------*/
+#video{
+	width:1090px;
+	height:633px;
+	position:fixed;
+	background-color: #29313A;
+	z-index:100;
+	top:50%;	
+	margin:258px 0 0 1918px;
+	
+}
+.videoBig{
+	width:239px;
+	height:153px;
+	border:1px solid #EFEEF0;
+	margin:5px;
+}
+#imgVideoSmall{
+	width:24px;
+	height:24px;
+	margin-top:-20px;
+	margin-left:-20px;
+}
+/*---------------------��Ƶ��������---------------------*/ 
+/*---------------------���м��ʼ---------------------*/ 
+#divbrand{
+	position: absolute;
+	top:20px;
+	left:44px;
+	color:white;
+	height:26px;
+	width:27px;
+	background-repeat:no-repeat;
+	float:left;
+	
+}
+#divbrandText{
+	position: absolute;
+	top:20px;
+	left:75px;
+	color:white;
+	height:26px;	
+	float:left;
+	word-wrap:break-word;
+	text-align: left;
+}
+#divbrandText:hover{
+	text-decoration:underline;
+}
+#divbrandText>a:hover{
+	text-decoration:underline;
+}
+.brand  {
+	color: black;
+}
+.brand:hover {
+	background-color:#707070;	
+}
+.brand >a:hover {
+	color: #D69442;	
+}
+/*---------------------���м����---------------------*/ 
+/*---------------------��ർ������ʼ---------------------*/ 
+#tjfx-panel {
+	width: 100%;
+	height: 100%;
+}
+
+#tjfx-panel .search-panel {
+	width: 100%;
+	height: 90px;
+}
+
+#tjfx-panel .search-panel div {
+	padding: 5px 0px 5px 10px;
+	float: left;
+}
+
+/*---------------------��ർ��������---------------------*/ 
+#divNoMessage{
+	position:absolute;
+	top:50%;
+	left:40%;
+}
+#divTime{
+	width:100%;
+	height:30px;
+	margin-top:10px;
+	line-height:30px;
+	vertical-align: middle;
+	color:white;
+	font-size:24px;
+}
+.tree_node_DEVICE {
+    background: url(images/cons.png) center center no-repeat;
+}
+
+#divRun:hover{
+	text-decoration:underline;
+}
+#divRun>a:hover{
+	text-decoration:underline;
+}
+#divStop:hover{
+	text-decoration:underline;
+}
+#divStop>a:hover{
+	text-decoration:underline;
+}
+#divNosingle:hover{
+	text-decoration:underline;
+}
+#divNosingle>a:hover{
+	text-decoration:underline;
+}
+.divMin
+{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0px;
+	right: 25px;
+	background: #7A7A7A;
+	cursor: pointer;
+	color:black;
+	margin-top: 135px;
+}
+.divMin:hover
+{
+	color:white;
+	
+	}
+	
+.divMax
+{
+	width:30px;
+	height:20px;
+	right:10px;
+	background:url('../images/Max.png') 18px 3px no-repeat;
+}
+.divMax:hover
+{
+	background:url('../images/Max_hover.png') 18px 3px no-repeat;
+	
+	}
+	
+.btn{
+	width:auto;
+	line-height:24px;
+	font-size:12px;
+	padding:0;
+	margin:0;
+	text-align: center;
+	border-radius: 10px;
+}
+.btnNormal{
+	background-color:#D7D7D7;
+	color:black;
+}
+.btnSelect{
+	background-color:#0B666F;
+	color:white;
+}
+#divOrgSmallText{
+	width:50px;
+	height: 100%;
+	color:black;
+	cursor: pointer;
+	/*background:url('../images/numMinus.png');*/
+}
+#divOrgSmallText:hover{
+	color:#FA8315;
+	/*background:url('../images/numMinusHover.png');*/
+}
+
+#divOrgText{
+	width:50px;
+	height:26px;
+	line-height:26px;
+	vertical-align: middle;
+	/*background:url('../images/num100.png');*/
+}
+#divOrgText:hover{
+	/*background:url('../images/num100Hover.png');*/
+}
+#divOrgBigText{
+	width:50px;
+	height: 100%;
+	color:black;
+	cursor: pointer;
+	/*background:url('../images/numAdd.png');*/
+}
+#divOrgBigText:hover{
+	color:#FA8315;
+	/*background:url('../images/numAddHover.png');*/
+}
+
+.item_div {
+	height: 30px;
+	margin-top: 5px;
+	border-bottom: solid 1px #27262B;
+}
+
+.item_div .v_div {
+	/* width: 165px; */
+	float: left;
+	/* margin-left: 20px; */
+}
+
+.item_div .v_div .name_div {
+	width: 145px;
+	height: 60px;
+	overflow: hidden;
+	cursor: default;
+	text-align: left;
+}
+
+.item_div .v_div .value_div {
+	margin-top: 5px;
+	color:#E3F07E;
+	/* width: 180px; */
+	text-align: left;
+}

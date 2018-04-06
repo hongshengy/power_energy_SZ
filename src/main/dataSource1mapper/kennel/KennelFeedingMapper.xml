@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KennelFeedingMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND feeding_info.id = #{id}
+            </if>
+            <if test="null != feed_Type and feed_Type != ''">
+                AND feeding_info.feed_Type = #{feed_Type}
+            </if>
+            <if test="null != coat_Colour and coat_Colour != ''">
+                AND feeding_info.coat_Colour = #{coat_Colour}
+            </if>
+            <if test="null != ill_If and ill_If != ''">
+                AND feeding_info.ill_If = #{ill_If}
+            </if>
+            <if test="null != mental_State and mental_State != ''">
+                AND feeding_info.mental_State = #{mental_State}
+            </if>
+            <if test="null != feeding_Date and feeding_Date != ''">
+                AND feeding_info.feeding_Date = #{feeding_Date}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND feeding_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.feed_Type and pd.feed_Type != ''">
+                AND feeding_info.feed_Type = #{pd.feed_Type}
+            </if>
+            <if test="null != pd.coat_Colour and pd.coat_Colour != ''">
+                AND feeding_info.coat_Colour = #{pd.coat_Colour}
+            </if>
+            <if test="null != pd.ill_If and pd.ill_If != ''">
+                AND feeding_info.ill_If = #{pd.ill_If}
+            </if>
+            <if test="null != pd.mental_State and pd.mental_State != ''">
+                AND feeding_info.mental_State = #{pd.mental_State}
+            </if>
+            <if test="null != pd.feeding_Date and pd.feeding_Date != ''">
+                AND feeding_info.feeding_Date = #{pd.feeding_Date}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        feeding_info.id AS id
+        ,feeding_info.feed_Type AS feed_Type
+        ,feeding_info.coat_Colour AS coat_Colour
+        ,feeding_info.ill_If AS ill_If
+        ,feeding_info.mental_State AS mental_State
+        ,feeding_info.feeding_Date AS feeding_Date
+        ,feeding_info.feeding_create_date AS feeding_create_date
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != antiepidemic_Type and antiepidemic_Type != ''">
+                antiepidemic_Type = #{antiepidemic_Type},
+            </if>
+            <if test="null != feed_Type and feed_Type != ''">
+                feed_Type = #{feed_Type},
+            </if>
+            <if test="null != coat_Colour and coat_Colour != ''">
+                coat_Colour = #{coat_Colour},
+            </if>
+            <if test="null != ill_If and ill_If != ''">
+                ill_If = #{ill_If},
+            </if>
+            <if test="null != mental_State and mental_State != ''">
+                mental_State = #{mental_State},
+            </if>
+            <if test="null != feeding_Date and feeding_Date != ''">
+                feeding_Date = #{feeding_Date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ILL
+        FROM feeding_info AS feeding_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = feeding_info.ill_If
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ILL'
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        ,dictionary_stat.code_cn AS ILL
+
+        FROM feeding_info AS feeding_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = feeding_info.ill_If
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ILL'
+
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO feeding_info
+        (
+        feed_Type
+        <if test="null != coat_Colour and coat_Colour != ''">
+            ,coat_Colour
+        </if>
+        <if test="null != ill_If and ill_If != ''">
+            ,ill_If
+        </if>
+        <if test="null != mental_State and mental_State != ''">
+            ,mental_State
+        </if>
+        <if test="null != feeding_Date and feeding_Date != ''">
+            ,feeding_Date
+        </if>
+        ) VALUES (
+        #{feed_Type}
+        <if test="null != coat_Colour and coat_Colour != ''">
+            ,#{coat_Colour}
+        </if>
+        <if test="null != ill_If and ill_If != ''">
+            ,#{ill_If}
+        </if>
+        <if test="null != mental_State and mental_State != ''">
+            ,#{mental_State}
+        </if>
+        <if test="null != feeding_Date and feeding_Date != ''">
+            ,#{feeding_Date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE feeding_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM feeding_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

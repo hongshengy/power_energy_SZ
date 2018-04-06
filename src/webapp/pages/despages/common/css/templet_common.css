@@ -1,0 +1,53 @@
+.left-panel{
+	width:200px;
+	position: relative;
+}
+
+.left-panel .search-panel{
+	padding: 5px;
+	background-color: #F9F9F9;
+}
+
+.left-panel .tree-panel{
+	position: absolute;
+	top: 35px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	overflow: auto;
+}
+
+.noOverflow{
+	position: relative;
+	overflow: hidden;
+}
+
+.s-ul-one{
+	padding: 10px 10px 10px 10px;
+	margin: 0px;
+	display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.s-ul-one li{
+	display: inline-block;
+	/*vertical-align: middle;*/
+	padding-right: 35px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.s-ul-one .s-right-one{
+	float: right;
+	padding-right: 10px;
+}
+
+.show-bottom-border{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.bottom-padding{
+	padding-bottom: 10px;
+}

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SeizedRecordsLogInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND seized_records_log_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND seized_records_log_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != contraband_Name and contraband_Name != ''">
+                AND seized_records_log_info.contraband_Name = #{contraband_Name}
+            </if>
+            <if test="null != contraband_Count and contraband_Count != ''">
+                AND seized_records_log_info.contraband_Count = #{contraband_Count}
+            </if>
+            <if test="null != flight_Number and flight_Number != ''">
+                AND seized_records_log_info.flight_Number = #{flight_Number}
+            </if>
+            <if test="null != from_Location and from_Location != ''">
+                AND seized_records_log_info.from_Location = #{from_Location}
+            </if>
+            <if test="null != intercept_Date and intercept_Date != ''">
+                AND seized_records_log_info.intercept_Date = #{intercept_Date}
+            </if>
+            <if test="null != unit and unit != ''">
+                AND seized_records_log_info.unit = #{unit}
+            </if>
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND seized_records_log_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND seized_records_log_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.contraband_Name and pd.contraband_Name != ''">
+                AND seized_records_log_info.contraband_Name = #{pd.contraband_Name}
+            </if>
+            <if test="null != pd.contraband_Count and pd.contraband_Count != ''">
+                AND seized_records_log_info.contraband_Count = #{pd.contraband_Count}
+            </if>
+            <if test="null != pd.flight_Number and pd.flight_Number != ''">
+                AND seized_records_log_info.flight_Number = #{pd.flight_Number}
+            </if>
+            <if test="null != pd.from_Location and pd.from_Location != ''">
+                AND seized_records_log_info.from_Location = #{pd.from_Location}
+            </if>
+            <if test="null != pd.intercept_Date and pd.intercept_Date != ''">
+                AND seized_records_log_info.intercept_Date = #{pd.intercept_Date}
+            </if>
+            <if test="null != pd.unit and pd.unit != ''">
+                AND seized_records_log_info.unit = #{pd.unit}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        seized_records_log_info.id AS id
+        ,seized_records_log_info.dog_Id AS dog_Id
+        ,seized_records_log_info.contraband_Name AS contraband_Name
+        ,seized_records_log_info.contraband_Count AS contraband_Count
+        ,seized_records_log_info.flight_Number AS flight_Number
+        ,seized_records_log_info.from_Location AS from_Location
+        ,seized_records_log_info.intercept_Date AS intercept_Date
+        ,seized_records_log_info.unit AS unit
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != contraband_Name and contraband_Name != ''">
+                contraband_Name = #{contraband_Name},
+            </if>
+            <if test="null != contraband_Count and contraband_Count != ''">
+                contraband_Count = #{contraband_Count},
+            </if>
+            <if test="null != flight_Number and flight_Number != ''">
+                flight_Number = #{flight_Number},
+            </if>
+            <if test="null != from_Location and from_Location != ''">
+                from_Location = #{from_Location},
+            </if>
+            <if test="null != intercept_Date and intercept_Date != ''">
+                intercept_Date = #{intercept_Date},
+            </if>
+            <if test="null != unit and unit != ''">
+                unit = #{unit},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,dictionary_stat.code_cn AS UNITSHOW
+        FROM seized_records_log_info AS seized_records_log_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = seized_records_log_info.unit
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'UNIT_TP'
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = seized_records_log_info.dog_Id
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,dictionary_stat.code_cn AS UNITSHOW
+        FROM seized_records_log_info AS seized_records_log_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = seized_records_log_info.unit
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'UNIT_TP'
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = seized_records_log_info.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM train_log_info-->
+        <!--<where>-->
+            <!--train_subject_Name = #{train_subject_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO seized_records_log_info
+        (
+        dog_Id
+        <if test="null != contraband_Name and contraband_Name != ''">
+            ,contraband_Name
+        </if>
+        <if test="null != contraband_Count and contraband_Count != ''">
+            ,contraband_Count
+        </if>
+        <if test="null != flight_Number and flight_Number != ''">
+            ,flight_Number
+        </if>
+        <if test="null != from_Location and from_Location != ''">
+            ,from_Location
+        </if>
+        <if test="null != intercept_Date and intercept_Date != ''">
+            ,intercept_Date
+        </if>
+        <if test="null != unit and unit != ''">
+            ,unit
+        </if>
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != contraband_Name and contraband_Name != ''">
+            ,#{contraband_Name}
+        </if>
+        <if test="null != contraband_Count and contraband_Count != ''">
+            ,#{contraband_Count}
+        </if>
+        <if test="null != flight_Number and flight_Number != ''">
+            ,#{flight_Number}
+        </if>
+        <if test="null != from_Location and from_Location != ''">
+            ,#{from_Location}
+        </if>
+        <if test="null != intercept_Date and intercept_Date != ''">
+            ,#{intercept_Date}
+        </if>
+        <if test="null != unit and unit != ''">
+            ,#{unit}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE seized_records_log_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM seized_records_log_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

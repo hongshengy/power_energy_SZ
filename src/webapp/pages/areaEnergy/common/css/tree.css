@@ -1,0 +1,38 @@
+html{overflow-x: hidden;}
+body{margin:0;padding:0;font-size:12px;background: #ffffff}
+
+.tree_node_DEVICE{background:url(./icons/cons.png) center center no-repeat }
+.tree_node_CONSSUB{background:url(./icons/consSub.png) center center no-repeat }
+.tree_node_COLLTMNL{background:url(./icons/tmnl.png) center center no-repeat}
+.tree_node_TRAN{background:url(./icons/tran.png) center center no-repeat}
+.tree_node_BS{background:url(./icons/bs.png) center center no-repeat}
+.tree_node_LINE{background:url(./icons/line.png) center center no-repeat}
+.tree_node_EM{background:url(./icons/em.png) center center no-repeat}
+.tree_node_AC{background:url(./icons/ac.png) center center no-repeat}
+.tree_node_LIGHT{background:url(./icons/light.png) center center no-repeat}
+.tree_node_METER{background:url(./icons/meter.png) center center no-repeat}
+.tree_node_ELEC{background:url(./icons/elec.png) center center no-repeat}
+.tree_node_NONELEC{background:url(./icons/nonelec.png) center center no-repeat}
+.tree_node_arefolder {background: url(./icons/tmnl.png) center center no-repeat}
+
+.tree_node_ELECOTHER{background:url(./icons/elecOther.png) center center no-repeat}
+.tree_node_NONELECOTHER{background:url(./icons/nonElecOther.png) center center no-repeat}
+.tree_node_RVU{background:url(./icons/rvu.png) center center no-repeat}
+.tree_node_VIDEO{background:url(./icons/video.png) center center no-repeat}
+
+.tree_node_CONSBUILD{background:url(./icons/consBuild.png) center center no-repeat}
+.tree_node_CONSDEPART{background:url(./icons/consDepart.png) center center no-repeat}
+.tree_node_POWERMONITOR{background:url(./icons/powerMonitor.png) center center no-repeat}
+
+.tree_node_CAPACITY{background:url(./icons/capacity.png) center center no-repeat}
+.tree_node_ROOM{background:url(./icons/room.png) center center no-repeat}
+.tree_node_SOCKET{background:url(./icons/socket.png) center center no-repeat}
+.tree_node_ELE{background:url(./icons/ele.png) center center no-repeat}
+
+.tree_node_ELECSUB{background:url(./icons/seSub.png) center center no-repeat }
+.tree_node_PCS{background:url(./icons/pcs.png) center center no-repeat }
+.tree_node_BMS{background:url(./icons/bms.png) center center no-repeat }
+.tree_node_EMS{background:url(./icons/ems.png) center center no-repeat }
+
+.tree_node_SEMD{background:url(./icons/consBuild.png) center center no-repeat}
+.tree_node_SED{background:url(./icons/powerMonitor.png) center center no-repeat}

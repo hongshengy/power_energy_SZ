@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SupervisorInfoMapper">
+
+	<!--所有表的ID要带mapper文件的前缀名-->
+
+	<sql id="where">
+		<where>
+
+			<if test="null != supervisor_Name and supervisor_Name != ''">
+				AND supervisor_Name = #{supervisor_Name}
+			</if>
+			<if test="null != supervisor_Sex and supervisor_Sex != ''">
+				AND supervisor_Sex = #{supervisor_Sex}
+			</if>
+			<if test="null != supervisor_Birthday and supervisor_Birthday != ''">
+				AND supervisor_Birthday = #{supervisor_Birthday}
+			</if>
+			<if test="null != supervisor_Degree_Education and supervisor_Degree_Education != ''">
+				AND supervisor_Degree_Education = #{supervisor_Degree_Education}
+			</if>
+			<if test="null != supervisor_Graduate_Institutions and supervisor_Graduate_Institutions != ''">
+				AND supervisor_Graduate_Institutions = #{supervisor_Graduate_Institutions}
+			</if>
+			<if test="null != supervisor_Specialty and supervisor_Specialty != ''">
+				AND supervisor_Specialty = #{supervisor_Specialty}
+			</if>
+			<if test="null != supervisor_Job and supervisor_Job != ''">
+				AND supervisor_Job = #{supervisor_Job}
+			</if>
+			<if test="null != supervisor_Positional_Titles and supervisor_Positional_Titles != ''">
+				AND supervisor_Positional_Titles = #{supervisor_Positional_Titles}
+			</if>
+			<if test="null != supervisor_Service_date and supervisor_Service_date != ''">
+				AND supervisor_Service_date = #{supervisor_Service_date}
+			</if>
+			<if test="null != supervisor_Work_experience and supervisor_Work_experience != ''">
+				AND supervisor_Work_experience = #{supervisor_Work_experience}
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="where2">
+		<where>
+			<if test="null != pd.supervisor_Name and pd.supervisor_Name != ''">
+				AND supervisor_Name = #{pd.supervisor_Name}
+			</if>
+			<if test="null != pd.supervisor_Sex and pd.supervisor_Sex != ''">
+				AND supervisor_Sex = #{pd.supervisor_Sex}
+			</if>
+			<if test="null != pd.supervisor_Birthday and pd.supervisor_Birthday != ''">
+				AND supervisor_Birthday = #{pd.supervisor_Birthday}
+			</if>
+			<if test="null != pd.supervisor_Degree_Education and pd.supervisor_Degree_Education != ''">
+				AND supervisor_Degree_Education = #{pd.supervisor_Degree_Education}
+			</if>
+			<if test="null != pd.supervisor_Graduate_Institutions and pd.supervisor_Graduate_Institutions != ''">
+				AND supervisor_Graduate_Institutions = #{pd.supervisor_Graduate_Institutions}
+			</if>
+			<if test="null != pd.supervisor_Specialty and pd.supervisor_Specialty != ''">
+				AND supervisor_Specialty = #{pd.supervisor_Specialty}
+			</if>
+			<if test="null != pd.supervisor_Job and pd.supervisor_Job != ''">
+				AND supervisor_Job = #{pd.supervisor_Job}
+			</if>
+			<if test="null != pd.supervisor_Positional_Titles and pd.supervisor_Positional_Titles != ''">
+				AND supervisor_Positional_Titles = #{pd.supervisor_Positional_Titles}
+			</if>
+			<if test="null != pd.supervisor_Service_date and pd.supervisor_Service_date != ''">
+				AND supervisor_Service_date = #{pd.supervisor_Service_date}
+			</if>
+			<if test="null != pd.supervisor_Work_experience and pd.supervisor_Work_experience != ''">
+				AND supervisor_Work_experience = #{pd.supervisor_Work_experience}
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="field">
+		id
+		,supervisor_Name
+		,supervisor_Sex
+		,date_format(supervisor_Birthday,'%Y-%m-%d') AS supervisor_Birthday
+		,supervisor_Degree_Education
+		,supervisor_Graduate_Institutions
+		,supervisor_Specialty
+		,supervisor_Job
+		,supervisor_Positional_Titles
+		,date_format(supervisor_Service_date,'%Y-%m-%d') AS supervisor_Service_date
+		,supervisor_Work_experience
+	</sql>
+
+	<select id="selectInfoByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+		SELECT
+		<include refid="field"></include>
+		FROM supervisor_base_info
+		<include refid="where2"></include>
+	</select>
+
+	<select id="selectInfo" parameterType="map" resultType="map">
+		SELECT
+		<include refid="field"></include>
+		,CASE WHEN supervisor_Sex = '0' THEN '女' ELSE '男' END AS SEX_SHOW
+		FROM supervisor_base_info
+		<include refid="where"></include>
+	</select>
+
+	<insert id="insertInfo" parameterType="map">
+		INSERT INTO supervisor_base_info
+		(
+		<if test="null != supervisor_Name and supervisor_Name != ''">
+			supervisor_Name
+		</if>
+		<if test="null != supervisor_Sex and supervisor_Sex != ''">
+			,supervisor_Sex
+		</if>
+		<if test="null != supervisor_Birthday and supervisor_Birthday != ''">
+			,supervisor_Birthday
+		</if>
+		<if test="null != supervisor_Degree_Education and supervisor_Degree_Education != ''">
+			,supervisor_Degree_Education
+		</if>
+		<if test="null != supervisor_Graduate_Institutions and supervisor_Graduate_Institutions != ''">
+			,supervisor_Graduate_Institutions
+		</if>
+		<if test="null != supervisor_Specialty and supervisor_Specialty != ''">
+			,supervisor_Specialty
+		</if>
+		<if test="null != supervisor_Job and supervisor_Job != ''">
+			,supervisor_Job
+		</if>
+		<if test="null != supervisor_Positional_Titles and supervisor_Positional_Titles != ''">
+			,supervisor_Positional_Titles
+		</if>
+		<if test="null != supervisor_Service_date and supervisor_Service_date != ''">
+			,supervisor_Service_date
+		</if>
+		<if test="null != supervisor_Work_experience and supervisor_Work_experience != ''">
+			,supervisor_Work_experience
+		</if>
+		) VALUES (
+			<if test="null != supervisor_Name and supervisor_Name != ''">
+				#{supervisor_Name}
+			</if>
+			<if test="null != supervisor_Sex and supervisor_Sex != ''">
+				,#{supervisor_Sex}
+			</if>
+			<if test="null != supervisor_Birthday and supervisor_Birthday != ''">
+				,#{supervisor_Birthday}
+			</if>
+			<if test="null != supervisor_Degree_Education and supervisor_Degree_Education != ''">
+				,#{supervisor_Degree_Education}
+			</if>
+			<if test="null != supervisor_Graduate_Institutions and supervisor_Graduate_Institutions != ''">
+				,#{supervisor_Graduate_Institutions}
+			</if>
+			<if test="null != supervisor_Specialty and supervisor_Specialty != ''">
+				,#{supervisor_Specialty}
+			</if>
+			<if test="null != supervisor_Job and supervisor_Job != ''">
+				,#{supervisor_Job}
+			</if>
+			<if test="null != supervisor_Positional_Titles and supervisor_Positional_Titles != ''">
+				,#{supervisor_Positional_Titles}
+			</if>
+			<if test="null != supervisor_Service_date and supervisor_Service_date != ''">
+				,#{supervisor_Service_date}
+			</if>
+			<if test="null != supervisor_Work_experience and supervisor_Work_experience != ''">
+				,#{supervisor_Work_experience}
+			</if>
+		)
+	</insert>
+
+</mapper>

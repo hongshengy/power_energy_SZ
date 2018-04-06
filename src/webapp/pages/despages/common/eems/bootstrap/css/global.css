@@ -1,0 +1,192 @@
+body{
+	font-size: 12px ;
+}
+
+h1,h2,h3,label,form{
+	margin: 0;
+	padding: 0;
+}
+
+.fontfamilySet {
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",
+		"Helvetica","Arial","Hiragino Sans GB","Hiragino Sans GB    W3","Microsoft YaHei UI",
+		"Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+
+.globalBlock{
+	padding: 15px;
+	background-color: #d5cebb;
+	border: 1px solid #bab4a3;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	-webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.content_titleStyle{
+	padding: 5px 20px 2px 8px;
+	background-color:#36ae93;
+	border-top-right-radius:20px;
+	border-left:1px solid #319d85;
+/*			border-bottom:1px solid #298b75;*/
+	-webkit-box-shadow:1px 0px 1px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:1px 0px 1px rgba(0, 0, 0, 0.25);
+}
+
+.content_titleTextStyle{
+	color: #ffffff;
+	font-size:20px;
+	font-weight: 500;
+}
+
+.content_titleLineStyle{
+	height: 4px;
+	background-color: #36ae93;
+	border-bottom-right-radius:5px;
+	border-top-right-radius:5px;
+	border-bottom:1px solid #298b75;
+	-webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.content_controlBarContains{
+	padding: 5px;
+	margin: 5px 0 0 0;
+	background-color: #f0eee7;
+	border: 1px solid #ddd7c8;
+	border-radius:3px;
+	font-size: 12px !important;
+}
+
+.content_blockStyle{
+	background-color: #fdfdfd;
+	border:1px solid #dedede;
+	padding: 2px;
+}
+
+.formLeftOffset{
+	margin: 0 0 0 5px !important;
+} 
+
+.leftOffset{
+	margin: 0 0 0 8px !important;
+} 
+
+.addSplitLineDiv{
+	border-left: 1px solid #c3b5a0;
+	padding: 0 0 0 10px;
+	display: inline-block;
+}
+
+.rightDisplay{
+	float: right;
+}
+
+.customButtonStyle{
+	background-color: #EEE;
+}
+
+.group_combo{
+}
+
+.group_combo .textbox{
+	height: 30px !important;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.active.btn-success
+{
+	color: #ffffff;
+	background-color:#28cbbe;
+}
+			
+/*弹出窗口 选择地区窗口样式*/
+.modal-header{
+	padding: 8px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.row{
+	margin: 0;
+}
+
+.row_regiontitle{
+	margin:0 0 15px 0;
+}
+
+.row_regiontitle .row-regionbutton{
+	font-weight: bold;
+	font-size: 14px;
+	color: #222;
+}
+
+.row_region{
+	padding: 5px 0;
+	border-top:1px dashed #eee;
+}
+
+.row-regionbutton{
+	padding: 2px 6px;
+	background-color: inherit;
+	color: #666;
+}
+
+.row-regionbutton:hover{
+	background-color: #e2e2e2;
+}
+
+.row-regionbutton.active, .row-regionbutton:active{
+	background-color: #009b9b;
+	color:#fff;
+}
+/*end*/
+
+.colstyle
+{
+	padding: 5px 5px 0px 5px;
+}
+
+.nav-pills li a
+{
+	padding: 3px 8px 3px 8px;
+	color: #656565;
+	outline: none;
+}
+
+/*调整tab标签在pills状态下的样式*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover
+{
+	color: #fff;
+	background-color: #28b298;
+}
+
+.nav-tabs li a
+{
+	padding: 5px 15px 7px 15px;
+	color: #656565;
+	outline: none;
+}
+
+/*调整tab标签在tabs状态下的样式*/
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover
+{
+	font-weight: bold;
+	color: #28b298;
+}
+
+.label-title
+{
+
+}
+
+.label-value
+{
+	color: #777;
+}
+
+.btn
+{
+	outline: none !important;
+}

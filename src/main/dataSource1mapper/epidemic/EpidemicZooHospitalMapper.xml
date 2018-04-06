@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EpidemicZooHospitalMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND zoo_hospital_info.id = #{id}
+            </if>
+            <if test="null != hospital_Name and hospital_Name != ''">
+                AND zoo_hospital_info.hospital_Name = #{hospital_Name}
+            </if>
+            <if test="null != hospital_address and hospital_address != ''">
+                AND zoo_hospital_info.hospital_address = #{hospital_address}
+            </if>
+            <if test="null != contacts and contacts != ''">
+                AND zoo_hospital_info.contacts = #{contacts}
+            </if>
+            <if test="null != contacts_Telephone and contacts_Telephone != ''">
+                AND zoo_hospital_info.contacts_Telephone = #{contacts_Telephone}
+            </if>
+            <if test="null != treat_Remark and treat_Remark != ''">
+                AND zoo_hospital_info.treat_Remark = #{treat_Remark}
+            </if>
+            <if test="null != treat_Status and treat_Status != ''">
+                AND zoo_hospital_info.treat_Status = #{treat_Status}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND zoo_hospital_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.hospital_Name and pd.hospital_Name != ''">
+                AND zoo_hospital_info.hospital_Name = #{pd.hospital_Name}
+            </if>
+            <if test="null != pd.hospital_address and pd.hospital_address != ''">
+                AND zoo_hospital_info.hospital_address = #{pd.hospital_address}
+            </if>
+            <if test="null != pd.contacts and pd.contacts != ''">
+                AND zoo_hospital_info.contacts = #{pd.contacts}
+            </if>
+            <if test="null != pd.contacts_Telephone and pd.contacts_Telephone != ''">
+                AND zoo_hospital_info.contacts_Telephone = #{pd.contacts_Telephone}
+            </if>
+            <if test="null != pd.treat_Remark and pd.treat_Remark != ''">
+                AND zoo_hospital_info.treat_Remark = #{pd.treat_Remark}
+            </if>
+            <if test="null != pd.treat_Status and pd.treat_Status != ''">
+                AND zoo_hospital_info.treat_Status = #{pd.treat_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        zoo_hospital_info.id AS id
+        ,zoo_hospital_info.hospital_Name AS hospital_Name
+        ,zoo_hospital_info.hospital_address AS hospital_address
+        ,zoo_hospital_info.contacts AS contacts
+        ,zoo_hospital_info.contacts_Telephone AS contacts_Telephone
+        ,zoo_hospital_info.treat_Remark AS treat_Remark
+        ,zoo_hospital_info.treat_Status AS treat_Status
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+
+            <if test="null != hospital_Name and hospital_Name != ''">
+                hospital_Name = #{hospital_Name},
+            </if>
+            <if test="null != hospital_address and hospital_address != ''">
+                hospital_address = #{hospital_address},
+            </if>
+            <if test="null != contacts and contacts != ''">
+                contacts = #{contacts},
+            </if>
+            <if test="null != contacts_Telephone and contacts_Telephone != ''">
+                contacts_Telephone = #{contacts_Telephone},
+            </if>
+            <if test="null != treat_Remark and treat_Remark != ''">
+                treat_Remark = #{treat_Remark},
+            </if>
+            <if test="null != treat_Status and treat_Status != ''">
+                treat_Status = #{treat_Status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM zoo_hospital_info AS zoo_hospital_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = zoo_hospital_info.treat_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+
+        FROM zoo_hospital_info AS zoo_hospital_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = zoo_hospital_info.treat_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM zoo_hospital_info
+        <where>
+            hospital_Name = #{hospital_Name} OR hospital_address = #{hospital_address}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO zoo_hospital_info
+        (
+        hospital_Name
+        <if test="null != hospital_address and hospital_address != ''">
+            ,hospital_address
+        </if>
+        <if test="null != contacts and contacts != ''">
+            ,contacts
+        </if>
+        <if test="null != contacts_Telephone and contacts_Telephone != ''">
+            ,contacts_Telephone
+        </if>
+        <if test="null != treat_Remark and treat_Remark != ''">
+            ,treat_Remark
+        </if>
+        <if test="null != treat_Status and treat_Status != ''">
+            ,treat_Status
+        </if>
+
+        ) VALUES (
+
+        #{hospital_Name}
+        <if test="null != hospital_address and hospital_address != ''">
+            ,#{hospital_address}
+        </if>
+        <if test="null != contacts and contacts != ''">
+            ,#{contacts}
+        </if>
+        <if test="null != contacts_Telephone and contacts_Telephone != ''">
+            ,#{contacts_Telephone}
+        </if>
+        <if test="null != treat_Remark and treat_Remark != ''">
+            ,#{treat_Remark}
+        </if>
+        <if test="null != treat_Status and treat_Status != ''">
+            ,#{treat_Status}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE zoo_hospital_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM zoo_hospital_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

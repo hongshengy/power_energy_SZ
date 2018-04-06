@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EvaluationModelInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND evaluation_model_info.id = #{id}
+            </if>
+            <if test="null != model_Name and model_Name != ''">
+                AND evaluation_model_info.model_Name = #{model_Name}
+            </if>
+            <if test="null != model_Content and model_Content != ''">
+                AND evaluation_model_info.model_Content = #{model_Content}
+            </if>
+            <if test="null != model_Path and model_Path != ''">
+                AND evaluation_model_info.model_Path = #{model_Path}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND evaluation_model_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.model_Name and pd.model_Name != ''">
+                AND evaluation_model_info.model_Name = #{pd.model_Name}
+            </if>
+            <if test="null != pd.model_Content and pd.model_Content != ''">
+                AND evaluation_model_info.model_Content = #{pd.model_Content}
+            </if>
+            <if test="null != pd.model_Path and pd.model_Path != ''">
+                AND evaluation_model_info.model_Path = #{pd.model_Path}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        evaluation_model_info.id AS id
+        ,evaluation_model_info.model_Name AS model_Name
+        ,evaluation_model_info.model_Content AS model_Content
+        ,evaluation_model_info.model_Path AS model_Path
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != model_Name and model_Name != ''">
+            model_Name = #{model_Name},
+            </if>
+            <if test="null != model_Content and model_Content != ''">
+            model_Content = #{model_Content},
+            </if>
+            <if test="null != model_Path and model_Path != ''">
+            model_Path = #{model_Path},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM evaluation_model_info AS evaluation_model_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        FROM evaluation_model_info AS evaluation_model_info
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM evaluation_model_info
+        <where>
+            model_Name  = #{model_Name}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO evaluation_model_info
+        (
+        model_Name
+        <if test="null != model_Content and model_Content != ''">
+            ,model_Content
+        </if>
+        <if test="null != model_Path and model_Path != ''">
+            ,model_Path
+        </if>
+
+        ) VALUES (
+        #{model_Name}
+        <if test="null != model_Content and model_Content != ''">
+            ,#{model_Content}
+        </if>
+        <if test="null != model_Path and model_Path != ''">
+            ,#{model_Path}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE evaluation_model_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM evaluation_model_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

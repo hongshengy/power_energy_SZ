@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsTypeMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND goods_type_info.id = #{id}
+            </if>
+            <if test="null != goods_Type_Name and goods_Type_Name != ''">
+                AND goods_type_info.goods_Type_Name = #{goods_Type_Name}
+            </if>
+            <if test="null != goods_Type_Code and goods_Type_Code != ''">
+                AND goods_type_info.goods_Type_Code = #{goods_Type_Code}
+            </if>
+            <if test="null != goods_Type_Content and goods_Type_Content != ''">
+                AND goods_type_info.goods_Type_Content = #{goods_Type_Content}
+            </if>
+            <if test="null != creator and creator != ''">
+                AND goods_type_info.creator = #{creator}
+            </if>
+            <if test="null != creation_Date and creation_Date != ''">
+                AND goods_type_info.creation_Date = #{creation_Date}
+            </if>
+            <if test="null != goods_Type_Status and goods_Type_Status != ''">
+                AND goods_type_info.goods_Type_Status = #{goods_Type_Status}
+            </if>
+            <if test="null != goods_Type_Remark and goods_Type_Remark != ''">
+                AND goods_type_info.goods_Type_Remark = #{goods_Type_Remark}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND goods_type_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.goods_Type_Name and pd.goods_Type_Name != ''">
+                AND goods_type_info.goods_Type_Name = #{pd.goods_Type_Name}
+            </if>
+            <if test="null != pd.goods_Type_Code and pd.goods_Type_Code != ''">
+                AND goods_type_info.goods_Type_Code = #{pd.goods_Type_Code}
+            </if>
+            <if test="null != pd.goods_Type_Content and pd.goods_Type_Content != ''">
+                AND goods_type_info.goods_Type_Content = #{pd.goods_Type_Content}
+            </if>
+            <if test="null != pd.creator and pd.creator != ''">
+                AND goods_type_info.creator = #{pd.creator}
+            </if>
+            <if test="null != pd.creation_Date and pd.creation_Date != ''">
+                AND goods_type_info.creation_Date = #{pd.creation_Date}
+            </if>
+            <if test="null != pd.goods_Type_Status and pd.goods_Type_Status != ''">
+                AND goods_type_info.goods_Type_Status = #{pd.goods_Type_Status}
+            </if>
+            <if test="null != pd.goods_Type_Remark and pd.goods_Type_Remark != ''">
+                AND goods_type_info.goods_Type_Remark = #{pd.goods_Type_Remark}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        goods_type_info.id
+        , goods_type_info.goods_Type_Name
+        , goods_type_info.goods_Type_Code
+        , goods_type_info.goods_Type_Content
+        , goods_type_info.creator
+        , goods_type_info.creation_Date
+        , goods_type_info.goods_Type_Status
+        , goods_type_info.goods_Type_Remark
+    </sql>
+
+    <sql id="field">
+        goods_type_info.id AS id
+        , goods_type_info.goods_Type_Name AS goods_Type_Name
+        , goods_type_info.goods_Type_Code AS goods_Type_Code
+        , goods_type_info.goods_Type_Content AS goods_Type_Content
+        , goods_type_info.creator AS creator
+        , goods_type_info.creation_Date AS creation_Date
+        , goods_type_info.goods_Type_Status AS goods_Type_Status
+        , goods_type_info.goods_Type_Remark AS goods_Type_Remark
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != goods_Type_Name and goods_Type_Name != ''">
+                goods_Type_Name = #{goods_Type_Name},
+            </if>
+            <if test="null != goods_Type_Code and goods_Type_Code != ''">
+                goods_Type_Code = #{goods_Type_Code},
+            </if>
+            <if test="null != goods_Type_Content and goods_Type_Content != ''">
+                goods_Type_Content = #{goods_Type_Content},
+            </if>
+            <if test="null != creator and creator != ''">
+                creator = #{creator},
+            </if>
+            <if test="null != creation_Date and creation_Date != ''">
+                creation_Date = #{creation_Date},
+            </if>
+            <if test="null != goods_Type_Status and goods_Type_Status != ''">
+                goods_Type_Status = #{goods_Type_Status},
+            </if>
+            <if test="null != goods_Type_Remark and goods_Type_Remark != ''">
+                goods_Type_Remark = #{goods_Type_Remark},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM goods_type_info AS goods_type_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = goods_type_info.goods_Type_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        FROM goods_type_info AS goods_type_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = goods_type_info.goods_Type_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM goods_type_info
+        <where>
+            goods_Type_Name = #{goods_Type_Name} OR goods_Type_Code = #{goods_Type_Code}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO goods_type_info
+        (
+          goods_Type_Name
+        <if test="null != goods_Type_Code and goods_Type_Code != ''">
+            ,goods_Type_Code
+        </if>
+        <if test="null != goods_Type_Content and goods_Type_Content != ''">
+            ,goods_Type_Content
+        </if>
+        <if test="null != creator and creator != ''">
+            ,creator
+        </if>
+
+        ,creation_Date
+
+        <if test="null != goods_Type_Status and goods_Type_Status != ''">
+            ,goods_Type_Status
+        </if>
+        <if test="null != goods_Type_Remark and goods_Type_Remark != ''">
+            ,goods_Type_Remark
+        </if>
+        ) VALUES (
+          #{goods_Type_Name}
+        <if test="null != goods_Type_Code and goods_Type_Code != ''">
+            ,#{goods_Type_Code}
+        </if>
+        <if test="null != goods_Type_Content and goods_Type_Content != ''">
+            ,#{goods_Type_Content}
+        </if>
+        <if test="null != creator and creator != ''">
+            ,#{creator}
+        </if>
+
+        ,now()
+
+        <if test="null != goods_Type_Status and goods_Type_Status != ''">
+            ,#{goods_Type_Status}
+        </if>
+        <if test="null != goods_Type_Remark and goods_Type_Remark != ''">
+            ,#{goods_Type_Remark}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE goods_type_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM goods_type_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

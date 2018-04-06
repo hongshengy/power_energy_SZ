@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+.x-window-footer {position: relative;top: 0;right: 0;}
+.ext-strict .ext-ie6 .x-layout-split{background-color: #dfe8f6;}
+.ext-ie .x-tree .x-panel-body {position: relative;}
+.ext-ie .x-tree .x-tree-root-ct  {position: absolute;}
+/*
+.ext-el-mask-msg div{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.loading-indicator{font-size:12px;}
+.x-tab-strip span.x-tab-strip-text{font:normal 12px 宋体,tahoma,arial,helvetica;}
+.x-form-field{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-form-text,textarea.x-form-field{border:1px solid #7E9DBA;}
+.x-form-grow-sizer{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-form-item{font:normal 宋体,12px tahoma,arial,helvetica,sans-serif;}
+.x-form-invalid-msg{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-small-editor .x-form-field{font:normal 12px 宋体,arial,tahoma,helvetica,sans-serif;}
+.ext-safari .x-small-editor .x-form-field{font:normal 12px 宋体,arial,tahoma,helvetica,sans-serif;}
+.ext-ie .x-small-editor .x-form-field-wrap .x-form-trigger{margin-top:-1px!important;margin-bottom:-1px!important;}
+.x-fieldset legend{font:bold 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-btn{font:normal 12px 宋体,tahoma,verdana,helvetica;}
+.x-btn button{font:normal 12px 宋体,tahoma,verdana,helvetica;}
+.ext-ie .x-btn-text-icon .x-btn-center .x-btn-text{padding-top:5px;padding-left:20px;}
+.x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-toolbar .ytb-spacer{color:#006666;}
+.x-paging-info{color:#006666;}
+.x-grid3-hd-row td,.x-grid3-row td,.x-grid3-summary-row td{font:normal 12px 宋体,arial,tahoma,helvetica,sans-serif;}
+.x-grid3-row td,.x-grid3-summary-row td{border-left:1px solid #eee;border-right:1px solid #d0d0d0;padding-left:0px;padding-right:0px;}
+.x-grid3-hd-inner{font-size: 12px;font-weight: bold;color: #014642;font-family: "宋体";}
+.x-grid3-row{border-top:1px solid #eee;border-bottom:1px solid #d0d0d0;mouseover:#ade5e2;}
+.x-grid3-row-alt{background-color:#E9FFF2;}
+.x-grid3-scroller{background:#EEEEEE none repeat scroll 0%;}
+.x-grid3-row-selected{background:#CAE9E7!important;border:1px dotted #cccccc;}
+.x-grid3-topbar,.x-grid3-bottombar{font:normal 12px 宋体,arial,tahoma,helvetica,sans-serif;}
+.x-grid-group-hd div{font:bold 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-grid-empty{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-dd-drag-ghost{color:black;font:normal 12px 宋体,arial,helvetica,sans-serif;}
+.x-tree .x-panel-body{background-color:#eeeeee;}
+.x-tree-node{font:normal 12px 宋体,arial,tahoma,helvetica,sans-serif;}
+.x-date-middle,.x-date-left,.x-date-right{font:bold 12px 宋体,"sans serif",tahoma,verdana,helvetica;}
+.x-date-inner a{font:normal 12px 宋体,arial,helvetica,tahoma,sans-serif;}
+.x-date-mp td{font:normal 12px 宋体,arial,helvetica,tahoma,sans-serif;}
+.x-date-mp-btns button{font:normal 12px 宋体,arial,helvetica,tahoma,sans-serif;cursor:pointer;}
+.x-tip .x-tip-mc{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-tip .x-tip-header-text{font:bold 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-tip .x-tip-body{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-menu-list-item{font:normal 12px 宋体,tahoma,arial,sans-serif;}
+.x-menu a.x-menu-item{color:#006666;}
+.x-box-mc{font-family:"宋体","Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial"}
+#x-debug-browser .x-tree .x-tree-node a span{font-size:12px;font-family:"宋体","monotype","courier new",sans-serif;}
+.x-combo-list-hd{font:bold 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-combo-list-item{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-combo-list-small .x-combo-list-item{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-panel-header{color:#9ED7D3;font:bold 12px 宋体,tahoma,arial,verdana,sans-serif;}
+.x-panel-body{background:#eeeeee;}
+.x-panel-tbar .x-toolbar{border:1px solid #cccccc;background:#CAE8EA;}
+.x-panel-tl .x-panel-header{font:bold 12px 宋体,tahoma,arial,verdana,sans-serif;}
+.x-panel-mc{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-window-tl .x-window-header{background-position:0px 8px;color:#9ED7D3;font:bold 12px 宋体,tahoma,arial,verdana,sans-serif;padding:10px 0 5px 5px;}
+.x-window-bc{background:#C7D6E9 none repeat scroll 0%;}
+.x-window-bl{background:#C7D6E9 none repeat scroll 0%;}
+.x-window-br{background:#C7D6E9 none repeat scroll 0%;}
+.x-window-mc{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+.x-window-ml{background:#C7D6E9 none repeat scroll 0%;}
+.x-window-mr{background:#C7D6E9 none repeat scroll 0%;}
+.x-panel-noborder .x-panel-tbar-noborder .x-toolbar{background:#CAE8EA;}
+.x-progress-text{font-size:12px;}
+.x-window-dlg .ext-mb-textarea{font:normal 12px 宋体,tahoma,arial,helvetica,sans-serif;}
+*/

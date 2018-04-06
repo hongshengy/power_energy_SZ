@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RetireAdoptMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND retire_adopt.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND retire_adopt.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != adopt and adopt != ''">
+                AND retire_adopt.adopt = #{adopt}
+            </if>
+            <if test="null != adopt_phone and adopt_phone != ''">
+                AND retire_adopt.adopt_phone = #{adopt_phone}
+            </if>
+            <if test="null != adopt_address and adopt_address != ''">
+                AND retire_adopt.adopt_address = #{adopt_address}
+            </if>
+            <if test="null != approver_organization and approver_organization != ''">
+                AND retire_adopt.approver_organization = #{approver_organization}
+            </if>
+            <if test="null != approver and approver != ''">
+                AND retire_adopt.approver = #{approver}
+            </if>
+            <if test="null != adopt_date and adopt_date != ''">
+                AND retire_adopt.adopt_date = #{adopt_date}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND retire_adopt.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND retire_adopt.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.adopt and pd.adopt != ''">
+                AND retire_adopt.adopt = #{pd.adopt}
+            </if>
+            <if test="null != pd.adopt_phone and pd.adopt_phone != ''">
+                AND retire_adopt.adopt_phone = #{pd.adopt_phone}
+            </if>
+            <if test="null != pd.adopt_address and pd.adopt_address != ''">
+                AND retire_adopt.adopt_address = #{pd.adopt_address}
+            </if>
+            <if test="null != pd.approver_organization and pd.approver_organization != ''">
+                AND retire_adopt.approver_organization = #{pd.approver_organization}
+            </if>
+            <if test="null != pd.approver and pd.approver != ''">
+                AND retire_adopt.approver = #{pd.approver}
+            </if>
+            <if test="null != pd.adopt_date and pd.adopt_date != ''">
+                AND retire_adopt.adopt_date = #{pd.adopt_date}
+            </if>
+
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        retire_adopt.id AS id
+        ,retire_adopt.dog_Id AS dog_Id
+        ,retire_adopt.adopt AS adopt
+        ,retire_adopt.adopt_phone AS adopt_phone
+        ,retire_adopt.adopt_address AS adopt_address
+        ,retire_adopt.approver_organization AS approver_organization
+        ,retire_adopt.approver AS approver
+        ,retire_adopt.adopt_date AS adopt_date
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != adopt and adopt != ''">
+                adopt = #{adopt},
+            </if>
+            <if test="null != adopt_phone and adopt_phone != ''">
+                adopt_phone = #{adopt_phone},
+            </if>
+            <if test="null != adopt_address and adopt_address != ''">
+                adopt_address = #{adopt_address},
+            </if>
+            <if test="null != approver_organization and approver_organization != ''">
+                approver_organization = #{approver_organization},
+            </if>
+            <if test="null != approver and approver != ''">
+                approver = #{approver},
+            </if>
+            <if test="null != adopt_date and adopt_date != ''">
+                adopt_date = #{adopt_date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        FROM retire_adopt AS retire_adopt
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM retire_adopt AS retire_adopt
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = retire_adopt.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM retire_adopt
+        <where>
+            dog_Id = #{dog_Id}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO retire_adopt
+        (
+        dog_Id
+        <if test="null != adopt and adopt != ''">
+            ,adopt
+        </if>
+        <if test="null != adopt_phone and adopt_phone != ''">
+            ,adopt_phone
+        </if>
+        <if test="null != adopt_address and adopt_address != ''">
+            ,adopt_address
+        </if>
+        <if test="null != approver_organization and approver_organization != ''">
+            ,approver_organization
+        </if>
+        <if test="null != approver and approver != ''">
+            ,approver
+        </if>
+        <if test="null != adopt_date and adopt_date != ''">
+            ,adopt_date
+        </if>
+
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != adopt and adopt != ''">
+            ,#{adopt}
+        </if>
+        <if test="null != adopt_phone and adopt_phone != ''">
+            ,#{adopt_phone}
+        </if>
+        <if test="null != adopt_address and adopt_address != ''">
+            ,#{adopt_address}
+        </if>
+        <if test="null != approver_organization and approver_organization != ''">
+            ,#{approver_organization}
+        </if>
+        <if test="null != approver and approver != ''">
+            ,#{approver}
+        </if>
+        <if test="null != adopt_date and adopt_date != ''">
+            ,#{adopt_date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE retire_adopt
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM retire_adopt
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

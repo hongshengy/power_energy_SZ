@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:amq="http://activemq.apache.org/schema/core" xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	
+    http://www.springframework.org/schema/jms
+    http://www.springframework.org/schema/jms/spring-jms.xsd
+    http://activemq.apache.org/schema/core
+    http://activemq.apache.org/schema/core/activemq-core-5.12.1.xsd
+    http://www.springframework.org/schema/cache 
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+    
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    ">
+
+    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
+
+    <mvc:annotation-driven/>
+
+    <context:component-scan base-package="com.springmvc"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:config proxy-target-class="true"></aop:config>
+
+    <!--quartz替代springTask-->
+    <!--<task:annotation-driven /> &ndash;&gt;-->
+    <!--<task:scheduled-tasks scheduler="myScheduler">-->
+
+    <!--<task:scheduled ref="manageSpringTimeTask" method="doMangerTask" initial-delay="2000" fixed-delay="1000"/>-->
+
+    <!--</task:scheduled-tasks>-->
+    <!--<task:scheduler id="myScheduler" pool-size="10"/>-->
+    <!--quartz替代springTask-->
+
+
+    <!-- 避免IE在ajax请求时，返回json出现下载 -->
+    <bean id="jacksonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 对模型视图添加前后缀 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="10485760000"/>
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+
+    <!-- 静态资源文件，不会被Spring MVC拦截 -->
+    <mvc:resources location="/plugins/" mapping="/plugins/**"/>
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources location="/pages/" mapping="/pages/**"/>
+
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/error/" mapping="/error/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/lucene/" mapping="/lucene/**"/>
+    <mvc:resources location="/upLoads/" mapping="/upLoads/**"/>
+
+
+    <!-- spring 拦截 -->
+    <!--<mvc:interceptors>-->
+    <!--<mvc:interceptor>-->
+    <!--<mvc:mapping path="/*/*.do"/>-->
+    <!--<mvc:exclude-mapping path="/login/login.do"/>-->
+    <!--<mvc:exclude-mapping path="/login/goCheck.do"/>-->
+    <!--<mvc:exclude-mapping path="/login/logout.do"/>-->
+    <!--<bean class="com.springmvc.interceptor.SessionInterceptor">-->
+    <!--<property name="redirectPath" value="/login/logout.do"></property>-->
+    <!--<property name="sessionName" value="sessionData"></property>-->
+    <!--</bean>-->
+    <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!-- jms_mq在老平台上，这里不需要先删掉 -->
+
+    <!-- Ehcache配置S -->
+    <!--<cache:annotation-driven cache-manager="cacheManager"/>
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>-->
+
+    <!--<bean id="cacheManagerFactory"
+          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache/ehcache.xml">
+        </property>
+    </bean>-->
+    <!-- Ehcache配置E -->
+
+
+    <!-- <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" /> -->
+
+    <!-- Quartz -->
+    <bean id="jobFactory" class="com.springmvc.task.MyJobFactory"></bean>
+
+    <bean name="MyScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory" ref="jobFactory"></property>
+    </bean>
+    <!-- Quartz -->
+
+
+    <!-- aop -->
+    <!-- 被代理对象 -->
+    <!-- 已经注入容易，不需要了 -->
+    <!-- <bean id="airAlarmPlanServiceImpl" class="com.springmvc.dataSource1servicerce1service.impl.AirAlarmPlanServiceImpl"></bean> -->
+
+    <!-- 通知类 -->
+    <bean id="advices" class="com.springmvc.aop.Advices"></bean>
+
+    <!-- aop配置 -->
+    <aop:config proxy-target-class="true">
+        <!-- <aop:pointcut expression="execution(* com.springmvc.dataSource1daoaSource1dao.*.*(..))" id="pointcut1"/> -->
+        <aop:pointcut expression="(execution(* com.springmvc.dataSource1service.*.*.*(..))) or (execution(* com.springmvc.dataSource2service.*.*.*(..)))" id="pointcut1"/>
+
+        <aop:aspect ref="advices">
+            <!-- <aop:pointcut expression="execution(* com.springmvc.dataSource1servicerce1service.impl.AirAlarmPlanServiceImpl.*(..))" id="pointcut1"/>
+            <aop:pointcut expression="(execution(* com.springmvc.dataSource1servicerce1service.impl.*.*(..))) or (execution(* com.springmvc.dataSource1daoaSource1dao.*.*(..)))" id="pointcut1"/>
+            <aop:pointcut expression="execution(* com.springmvc.dataSource1servicerce1service.impl.*.*(..))" id="pointcut1"/> -->
+            <aop:before method="before" pointcut-ref="pointcut1"/>
+            <aop:after method="after" pointcut-ref="pointcut1"/>
+        </aop:aspect>
+    </aop:config>
+    <!-- aop -->
+
+
+    <!--<aop:config proxy-target-class="true"></aop:config>-->
+    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+    <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--</bean>-->
+</beans>

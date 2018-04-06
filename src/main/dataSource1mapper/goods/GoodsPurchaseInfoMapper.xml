@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsPurchaseInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND goods_purchase_info.id = #{id}
+            </if>
+            <if test="null != goods_Type_Id and goods_Type_Id != ''">
+                AND goods_purchase_info.goods_Type_Id = #{goods_Type_Id}
+            </if>
+            <if test="null != storage_Room_Id and storage_Room_Id != ''">
+                AND goods_purchase_info.storage_Room_Id = #{storage_Room_Id}
+            </if>
+            <if test="null != goods_Id and goods_Id != ''">
+                AND goods_purchase_info.goods_Id = #{goods_Id}
+            </if>
+            <if test="null != purchase_Price and purchase_Price != ''">
+                AND goods_purchase_info.purchase_Price = #{purchase_Price}
+            </if>
+            <if test="null != purchase_Count and purchase_Count != ''">
+                AND goods_purchase_info.purchase_Count = #{purchase_Count}
+            </if>
+            <if test="null != purchase_Date and purchase_Date != ''">
+                AND goods_purchase_info.purchase_Date = #{purchase_Date}
+            </if>
+            <if test="null != purchase_User_Name and purchase_User_Name != ''">
+                AND goods_purchase_info.purchase_User_Name = #{purchase_User_Name}
+            </if>
+            <if test="null != goods_purchase_Content and goods_purchase_Content != ''">
+                AND goods_purchase_info.goods_purchase_Content = #{goods_purchase_Content}
+            </if>
+            <if test="null != goods_purchase_Statuc and goods_purchase_Statuc != ''">
+                AND goods_purchase_info.goods_purchase_Statuc = #{goods_purchase_Statuc}
+            </if>
+            <if test="null != create_date and create_date != ''">
+                AND goods_purchase_info.create_date = #{create_date}
+            </if>
+            <if test="null != goods_Purchase_Total and goods_Purchase_Total != ''">
+                AND goods_purchase_info.goods_Purchase_Total = #{goods_Purchase_Total}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND goods_purchase_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.goods_Type_Id and pd.goods_Type_Id != ''">
+                AND goods_purchase_info.goods_Type_Id = #{pd.goods_Type_Id}
+            </if>
+            <if test="null != pd.storage_Room_Id and pd.storage_Room_Id != ''">
+                AND goods_purchase_info.storage_Room_Id = #{pd.storage_Room_Id}
+            </if>
+            <if test="null != pd.goods_Id and pd.goods_Id != ''">
+                AND goods_purchase_info.goods_Id = #{pd.goods_Id}
+            </if>
+            <if test="null != pd.purchase_Price and pd.purchase_Price != ''">
+                AND goods_purchase_info.purchase_Price = #{pd.purchase_Price}
+            </if>
+            <if test="null != pd.purchase_Count and pd.purchase_Count != ''">
+                AND goods_purchase_info.purchase_Count = #{pd.purchase_Count}
+            </if>
+            <if test="null != pd.purchase_Date and pd.purchase_Date != ''">
+                AND goods_purchase_info.purchase_Date = #{pd.purchase_Date}
+            </if>
+            <if test="null != pd.purchase_User_Name and pd.purchase_User_Name != ''">
+                AND goods_purchase_info.purchase_User_Name = #{pd.purchase_User_Name}
+            </if>
+            <if test="null != pd.goods_purchase_Content and pd.goods_purchase_Content != ''">
+                AND goods_purchase_info.goods_purchase_Content = #{pd.goods_purchase_Content}
+            </if>
+            <if test="null != pd.goods_purchase_Statuc and pd.goods_purchase_Statuc != ''">
+                AND goods_purchase_info.goods_purchase_Statuc = #{pd.goods_purchase_Statuc}
+            </if>
+            <if test="null != pd.create_date and pd.create_date != ''">
+                AND goods_purchase_info.create_date = #{pd.create_date}
+            </if>
+            <if test="null != pd.goods_Purchase_Total and pd.goods_Purchase_Total != ''">
+                AND goods_purchase_info.goods_Purchase_Total = #{pd.goods_Purchase_Total}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        goods_purchase_info.id AS id
+        ,goods_purchase_info.goods_Type_Id AS goods_Type_Id
+        ,goods_purchase_info.storage_Room_Id AS storage_Room_Id
+        ,goods_purchase_info.goods_Id AS goods_Id
+        ,goods_purchase_info.purchase_Price AS purchase_Price
+        ,goods_purchase_info.purchase_Count AS purchase_Count
+        ,date_format(goods_purchase_info.purchase_Date, '%Y-%m-%d') AS purchase_Date
+        ,goods_purchase_info.purchase_User_Name AS purchase_User_Name
+        ,goods_purchase_info.goods_purchase_Content AS goods_purchase_Content
+        ,goods_purchase_info.goods_purchase_Statuc AS goods_purchase_Statuc
+        ,goods_purchase_info.goods_Purchase_Total AS goods_Purchase_Total
+        ,goods_purchase_info.create_date AS create_date
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != storage_Room_Id and storage_Room_Id != ''">
+                storage_Room_Id = #{storage_Room_Id},
+            </if>
+            <if test="null != goods_Id and goods_Id != ''">
+                goods_Id = #{goods_Id},
+            </if>
+            <if test="null != purchase_Price and purchase_Price != ''">
+                purchase_Price = #{purchase_Price},
+            </if>
+            <if test="null != purchase_Count and purchase_Count != ''">
+                purchase_Count = #{purchase_Count},
+            </if>
+            <if test="null != purchase_Date and purchase_Date != ''">
+                purchase_Date = #{purchase_Date},
+            </if>
+            <if test="null != purchase_User_Name and purchase_User_Name != ''">
+                purchase_User_Name = #{purchase_User_Name},
+            </if>
+            <if test="null != goods_purchase_Content and goods_purchase_Content != ''">
+                goods_purchase_Content = #{goods_purchase_Content},
+            </if>
+            <if test="null != goods_purchase_Statuc and goods_purchase_Statuc != ''">
+                goods_purchase_Statuc = #{goods_purchase_Statuc},
+            </if>
+            <if test="null != create_date and create_date != ''">
+                create_date = #{create_date},
+            </if>
+            <if test="null != goods_Purchase_Total and goods_Purchase_Total != ''">
+                goods_Purchase_Total = #{goods_Purchase_Total},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,goods_type_info.goods_Type_Name AS goods_Type_Name
+        ,goods_storage_room_info.storage_Room_Name AS storage_Room_Name
+        ,goods_info.goods_Name AS goods_Name_Show
+
+        FROM goods_purchase_info AS goods_purchase_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = goods_purchase_info.goods_purchase_Statuc
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+
+        INNER JOIN goods_type_info AS goods_type_info ON goods_type_info.id = goods_purchase_info.goods_Type_Id
+        INNER JOIN goods_storage_room_info AS goods_storage_room_info ON goods_storage_room_info.id = goods_purchase_info.storage_Room_Id
+        INNER JOIN goods_info AS goods_info ON goods_info.id = goods_purchase_info.goods_Id
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,goods_type_info.goods_Type_Name AS goods_Type_Name
+        ,goods_storage_room_info.storage_Room_Name AS storage_Room_Name
+        ,goods_info.goods_Name AS goods_Name_Show
+
+        FROM goods_purchase_info AS goods_purchase_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND  dictionary_stat.code_value = goods_purchase_info.goods_purchase_Statuc
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+
+        INNER JOIN goods_type_info AS goods_type_info ON goods_type_info.id = goods_purchase_info.goods_Type_Id
+        INNER JOIN goods_storage_room_info AS goods_storage_room_info ON goods_storage_room_info.id = goods_purchase_info.storage_Room_Id
+        INNER JOIN goods_info AS goods_info ON goods_info.id = goods_purchase_info.goods_Id
+
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM goods_purchase_info-->
+        <!--<where>-->
+             <!--= #{}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO goods_purchase_info
+        (
+        goods_Type_Id
+        ,create_date
+        <if test="null != storage_Room_Id and storage_Room_Id != ''">
+            ,storage_Room_Id
+        </if>
+        <if test="null != goods_Id and goods_Id != ''">
+            ,goods_Id
+        </if>
+        <if test="null != purchase_Price and purchase_Price != ''">
+            ,purchase_Price
+        </if>
+        <if test="null != purchase_Count and purchase_Count != ''">
+            ,purchase_Count
+        </if>
+        <if test="null != purchase_Date and purchase_Date != ''">
+            ,purchase_Date
+        </if>
+        <if test="null != purchase_User_Name and purchase_User_Name != ''">
+            ,purchase_User_Name
+        </if>
+        <if test="null != goods_purchase_Content and goods_purchase_Content != ''">
+            ,goods_purchase_Content
+        </if>
+        <if test="null != goods_purchase_Statuc and goods_purchase_Statuc != ''">
+            ,goods_purchase_Statuc
+        </if>
+        <if test="null != goods_Purchase_Total and goods_Purchase_Total != ''">
+            ,goods_Purchase_Total
+        </if>
+        ) VALUES (
+        #{goods_Type_Id}
+        ,now()
+        <if test="null != storage_Room_Id and storage_Room_Id != ''">
+            ,#{storage_Room_Id}
+        </if>
+        <if test="null != goods_Id and goods_Id != ''">
+            ,#{goods_Id}
+        </if>
+        <if test="null != purchase_Price and purchase_Price != ''">
+            ,#{purchase_Price}
+        </if>
+        <if test="null != purchase_Count and purchase_Count != ''">
+            ,#{purchase_Count}
+        </if>
+        <if test="null != purchase_Date and purchase_Date != ''">
+            ,#{purchase_Date}
+        </if>
+        <if test="null != purchase_User_Name and purchase_User_Name != ''">
+            ,#{purchase_User_Name}
+        </if>
+        <if test="null != goods_purchase_Content and goods_purchase_Content != ''">
+            ,#{goods_purchase_Content}
+        </if>
+        <if test="null != goods_purchase_Statuc and goods_purchase_Statuc != ''">
+            ,#{goods_purchase_Statuc}
+        </if>
+        <if test="null != goods_Purchase_Total and goods_Purchase_Total != ''">
+            ,#{goods_Purchase_Total}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE goods_purchase_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM goods_purchase_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

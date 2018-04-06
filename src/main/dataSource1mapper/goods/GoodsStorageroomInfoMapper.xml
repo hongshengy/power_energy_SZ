@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsStorageroomInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND goods_storage_room_info.id = #{id}
+            </if>
+            <if test="null != storage_Room_Name and storage_Room_Name != ''">
+                AND goods_storage_room_info.storage_Room_Name = #{storage_Room_Name}
+            </if>
+            <if test="null != storage_Room_Code and storage_Room_Code != ''">
+                AND goods_storage_room_info.storage_Room_Code = #{storage_Room_Code}
+            </if>
+            <if test="null != storage_Room_Content and storage_Room_Content != ''">
+                AND goods_storage_room_info.storage_Room_Content = #{storage_Room_Content}
+            </if>
+            <if test="null != creator and creator != ''">
+                AND goods_storage_room_info.creator = #{creator}
+            </if>
+            <if test="null != creation_Date and creation_Date != ''">
+                AND goods_storage_room_info.creation_Date = #{creation_Date}
+            </if>
+            <if test="null != storage_Room_Type_Status and storage_Room_Type_Status != ''">
+                AND goods_storage_room_info.storage_Room_Type_Status = #{storage_Room_Type_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND goods_storage_room_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.storage_Room_Name and pd.storage_Room_Name != ''">
+                AND goods_storage_room_info.storage_Room_Name = #{pd.storage_Room_Name}
+            </if>
+            <if test="null != pd.storage_Room_Code and pd.storage_Room_Code != ''">
+                AND goods_storage_room_info.storage_Room_Code = #{pd.storage_Room_Code}
+            </if>
+            <if test="null != pd.storage_Room_Content and pd.storage_Room_Content != ''">
+                AND goods_storage_room_info.storage_Room_Content = #{pd.storage_Room_Content}
+            </if>
+            <if test="null != pd.creator and pd.creator != ''">
+                AND goods_storage_room_info.creator = #{pd.creator}
+            </if>
+            <if test="null != pd.creation_Date and pd.creation_Date != ''">
+                AND goods_storage_room_info.creation_Date = #{pd.creation_Date}
+            </if>
+            <if test="null != pd.storage_Room_Type_Status and pd.storage_Room_Type_Status != ''">
+                AND goods_storage_room_info.storage_Room_Type_Status = #{pd.storage_Room_Type_Status}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        goods_storage_room_info.id
+        ,goods_storage_room_info.storage_Room_Name
+        ,goods_storage_room_info.storage_Room_Code
+        ,goods_storage_room_info.storage_Room_Content
+        ,goods_storage_room_info.creator
+        ,goods_storage_room_info.creation_Date
+        ,goods_storage_room_info.storage_Room_Type_Status
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != storage_Room_Name and storage_Room_Name != ''">
+                storage_Room_Name = #{storage_Room_Name},
+            </if>
+            <if test="null != storage_Room_Code and storage_Room_Code != ''">
+                storage_Room_Code = #{storage_Room_Code},
+            </if>
+            <if test="null != storage_Room_Content and storage_Room_Content != ''">
+                storage_Room_Content = #{storage_Room_Content},
+            </if>
+            <if test="null != creator and creator != ''">
+                creator = #{creator},
+            </if>
+            <if test="null != creation_Date and creation_Date != ''">
+                creation_Date = #{creation_Date},
+            </if>
+            <if test="null != storage_Room_Type_Status and storage_Room_Type_Status != ''">
+                storage_Room_Type_Status = #{storage_Room_Type_Status},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,user_info.user_Real_Name AS user_Real_Name
+
+        FROM goods_storage_room_info AS goods_storage_room_info
+
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND dictionary_stat.code_value = goods_storage_room_info.storage_Room_Type_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        INNER JOIN user_info AS user_info ON user_info.id = goods_storage_room_info.creator
+
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,dictionary_stat.code_cn AS ZHUANGTAI
+        ,user_info.user_Real_Name AS user_Real_Name
+        FROM goods_storage_room_info AS goods_storage_room_info
+        INNER JOIN dictionary AS dictionary_stat ON 1 = 1 AND dictionary_stat.code_value = goods_storage_room_info.storage_Room_Type_Status
+        INNER JOIN dictionary AS dictionary_p_stat ON dictionary_stat.parent_id = dictionary_p_stat.id AND dictionary_p_stat.code_en = 'ZHUANGTAI'
+        INNER JOIN user_info AS user_info ON user_info.id = goods_storage_room_info.creator
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <select id="selectCheck" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT,id FROM goods_storage_room_info
+        <where>
+            storage_Room_Name = #{storage_Room_Name} OR storage_Room_Code = #{storage_Room_Code}
+        </where>
+        GROUP BY id
+    </select>
+
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO goods_storage_room_info
+        (
+        storage_Room_Name
+        ,storage_Room_Code
+        ,storage_Room_Type_Status
+        ,creation_Date
+        <if test="null != storage_Room_Content and storage_Room_Content != ''">
+            ,storage_Room_Content
+        </if>
+        <if test="null != creator and creator != ''">
+            ,creator
+        </if>
+
+        ) VALUES (
+        #{storage_Room_Name}
+        ,#{storage_Room_Code}
+        ,#{storage_Room_Type_Status}
+        ,now()
+        <if test="null != storage_Room_Content and storage_Room_Content != ''">
+            ,#{storage_Room_Content}
+        </if>
+        <if test="null != creator and creator != ''">
+            ,#{creator}
+        </if>
+
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE goods_storage_room_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM goods_storage_room_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

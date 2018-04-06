@@ -1,0 +1,524 @@
+@CHARSET "UTF-8";
+
+#loading-mask{
+	position:absolute;
+	left:0;
+	top:0;
+    width:100%;
+    height:100%;
+    z-index:20000;
+    background-color:white;
+}
+#loading{
+	position:absolute;
+	left:45%;
+	top:40%;
+	padding:2px;
+	z-index:20001;
+    height:auto;
+}
+#loading img {
+    margin-bottom:5px;
+}
+#loading .loading-indicator{
+	background:white;
+	color:#555;
+	font:bold 12px tahoma,arial,helvetica;
+	padding:10px;
+	margin:0;
+    text-align:center;
+    height:auto;
+}
+#class .loading-indicator{
+	font-size:12px;
+	height:18px;
+}
+
+ /*以下为上传文件的dialog需要的css*/
+.ext-ux-uploaddialog-addbtn
+{
+	background: url('images/upload/file-add.gif') no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-removebtn
+{
+	background: url('images/upload/file-remove.gif') no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-resetbtn
+{
+	background: url('images/upload/reset.gif') no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-uploadstartbtn
+{
+	background: url('images/upload/upload-start.gif') no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-uploadstopbtn
+{
+	background: url('images/upload/upload-stop.gif') no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-indicator-stoped
+{
+	width: 16px;
+	height: 16px;
+	background: url('images/upload/done.gif') no-repeat center center;
+}
+
+.ext-ux-uploaddialog-indicator-processing
+{
+	width: 16px;
+	height: 16px;	
+	background: url('images/upload/loading.gif') no-repeat center center;
+}
+
+.ext-ux-uploaddialog-state
+{
+	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+/* 操作票管理中的css*/
+.x-tree-node  .oper-ConfigItemTypeCls{background-image: url(images/itemType.gif);}
+.x-tree-node  .oper-ConfigItemCls{background-image: url(images/item.gif);}
+/* Queued */
+.ext-ux-uploaddialog-state-0
+{
+	background-image: url('images/upload/uncheck.gif');
+}
+
+/* Finished */
+.ext-ux-uploaddialog-state-1
+{
+	background-image: url('images/upload/check.gif');
+}
+
+/* Failed */
+.ext-ux-uploaddialog-state-2
+{
+	background-image: url('images/upload/failed.gif');
+}
+
+/* Processing */
+.ext-ux-uploaddialog-state-3
+{
+	background-image: url('images/upload/file-uploading.gif');	
+}
+
+/* Progress bar fix */
+.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div
+{
+	display: none;
+}
+
+.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back
+{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+}
+
+.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back div
+{
+	width: auto !important;
+	white-space: nowrap;
+}
+ /*以上为上传文件的dialog需要的css*/
+
+.maintop{
+	height:65px;
+	width:100%;
+	border:0px;
+	font-size:12px;
+ 	background-image:url(../images/img/top-bg.gif);
+ }
+.maintopTwo{
+	height:65px;
+	width:100%;
+	border:0px;
+	font-size:12px;
+ 	background-image:url(../images/img/top-bg2.gif);
+ } 
+ .userinfo{
+ 	position: absolute;
+	left:140px;
+	top:49px;
+	border:0px;
+	font-size:12px;
+ }
+ 
+ .maindown{
+	height:100%;
+	width:100%;
+	font-size:12px;
+	text-align: center;
+ }
+ 
+ .new-tab {
+    background-image:url(toolicon/t_edit2.gif) !important;
+}
+/*新增*/
+.add{
+    background-image:url(toolicon/t_add.gif) !important;
+}
+/*修改*/
+.edit{
+    background-image:url(toolicon/t_edit2.gif) !important;
+}
+/*新增*/
+.add1{
+    background-image:url(toolicon/t_add.gif) !important;
+}
+/*保存*/
+.save{
+    background-image:url(toolicon/tools_save.gif) !important;
+}
+/*删除*/
+.remove{
+    background-image:url(toolicon/t_sub.gif) !important;
+}
+/*查询*/
+.query{
+ 	background-image:url(toolicon/tools_search.gif) !important;
+ }
+/*排序*/
+.sort{
+ 	background-image:url(toolicon/tools_sort.gif) !important;
+ }
+/*导出*/
+.export{
+ 	background-image:url(toolicon/tools-exporttoexcel.gif) !important;
+ }
+/*打印*/
+.print{
+ 	background-image:url(toolicon/tools-print.gif) !important;
+ }
+ /*关闭*/
+.close{
+ 	background-image:url(toolicon/tools_close.gif) !important;
+ }
+ /*同步*/
+.synch{
+ 	background-image:url(toolicon/tools_unite.gif) !important;
+ }
+ /*上移*/
+.moveup{
+ 	background-image:url(toolicon/tools-moveup.gif) !important;
+ }
+ /*下移*/
+.movedown{
+ 	background-image:url(toolicon/tools-movedown.gif) !important;
+ }
+ /*关联*/
+.relate{
+ 	background-image:url(toolicon/tools-relating.gif) !important;
+ }
+  /*设置上级对口*/
+.setsuperior{
+ 	background-image:url(toolicon/tools-setsuperior.gif) !important;
+ }
+  /*设置扩展属性值*/
+.setextendproperty{
+ 	background-image:url(toolicon/tools-setextendproperty.gif) !important;
+ }
+ /*刷新*/
+ .refresh{
+ 	background-image:url(toolicon/tools_refresh.gif) !important;
+ }
+ /*数据*/
+ .data{
+ 	background-image:url(toolicon/tools_data.gif) !important;
+ }
+ /*提交*/
+ .submit{
+ 	background-image:url(toolicon/tools_refer.gif) !important;
+ }
+  /*确定*/
+ .ok{
+ 	background-image:url(toolicon/tools_ok.gif) !important;
+ }
+ /*重置*/
+ .cancelsetting{
+ 	background-image:url(toolicon/tools_cancelsetting.gif) !important;
+ }
+ /*运行*/
+ .run{
+ 	background-image:url(toolicon/tools_doit.gif) !important;
+ }
+ /*停用*/
+ .intermit{
+ 	background-image:url(toolicon/tools_intermit.gif) !important;
+ } 
+ /*岗位*/
+.station{
+    background-image:url(toolicon/tools_station.gif) !important;
+}
+ /*用户*/
+.employee{
+    background-image:url(toolicon/tools_employee.gif) !important;
+}
+ /*重新同步到AD*/
+.freshsync{
+    background-image:url(toolicon/tools-afreshsynchronization.gif) !important;
+}
+ 
+/*启用*/
+.start{
+	background-image:url(toolicon/tools_startusing.gif) !important;
+}
+/*停用*/
+.stop{
+	background-image:url(toolicon/tools_stopusing.gif) !important;
+}
+/*挂起*/
+.hangup{
+	background-image:url(toolicon/tools_hangup.gif) !important;
+}
+/*废止*/
+.disuse{
+	background-image:url(toolicon/tools_disuse.gif) !important;
+}
+/*复制*/
+.copy{
+	background-image:url(toolicon/tools_copy.gif) !important;
+}
+/*查看*/
+.view{
+ 	background-image:url(toolicon/tools_check.gif) !important;
+}
+/*自动排版*/
+.autotypeset{
+ 	background-image:url(toolicon/tools-autotypeset.gif) !important;
+}
+/*局部排版*/
+.parttypeset{
+ 	background-image:url(toolicon/tools-parttypeset.gif) !important;
+}
+/*校验*/
+.checkout{
+ 	background-image:url(toolicon/tools_checkout.gif) !important;
+}
+/*发布*/
+.issuance{
+ 	background-image:url(toolicon/tools_issuance.gif) !important;
+}
+/*全选*/
+.selectall{
+ 	background-image:url(toolicon/tools_selectall.gif) !important;
+}
+
+/*全不选*/
+.clearall{
+ 	background-image:url(toolicon/tools_clearall.gif) !important;
+}
+/*属性*/
+.property{
+ 	background-image:url(toolicon/tools_property.gif) !important;
+}
+/*隐藏网格*/
+.showgrid{
+ 	background-image:url(toolicon/tools-showgrid.gif) !important;
+}
+/*流程目录*/
+.workflowdir{
+ 	background-image:url(../../workflow/wfdefine/wfImg/wfTrWfGroup.gif) !important;
+}
+/*流程*/
+.workflow{
+ 	background-image:url(../../workflow/wfdefine/wfImg/wfTrWorkflow.gif) !important;
+}
+/*流程分组*/
+.workflowgroup{
+ 	background-image:url(../../workflow/wfdefine/wfImg/wfTrWfGroup.gif) !important;
+}
+/*流程定义*/
+.workflowdefine{
+ 	background-image:url(../../workflow/wfdefine/wfImg/wfTrMinor.gif) !important;
+}
+/*内部流程定义*/
+.workflowindefine{
+ 	background-image:url(../../workflow/wfdefine/wfImg/wfTrInnerWf.gif) !important;
+}
+
+/*业务*/
+.operation{
+ 	background-image:url(toolicon/tools_operation.gif) !important;
+}
+/*汇总*/
+.collect{
+ 	background-image:url(toolicon/tools_collect.gif) !important;
+}
+/*分析*/
+.analyse{
+ 	background-image:url(toolicon/tools_analysetable.gif) !important;
+}
+/*处理人*/
+.disposer{
+ 	background-image:url(toolicon/tools_disposer.gif) !important;
+}
+/*对齐方式*/
+.textalign{
+ 	background-image:url(toolicon/tools_textalign.gif) !important;
+}
+/*左对齐方式*/
+.textalignleft{
+ 	background-image:url(toolicon/tools_alignleft.gif) !important;
+}
+/*中对齐方式*/
+.textaligncenter{
+ 	background-image:url(toolicon/tools_aligncenter.gif) !important;
+}
+/*右对齐方式*/
+.textalignright{
+ 	background-image:url(toolicon/tools_alignright.gif) !important;
+}
+/*垂直对齐方式*/
+.textaligns{
+ 	background-image:url(toolicon/tools_aligns.gif) !important;
+}
+/*垂直上对齐方式*/
+.textalignstop{
+ 	background-image:url(toolicon/tools_alignstop.gif) !important;
+}
+/*垂直中对齐方式*/
+.textalignscenter{
+ 	background-image:url(toolicon/tools_alignscenter.gif) !important;
+}
+/*垂直下对齐方式*/
+.textalignsdown{
+ 	background-image:url(toolicon/tools_alignsdown.gif) !important;
+}
+
+/*处理*/
+.deal{
+ 	background-image:url(toolicon/tools_dispose.gif) !important;
+}
+/*标为已操作*/
+.setdealed{
+ 	background-image:url(toolicon/tools-labelworked.gif) !important;
+}
+/*引用*/
+.reference{
+    background-image:url(toolicon/tools_adduction.gif) !important;
+}
+/*统计*/
+.stat{
+    background-image:url(toolicon/tools-publicize.gif) !important;
+}	
+.object {
+    background-image:url(toolicon/tool_object.gif) !important;
+}
+.info {
+    background-image:url(toolicon/tools_adduction.gif) !important;
+}
+.movetop {
+    background-image:url(toolicon/tools-moveup.gif) !important;
+}
+.movelast {
+    background-image:url(toolicon/tools-movedown.gif) !important;
+}
+.search {
+    background-image:url(toolicon/tools_search.gif) !important;
+}
+.help {
+    background-image:url(toolicon/tools_help.gif) !important;
+} 
+.holidayStyle{
+ 	font-size:25px;color:red;border:0;cursor:pointer;
+ }
+.defaultholiday{
+	font-size:13px;color:blue;border:0;cursor:pointer;
+}
+.noliday{
+	font-size:13px;border:0;
+}
+.workdayStyle{
+ 	font-size:25px;font-color:black;border:0;cursor:pointer;
+}
+/*写消息*/
+.writemess{
+ 	background-image:url(toolicon/tools-writenews.gif) !important;
+ }
+ /*互斥角色*/
+.mutexrole{
+ 	background-image:url(toolicon/tools-mutexrole.gif) !important;
+}
+ /*发送*/
+.send{
+ 	background-image:url(toolicon/tools_sendmessage.gif) !important;
+ } 
+ /*转发*/
+.transmit{
+ 	background-image:url(toolicon/tools-transmit.gif) !important;
+ } 
+ /*回复*/
+.writeback{
+ 	background-image:url(toolicon/tools-writeback.gif) !important;
+ } 
+ /*复制或移动*/
+ .copyormove{
+ 	background-image:url(toolicon/tools_copy.gif) !important;
+ } 
+.delegate{
+ 	background-image:url(toolicon/delegate.gif) !important;
+} 
+.usercfg{
+ 	background-image:url(toolicon/usercfg.gif) !important;
+}
+.changepwd{
+ 	background-image:url(toolicon/changepwd.gif) !important;
+}
+.appicon {
+    background-image:url(toolicon/appicon.PNG) 0 6px !important;
+}
+/*节点信息*/
+.nodeoperate {
+    background-image:url(toolicon/tools-nodeoperate.gif) !important;
+}
+/*部署信息*/
+.disposeinfo {
+    background-image:url(toolicon/tools-disposeinfo.gif) !important;
+}
+/*弹出窗口返回*/
+.return {
+    background-image:url(toolicon/tools_return.gif) !important;
+}
+/*展开所有菜单*/
+.expendall {
+    background-image:url(toolicon/tools_castback.gif) !important;
+}
+/*展开所有菜单*/
+.collapseall {
+    background-image:url(toolicon/tools_appointtarget.gif) !important;
+}
+/*copy*/
+.copyauth {
+    background-image:url(toolicon/app_copy.png) !important;
+}
+/*paste*/
+.pasteauth {
+    background-image:url(toolicon/app_paste.png) !important;
+}
+/*history*/
+.history {
+    background-image:url(toolicon/tools_historylist.gif) !important;
+}	
+	
+.connectinfo {
+	background-image:url(toolicon/tools-systemstat.gif) !important;
+}
+/*流程任意跳转*/
+.jumpRandom {
+	background-image:url(toolicon/tools-jumpover.gif) !important;
+}
+.x-form-field-wrap .x-form-multi-trigger{background-image:url(toolicon/mulit-trigger.gif);cursor:pointer;}
+
+.overTimeWorkItem{
+	color:red;
+}
+
+.required {
+	color:#1e978f;font-weight:bold;
+}

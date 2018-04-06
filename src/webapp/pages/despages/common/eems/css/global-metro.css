@@ -1,0 +1,567 @@
+.clearfix:before,
+.clearfix:after{
+	content: '';
+	display: table;
+}
+
+.clearfix:after{
+	clear: both;
+}
+
+.clearfix{
+	*zoom: 1;
+}
+
+
+
+a
+{
+	text-decoration: none;
+}
+
+.panel-body,
+.datagrid-htable,
+.datagrid-btable,
+.datagrid-ftable {
+	color: #444;
+}
+
+.body-style
+{
+	padding: 0;
+	margin: 0;
+}
+
+.toolbar-style
+{
+	background-color: #f2f2f2;
+	border-bottom: 1px solid #e5e0db;
+	padding:2px;
+}
+
+.toolbar-block{
+	padding: 5px;
+}
+
+select[class^="easyui"] + .textbox,
+input[class^="easyui"] + .textbox{
+	height: 24px !important;
+}
+
+.page-title
+{
+	padding: 8px;
+	background-color: #229673;
+}
+
+.page-title-font
+{
+	color: #f4fffb;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+
+
+
+.tabpage1
+{
+	padding: 0;
+}
+
+.searchpanel
+{
+	margin-bottom: 2px;
+	border-bottom:1px solid #e3e3e3;
+	
+	padding: 1px;
+}
+
+.searchpanel .combo
+{
+	border: none;
+	border-radius: 0;
+}
+
+
+.table-style
+{
+	border-collapse: collapse;
+}
+
+.table-style .border-left
+{
+	border-left:1px solid #d6d6d6;
+}
+
+.border-left-larger
+{
+	border-left:5px double #d6d6d6;
+}
+
+.table-title-td
+{
+	background-color: #f2f2f2;
+	color: #433f33;
+}
+
+.table-textarea-panel
+{
+	padding:4px 5px;
+}
+
+.table-textarea-panel textarea
+{
+	width:100%;
+	resize:none;
+	border:none;
+}
+
+.table-value-td
+{
+	padding: 1px 4px;
+}
+
+.table-value-td:hover
+{
+	background-color: #edf8ff;
+}
+
+.table-bordered > tbody > tr > td, 
+.table-bordered > tbody > tr > th, 
+.table-bordered > tfoot > tr > td, 
+.table-bordered > tfoot > tr > th, 
+.table-bordered > thead > tr > td, 
+.table-bordered > thead > tr > th {
+	border: 1px solid #d9d7d0;
+}
+
+.ft-panel
+{
+	border:1px solid #b4b29c;
+}
+
+.easyui-dialog-white 
+{
+	border: none !important;
+}
+
+.panel-header,
+.easyui-panel-white .panel-header{
+	padding: 6px 5px;
+}
+
+.easyui-panel-white .panel-header
+{
+	border-color: #d4d4ca;
+	background-color: #e5e4d6 !important;
+	border-radius: 3px 3px 0px 0px;
+	border-style: solid;
+}
+
+.easyui-panel-white .panel-body
+{
+	border-color: #d4d4ca;
+	border-style: solid;
+}
+
+.panel-title,
+.easyui-panel-white .panel-title {
+	color: #676555;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.easyui-panel-white .panel-title
+{
+
+	text-shadow:none;
+}
+
+.easyui-dialog-white td .textbox
+{
+	border: none;
+}
+
+
+
+.main-tab-panel
+{
+	padding:0px;
+
+}
+
+.tabpage-panel
+{
+	background-color:#f2f2f2 !important;
+}
+
+.tabpage-panel > .panel-body
+{
+	background-color:#f2f2f2 !important;
+}
+
+.relative-panel
+{
+	position: relative;
+}
+
+.relative-panel .lefttop-position-panel
+{
+	position:absolute;
+	left:5px;
+	top:5px;
+	z-index:1;
+}
+
+.relative-panel .righttop-position-panel
+{
+	position:absolute;
+	right:5px;
+	top:-26px;
+	z-index:1;
+}
+
+.relative-panel .rightbottom-position-panel
+{
+	position:absolute;
+	right:10px;
+	top: 8px;
+	z-index:1;
+}
+
+/*.relative-panel*/
+.relative-panel .righttop-position-panel .l-btn
+{
+	border-radius: 4px 4px 0 0;
+	padding: 0px 8px;
+}
+
+.relative-panel .rightbottom-position-panel .l-btn
+{
+	border-radius: 0 0 0 0;
+	padding: 2px 12px;
+	filter: none;
+	background: transparent;
+	border-color: transparent;
+	color: #666;
+}
+
+.relative-panel .rightbottom-position-panel .l-btn:hover
+{
+	color: #345291;
+}
+
+.relative-panel .righttop-position-panel .l-btn-selected
+{
+	background-color: #fff !important;
+	border-bottom-color: #fff;
+	border-top-color: #1ea041;
+}
+
+.relative-panel .rightbottom-position-panel .l-btn-selected
+{
+	color: #333;
+	background-color: #fff !important;
+	border-bottom-color: #fff;
+	border-top-color: #b4b29c;
+	border-left-color: #b4b29c;
+	border-right-color: #b4b29c;
+}
+
+
+/*group框架内样式处理*/
+.group-addon
+{
+	border:1px solid #cecece;
+	border-radius: 5px;
+}
+
+.group-addon .textbox,
+.group-addon .l-btn
+{
+	border: none;
+}
+
+.group-addon .group-addon-left .textbox,
+.group-addon .group-addon-left .l-btn
+{
+	border-radius: 5px 0 0 5px;
+}
+
+.group-addon .group-addon-right .textbox,
+.group-addon .group-addon-right .l-btn
+{
+	/*margin-left: -3px;*/
+	border-radius: 0 5px 5px 0;
+	border-left: 1px solid #cecece;
+}
+
+.menu-button
+{
+	width: 80px;
+	padding: 12px 0;
+}
+
+.easyui-dialog-white .table-panel
+{
+	width: 800px;
+}
+				
+.easyui-dialog-white .table-row
+{
+	border-bottom: 1px dashed  #dddddd;
+}
+.easyui-dialog-white .table-cell
+{
+	padding: 10px 15px;
+	display: inline-block;
+	width: 150px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space:nowrap;
+}
+
+.easyui-dialog-white .tab-panel
+{
+	margin:0 auto;
+	padding-bottom:10px;
+	border-bottom:1px solid #e0e0e0;
+}
+
+.easyui-tabs-metro .tabs-header,
+.easyui-tabs-metro .tabs-scroller-left,
+.easyui-tabs-metro .tabs-scroller-right,
+.easyui-tabs-metro .tabs-tool,
+.easyui-tabs-metro .tabs,
+.easyui-tabs-metro .tabs-panels,
+.easyui-tabs-metro .tabs li a.tabs-inner,
+.easyui-tabs-metro .tabs li.tabs-selected a.tabs-inner,
+.easyui-tabs-metro .tabs-header-bottom .tabs li.tabs-selected a.tabs-inner,
+.easyui-tabs-metro .tabs-header-left .tabs li.tabs-selected a.tabs-inner,
+.easyui-tabs-metro .tabs-header-right .tabs li.tabs-selected a.tabs-inner {
+  border-color: #e0e0e0;
+}
+
+.easyui-tabs-metro .tabs
+{
+	height: 27px !important;
+}
+
+.easyui-tabs-metro .tabs-title
+{
+	font-size: 12px;
+	font-weight:normal;
+}
+
+.easyui-tabs-metro .tabs-header
+{
+	background-color: #fff;
+}
+
+.easyui-tabs-metro .tabs li.tabs-selected a.tabs-inner
+{
+	color: #2a9696;
+	background-color: #fff;
+}
+
+.easyui-tabs-metro .tabs li a.tabs-inner:hover
+{
+	color: #2a9696;
+	background-color: #fafafa;
+}
+
+.easyui-tabs-metro .tabs li a.tabs-inner
+{
+	padding: 13px;
+}
+
+.window .panel-header
+{
+	background-color: #fff;
+}
+
+.easyui-dialog-white .tab-panel .l-btn
+{
+	padding: 10px 0;
+	width: 90px;
+	border-radius: 0;
+	border:none;
+	background: none;
+	font-weight: bold;
+	color: #3b3b3b;
+/*	background-color: #999;*/
+/*	filter: none;*/
+}
+
+.easyui-dialog-white .tab-panel .l-btn:hover
+{
+	background-color: #c9dae8;
+	color: #3b3b3b;
+}
+
+.easyui-dialog-white .tab-panel .l-btn-selected
+{
+	background-color: #266fad;
+	color: #dde8f2;
+}
+
+.easyui-dialog-white .tab-panel .l-btn .l-btn-text
+{
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+
+h2 {color: blue;}
+
+.icon-arrowUp,
+.icon-arrowDown{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+/*重新写一套在table中表单控件的样式*/
+/*表格框中group的样式,group包括*/
+.group-table-cell{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 26px;
+}
+
+.group-table-cell .textbox{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 40px;
+	height: 24px;
+}
+
+.group-table-cell a.l-btn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 24px;
+}
+
+/*main页面样式*/
+.startus-block{
+	padding:3px 10px;
+	color:#404040;
+	border-top:1px solid #c7c7c7;
+	font-size: 11px;
+}
+
+.tabpage
+{
+	padding: 1px;
+}
+
+.treepanel-block
+{
+	width: 238px;
+	padding-right:5px;
+}
+/**/
+
+/*每一个封装内容的容器样式*/
+.panel-margin-top{
+	margin-top:1px;
+}
+
+.panel-margin-bottom{
+	margin-bottom:1px;
+}
+/**/
+
+/*展现在信息查看处的table样式*/
+.onlyTable-block{
+	padding:0;
+}
+
+.table-showInfo{
+	border-collapse: collapse;
+}
+
+.table-showInfo  tbody  tr  td,
+.table-showInfo  tbody  tr  th,
+.table-showInfo  tfoot  tr  td,
+.table-showInfo  tfoot  tr  th,
+.table-showInfo  thead  tr  td,
+.table-showInfo  thead  tr  th {
+	border: none;
+	padding: 5px 5px;
+}
+
+.table-showInfo tbody  tr  td{
+	border-bottom: 1px solid #e8e8e8;
+ }
+
+.table-showInfo tbody tr:last-of-type  td{
+	border-bottom: none;
+}
+
+.table-showInfo .table-title-td{
+	background-color: #f2f2f2;
+
+}
+
+.td-label{
+	color: #3b3d3e;
+}
+
+.td-value{
+	color: #7c8082;
+}
+/**/
+
+/*由于easyui的panel会出现一些样式上的bug，这里重新手写一组panel样式*/
+.local-panel{
+	border: 1px solid #D4D4CA;
+	background-color: #fff;
+}
+
+.local-panel .header-block{
+	background-color: #F5F5F5;
+	padding: 5px 8px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #464646;
+}
+
+.local-panel-shadow{
+	-webkit-box-shadow: 0 2px 10px #D4D4CA;
+	-moz-box-shadow: 0 2px 10px #D4D4CA;
+	box-shadow: 0 2px 10px #D4D4CA;
+}
+
+.local-panel.panel1{
+
+}
+
+.local-panel.panel1 .header-block{
+
+}
+
+.local-panel.panel1 .local-panel-shadow{
+
+}
+/**/
+
+/*toolbar的样式集*/
+.toolbar-block.toolbarStyle1{
+	background-color: #fafafa;
+	border-top: 1px solid #D4D4CA;
+	border-left: 1px solid #D4D4CA;
+	border-right: 1px solid #D4D4CA;
+	padding: 7px;
+}
+
+.toolbar-block.toolbarStyle2{
+	background-color: #fafafa;
+	border-bottom: 1px solid #D4D4CA;
+	padding: 7px;
+}
+/**/

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsTypeMapper">
+
+	<!--所有表的ID要带mapper文件的前缀名-->
+
+	<sql id="where">
+		<where>
+
+			<if test="null !=  and  != ''">
+				AND  = #{}
+			</if>
+
+		</where>
+	</sql>
+
+	<sql id="wherePage">
+
+	</sql>
+
+	<sql id="fieldLeft">
+
+	</sql>
+
+	<sql id="field">
+
+	</sql>
+
+	<sql id="fieldPage">
+
+	</sql>
+
+	<sql id="setUpd">
+		<set>
+			<if test="null !=  and  != ''">
+				 = #{},
+			</if>
+		</set>
+	</sql>
+
+	<select id="selectInfo" parameterType="map" resultType="map">
+		SELECT
+		<include refid="field"></include>
+		FROM
+		<include refid="where"></include>
+	</select>
+
+	<select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+		SELECT
+		<include refid="fieldPage"></include>
+		FROM
+		<include refid="wherePage"></include>
+	</select>
+
+	<!--插入前的处理,根据参数判断是否有重复数据-->
+	<select id="selectCheck" parameterType="map" resultType="map">
+		SELECT COUNT(1) AS COUNT,id FROM
+		<where>
+			= #{} OR  = #{}
+		</where>
+		GROUP BY id
+	</select>
+
+	<!--mysql当前日期函数    now()-->
+	<insert id="insertInfo" parameterType="map">
+		INSERT INTO
+		(
+			
+			,
+			,
+
+		) VALUES (
+			#{}
+			,#{}
+			,now()
+		)
+	</insert>
+
+	<!--写死根据id更新-->
+	<update id="updateInfo" parameterType="map">
+		UPDATE
+		<include refid="setUpd"></include>
+		<where>
+			<if test="null != id and id != ''">
+				AND id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<!--写死根据id删除-->
+	<delete id="deleteInfo" parameterType="map">
+		DELETE FROM
+		<where>
+			AND id = #{id}
+		</where>
+	</delete>
+
+</mapper>

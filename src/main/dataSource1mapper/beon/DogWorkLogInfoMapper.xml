@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DogWorkLogInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND dog_work_log_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND dog_work_log_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != goods_Type and goods_Type != ''">
+                AND dog_work_log_info.goods_Type = #{goods_Type}
+            </if>
+            <if test="null != goods_Name and goods_Name != ''">
+                AND dog_work_log_info.goods_Name = #{goods_Name}
+            </if>
+            <if test="null != use_User_Name and use_User_Name != ''">
+                AND dog_work_log_info.use_User_Name = #{use_User_Name}
+            </if>
+            <if test="null != use_Date and use_Date != ''">
+                AND dog_work_log_info.use_Date = #{use_Date}
+            </if>
+            <if test="null != log_Content and log_Content != ''">
+                AND dog_work_log_info.log_Content = #{log_Content}
+            </if>
+            <if test="null != remark and remark != ''">
+                AND dog_work_log_info.remark = #{remark}
+            </if>
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND dog_work_log_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND dog_work_log_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.goods_Type and pd.goods_Type != ''">
+                AND dog_work_log_info.goods_Type = #{pd.goods_Type}
+            </if>
+            <if test="null != pd.goods_Name and pd.goods_Name != ''">
+                AND dog_work_log_info.goods_Name = #{pd.goods_Name}
+            </if>
+            <if test="null != pd.use_User_Name and pd.use_User_Name != ''">
+                AND dog_work_log_info.use_User_Name = #{pd.use_User_Name}
+            </if>
+            <if test="null != pd.use_Date and pd.use_Date != ''">
+                AND dog_work_log_info.use_Date = #{pd.use_Date}
+            </if>
+            <if test="null != pd.log_Content and pd.log_Content != ''">
+                AND dog_work_log_info.log_Content = #{pd.log_Content}
+            </if>
+            <if test="null != pd.remark and pd.remark != ''">
+                AND dog_work_log_info.remark = #{pd.remark}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="fieldLeft">
+        dog_work_log_info.id AS id
+        ,dog_work_log_info.dog_Id AS dog_Id
+        ,dog_work_log_info.goods_Type AS goods_Type
+        ,dog_work_log_info.goods_Name AS goods_Name
+        ,dog_work_log_info.use_User_Name AS use_User_Name
+        ,dog_work_log_info.use_Date AS use_Date
+        ,dog_work_log_info.log_Content AS log_Content
+        ,dog_work_log_info.remark AS remark
+
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != goods_Type and goods_Type != ''">
+                goods_Type = #{goods_Type},
+            </if>
+            <if test="null != goods_Name and goods_Name != ''">
+                goods_Name = #{goods_Name},
+            </if>
+            <if test="null != use_User_Name and use_User_Name != ''">
+                use_User_Name = #{use_User_Name},
+            </if>
+            <if test="null != use_Date and use_Date != ''">
+                use_Date = #{use_Date},
+            </if>
+            <if test="null != log_Content and log_Content != ''">
+                log_Content = #{log_Content},
+            </if>
+            <if test="null != remark and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,goods_type_info.goods_Type_Name AS goods_Type_Name
+        ,goods_info.goods_Name AS goods_Name_SHOW
+        FROM dog_work_log_info AS dog_work_log_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = dog_work_log_info.dog_Id
+        LEFT JOIN goods_type_info AS goods_type_info ON goods_type_info.id = dog_work_log_info.goods_Type
+        LEFT JOIN goods_info AS goods_info ON goods_info.id = dog_work_log_info.goods_Name
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dog_Name
+        ,quarantinedog_base_info.dog_Image AS dog_Image
+        ,goods_type_info.goods_Type_Name AS goods_Type_Name
+        ,goods_info.goods_Name AS goods_Name_SHOW
+        FROM dog_work_log_info AS dog_work_log_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON quarantinedog_base_info.id = dog_work_log_info.dog_Id
+        LEFT JOIN goods_type_info AS goods_type_info ON goods_type_info.id = dog_work_log_info.goods_Type
+        LEFT JOIN goods_info AS goods_info ON goods_info.id = dog_work_log_info.goods_Name
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM train_log_info-->
+        <!--<where>-->
+            <!--train_subject_Name = #{train_subject_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO dog_work_log_info
+        (
+        dog_Id
+        <if test="null != goods_Type and goods_Type != ''">
+            ,goods_Type
+        </if>
+        <if test="null != goods_Name and goods_Name != ''">
+            ,goods_Name
+        </if>
+        <if test="null != use_User_Name and use_User_Name != ''">
+            ,use_User_Name
+        </if>
+        <if test="null != use_Date and use_Date != ''">
+            ,use_Date
+        </if>
+        <if test="null != log_Content and log_Content != ''">
+            ,log_Content
+        </if>
+        <if test="null != remark and remark != ''">
+            ,remark
+        </if>
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != goods_Type and goods_Type != ''">
+            ,#{goods_Type}
+        </if>
+        <if test="null != goods_Name and goods_Name != ''">
+            ,#{goods_Name}
+        </if>
+        <if test="null != use_User_Name and use_User_Name != ''">
+            ,#{use_User_Name}
+        </if>
+        <if test="null != use_Date and use_Date != ''">
+            ,#{use_Date}
+        </if>
+        <if test="null != log_Content and log_Content != ''">
+            ,#{log_Content}
+        </if>
+        <if test="null != remark and remark != ''">
+            ,#{remark}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE dog_work_log_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM dog_work_log_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

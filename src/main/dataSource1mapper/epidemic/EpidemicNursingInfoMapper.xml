@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EpidemicNursingInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{}-->
+    <sql id="where">
+        <where>
+
+            <if test="null != id and id != ''">
+                AND nursing_info.id = #{id}
+            </if>
+            <if test="null != dog_Id and dog_Id != ''">
+                AND nursing_info.dog_Id = #{dog_Id}
+            </if>
+            <if test="null != chip_No and chip_No != ''">
+                AND nursing_info.chip_No = #{chip_No}
+            </if>
+            <if test="null != coat_Nursing and coat_Nursing != ''">
+                AND nursing_info.coat_Nursing = #{coat_Nursing}
+            </if>
+            <if test="null != body_Surface_Nursing and body_Surface_Nursing != ''">
+                AND nursing_info.body_Surface_Nursing = #{body_Surface_Nursing}
+            </if>
+            <if test="null != ear_Nursing and ear_Nursing != ''">
+                AND nursing_info.ear_Nursing = #{ear_Nursing}
+            </if>
+            <if test="null != nail_Nursing and nail_Nursing != ''">
+                AND nursing_info.nail_Nursing = #{nail_Nursing}
+            </if>
+            <if test="null != nursing_User_Name and nursing_User_Name != ''">
+                AND nursing_info.nursing_User_Name = #{nursing_User_Name}
+            </if>
+            <if test="null != nursing_Date and nursing_Date != ''">
+                AND nursing_info.nursing_Date = #{nursing_Date}
+            </if>
+
+        </where>
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null != pd. and pd. != ''">-->
+    <!-- = #{pd.}-->
+    <sql id="wherePage">
+
+        <where>
+            <if test="null != pd.id and pd.id != ''">
+                AND nursing_info.id = #{pd.id}
+            </if>
+            <if test="null != pd.dog_Id and pd.dog_Id != ''">
+                AND nursing_info.dog_Id = #{pd.dog_Id}
+            </if>
+            <if test="null != pd.chip_No and pd.chip_No != ''">
+                AND nursing_info.chip_No = #{pd.chip_No}
+            </if>
+            <if test="null != pd.coat_Nursing and pd.coat_Nursing != ''">
+                AND nursing_info.coat_Nursing = #{pd.coat_Nursing}
+            </if>
+            <if test="null != pd.body_Surface_Nursing and pd.body_Surface_Nursing != ''">
+                AND nursing_info.body_Surface_Nursing = #{pd.body_Surface_Nursing}
+            </if>
+            <if test="null != pd.ear_Nursing and pd.ear_Nursing != ''">
+                AND nursing_info.ear_Nursing = #{pd.ear_Nursing}
+            </if>
+            <if test="null != pd.nail_Nursing and pd.nail_Nursing != ''">
+                AND nursing_info.nail_Nursing = #{pd.nail_Nursing}
+            </if>
+            <if test="null != pd.nursing_User_Name and pd.nursing_User_Name != ''">
+                AND nursing_info.nursing_User_Name = #{pd.nursing_User_Name}
+            </if>
+            <if test="null != pd.nursing_Date and pd.nursing_Date != ''">
+                AND nursing_info.nursing_Date = #{pd.nursing_Date}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="fieldLeft">
+        nursing_info.id AS id
+        ,nursing_info.dog_Id AS dog_Id
+        ,nursing_info.chip_No AS chip_No
+        ,nursing_info.coat_Nursing AS coat_Nursing
+        ,nursing_info.body_Surface_Nursing AS body_Surface_Nursing
+        ,nursing_info.ear_Nursing AS ear_Nursing
+        ,nursing_info.nail_Nursing AS nail_Nursing
+        ,nursing_info.nursing_User_Name AS nursing_User_Name
+        ,nursing_info.nursing_Date AS nursing_Date
+    </sql>
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!-- = #{},-->
+    <sql id="setUpd">
+        <set>
+            <if test="null != dog_Id and dog_Id != ''">
+                dog_Id = #{dog_Id},
+            </if>
+            <if test="null != chip_No and chip_No != ''">
+                chip_No = #{chip_No},
+            </if>
+            <if test="null != coat_Nursing and coat_Nursing != ''">
+                coat_Nursing = #{coat_Nursing},
+            </if>
+            <if test="null != body_Surface_Nursing and body_Surface_Nursing != ''">
+                body_Surface_Nursing = #{body_Surface_Nursing},
+            </if>
+            <if test="null != ear_Nursing and ear_Nursing != ''">
+                ear_Nursing = #{ear_Nursing},
+            </if>
+            <if test="null != nail_Nursing and nail_Nursing != ''">
+                nail_Nursing = #{nail_Nursing},
+            </if>
+            <if test="null != nursing_User_Name and nursing_User_Name != ''">
+                nursing_User_Name = #{nursing_User_Name},
+            </if>
+            <if test="null != nursing_Date and nursing_Date != ''">
+                nursing_Date = #{nursing_Date},
+            </if>
+        </set>
+    </sql>
+
+    <select id="selectInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM nursing_info AS nursing_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = nursing_info.dog_Id
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,quarantinedog_base_info.dog_Name AS dogName
+        ,quarantinedog_base_info.dog_Chip_Number AS dog_Chip_Number
+        FROM nursing_info AS nursing_info
+        LEFT JOIN quarantinedog_base_info AS quarantinedog_base_info ON 1 = 1 AND quarantinedog_base_info.id = nursing_info.dog_Id
+        <include refid="wherePage"></include>
+    </select>
+
+    <!--插入前的处理,根据参数判断是否有重复数据-->
+    <!--<select id="selectCheck" parameterType="map" resultType="map">-->
+        <!--SELECT COUNT(1) AS COUNT,id FROM epidemic_treatment_info-->
+        <!--<where>-->
+            <!--epidemic_Name = #{epidemic_Name}-->
+        <!--</where>-->
+        <!--GROUP BY id-->
+    <!--</select>-->
+
+    <!--</if>-->
+    <!--<if test="null !=  and  != ''">-->
+    <!--mysql当前日期函数    now()-->
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO nursing_info
+        (
+        dog_Id
+        <if test="null != chip_No and chip_No != ''">
+            ,chip_No
+        </if>
+        <if test="null != coat_Nursing and coat_Nursing != ''">
+            ,coat_Nursing
+        </if>
+        <if test="null != body_Surface_Nursing and body_Surface_Nursing != ''">
+            ,body_Surface_Nursing
+        </if>
+        <if test="null != ear_Nursing and ear_Nursing != ''">
+            ,ear_Nursing
+        </if>
+        <if test="null != nail_Nursing and nail_Nursing != ''">
+            ,nail_Nursing
+        </if>
+        <if test="null != nursing_User_Name and nursing_User_Name != ''">
+            ,nursing_User_Name
+        </if>
+        <if test="null != nursing_Date and nursing_Date != ''">
+            ,nursing_Date
+        </if>
+
+        ) VALUES (
+        #{dog_Id}
+        <if test="null != chip_No and chip_No != ''">
+            ,#{chip_No}
+        </if>
+        <if test="null != coat_Nursing and coat_Nursing != ''">
+            ,#{coat_Nursing}
+        </if>
+        <if test="null != body_Surface_Nursing and body_Surface_Nursing != ''">
+            ,#{body_Surface_Nursing}
+        </if>
+        <if test="null != ear_Nursing and ear_Nursing != ''">
+            ,#{ear_Nursing}
+        </if>
+        <if test="null != nail_Nursing and nail_Nursing != ''">
+            ,#{nail_Nursing}
+        </if>
+        <if test="null != nursing_User_Name and nursing_User_Name != ''">
+            ,#{nursing_User_Name}
+        </if>
+        <if test="null != nursing_Date and nursing_Date != ''">
+            ,#{nursing_Date}
+        </if>
+        )
+    </insert>
+
+    <!--写死根据id更新-->
+    <update id="updateInfo" parameterType="map">
+        UPDATE nursing_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <!--写死根据id删除-->
+    <delete id="deleteInfo" parameterType="map">
+        DELETE FROM nursing_info
+        <where>
+            AND id = #{id}
+        </where>
+    </delete>
+
+</mapper>

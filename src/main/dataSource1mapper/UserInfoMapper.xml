@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserInfoMapper">
+
+    <!--所有表的ID要带mapper文件的前缀名-->
+
+    <sql id="where">
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+            <if test="null != user_Name and user_Name != ''">
+                AND user_Name = #{user_Name}
+            </if>
+            <if test="null != user_password and user_password != ''">
+                AND user_password = #{user_password}
+            </if>
+            <if test="null != user_Real_Name and user_Real_Name != ''">
+                AND user_Real_Name = #{user_Real_Name}
+            </if>
+            <if test="null != user_Id and user_Id != ''">
+                AND user_Id = #{user_Id}
+            </if>
+            <if test="null != user_Sex and user_Sex != ''">
+                AND user_Sex = #{user_Sex}
+            </if>
+            <if test="null != user_Age and user_Age != ''">
+                AND user_Age = #{user_Age}
+            </if>
+            <if test="null != user_Phone and user_Phone != ''">
+                AND user_Phone = #{user_Phone}
+            </if>
+            <if test="null != user_Organization_Id and user_Organization_Id != ''">
+                AND user_Organization_Id = #{user_Organization_Id}
+            </if>
+            <if test="null != user_Type and user_Type != ''">
+                AND user_Type = #{user_Type}
+            </if>
+            <if test="null != user_Company and user_Company != ''">
+                AND user_Company = #{user_Company}
+            </if>
+            <if test="null != user_Content and user_Content != ''">
+                AND user_Content = #{user_Content}
+            </if>
+            <if test="null != user_Remark and user_Remark != ''">
+                AND user_Remark = #{user_Remark}
+            </if>
+        </where>
+    </sql>
+
+
+    <sql id="wherePage">
+        <where>
+            <if test="null != pd.user_Name and pd.user_Name != ''">
+                AND user_Name = #{pd.user_Name}
+            </if>
+            <if test="null != pd.user_password and pd.user_password != ''">
+                AND user_password = #{pd.user_password}
+            </if>
+            <if test="null != pd.user_Real_Name and pd.user_Real_Name != ''">
+                AND user_Real_Name = #{pd.user_Real_Name}
+            </if>
+            <if test="null != pd.user_Id and pd.user_Id != ''">
+                AND user_Id = #{pd.user_Id}
+            </if>
+            <if test="null != pd.user_Sex and pd.user_Sex != ''">
+                AND user_Sex = #{pd.user_Sex}
+            </if>
+            <if test="null != pd.user_Age and pd.user_Age != ''">
+                AND user_Age = #{pd.user_Age}
+            </if>
+            <if test="null != pd.user_Phone and pd.user_Phone != ''">
+                AND user_Phone = #{pd.user_Phone}
+            </if>
+            <if test="null != pd.user_Organization_Id and pd.user_Organization_Id != ''">
+                AND user_Organization_Id = #{pd.user_Organization_Id}
+            </if>
+            <if test="null != pd.user_Type and pd.user_Type != ''">
+                AND user_Type = #{pd.user_Type}
+            </if>
+            <if test="null != pd.user_Company and pd.user_Company != ''">
+                AND user_Company = #{pd.user_Company}
+            </if>
+            <if test="null != pd.user_Content and pd.user_Content != ''">
+                AND user_Content = #{pd.user_Content}
+            </if>
+            <if test="null != pd.user_Remark and pd.user_Remark != ''">
+                AND user_Remark = #{pd.user_Remark}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="wherePageLeft">
+        <where>
+            <if test="null != pd.user_Name and pd.user_Name != ''">
+                AND user_info.user_Name = #{pd.user_Name}
+            </if>
+            <if test="null != pd.user_password and pd.user_password != ''">
+                AND user_info.user_password = #{pd.user_password}
+            </if>
+            <if test="null != pd.user_Real_Name and pd.user_Real_Name != ''">
+                AND user_info.user_Real_Name = #{pd.user_Real_Name}
+            </if>
+            <if test="null != pd.user_Id and pd.user_Id != ''">
+                AND user_info.user_Id = #{pd.user_Id}
+            </if>
+            <if test="null != pd.user_Sex and pd.user_Sex != ''">
+                AND user_info.user_Sex = #{pd.user_Sex}
+            </if>
+            <if test="null != pd.user_Age and pd.user_Age != ''">
+                AND user_info.user_Age = #{pd.user_Age}
+            </if>
+            <if test="null != pd.user_Phone and pd.user_Phone != ''">
+                AND user_info.user_Phone = #{pd.user_Phone}
+            </if>
+            <if test="null != pd.user_Organization_Id and pd.user_Organization_Id != ''">
+                AND user_info.user_Organization_Id = #{pd.user_Organization_Id}
+            </if>
+            <if test="null != pd.user_Type and pd.user_Type != ''">
+                AND user_info.user_Type = #{pd.user_Type}
+            </if>
+            <if test="null != pd.user_Company and pd.user_Company != ''">
+                AND user_info.user_Company = #{pd.user_Company}
+            </if>
+            <if test="null != pd.user_Content and pd.user_Content != ''">
+                AND user_info.user_Content = #{pd.user_Content}
+            </if>
+            <if test="null != pd.user_Remark and pd.user_Remark != ''">
+                AND user_info.user_Remark = #{pd.user_Remark}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="setUpd">
+        <set>
+            <if test="null != user_Name and user_Name != ''">
+                user_Name = #{user_Name},
+            </if>
+            <if test="null != user_password and user_password != ''">
+                user_password = #{user_password},
+            </if>
+            <if test="null != user_Real_Name and user_Real_Name != ''">
+                user_Real_Name = #{user_Real_Name},
+            </if>
+            <if test="null != user_Id and user_Id != ''">
+                user_Id = #{user_Id},
+            </if>
+            <if test="null != user_Sex and user_Sex != ''">
+                user_Sex = #{user_Sex},
+            </if>
+            <if test="null != user_Age and user_Age != ''">
+                user_Age = #{user_Age},
+            </if>
+            <if test="null != user_Phone and user_Phone != ''">
+                user_Phone = #{user_Phone},
+            </if>
+            <if test="null != user_Organization_Id and user_Organization_Id != ''">
+                user_Organization_Id = #{user_Organization_Id},
+            </if>
+            <if test="null != user_Type and user_Type != ''">
+                user_Type = #{user_Type},
+            </if>
+            <if test="null != user_Company and user_Company != ''">
+                user_Company = #{user_Company},
+            </if>
+            <if test="null != user_Content and user_Content != ''">
+                user_Content = #{user_Content},
+            </if>
+            <if test="null != user_Remark and user_Remark != ''">
+                user_Remark = #{user_Remark},
+            </if>
+        </set>
+    </sql>
+
+    <sql id="field">
+        id
+                , user_Name
+                , user_password
+                , user_Real_Name
+                , user_Id
+                , user_Sex
+                , user_Age
+                , user_Phone
+                , user_Organization_Id
+                , user_Type
+                , user_Company
+                , user_Content
+                , user_Remark
+    </sql>
+
+    <sql id="fieldLeft">
+        user_info.id AS id
+        , user_info.user_Name AS user_Name
+        , user_info.user_password AS user_password
+        , user_info.user_Real_Name AS user_Real_Name
+        , user_info.user_Id AS user_Id
+        , user_info.user_Sex AS user_Sex
+        , user_info.user_Age AS user_Age
+        , user_info.user_Phone AS user_Phone
+        , user_info.user_Organization_Id AS user_Organization_Id
+        , user_info.user_Type AS user_Type
+        , user_info.user_Company AS user_Company
+        , user_info.user_Content AS user_Content
+        , user_info.user_Remark AS user_Remark
+    </sql>
+
+    <select id="getUser" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS USERCOUNT FROM user_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="selectUserInfo" parameterType="map" resultType="map">
+        SELECT
+        <include refid="field"></include>
+        FROM user_info
+        <include refid="where"></include>
+    </select>
+
+    <select id="getListByParamsByPage" parameterType="com.springmvc.model.Page" resultType="com.springmvc.tools.PageData">
+        SELECT
+        <include refid="fieldLeft"></include>
+        ,organization_info.organization_Name AS organization_Name
+        ,role_info.role_Name AS role_Name
+        FROM user_info AS user_info
+        LEFT JOIN organization_info AS organization_info ON organization_info.id = user_info.user_Organization_Id
+        LEFT JOIN role_info AS role_info ON role_info.id = user_info.user_Type
+        <include refid="wherePageLeft"></include>
+    </select>
+
+    <select id="getCountByParams" parameterType="map" resultType="map">
+        SELECT COUNT(1) AS COUNT FROM user_info
+        <where>
+            AND user_Name = #{user_Name}
+        </where>
+    </select>
+
+
+    <insert id="insertInfo" parameterType="map">
+        INSERT INTO user_info
+        (
+        <if test="null != user_Name and user_Name != ''">
+            user_Name
+        </if>
+        <if test="null != user_password and user_password != ''">
+            ,user_password
+        </if>
+        <if test="null != user_Real_Name and user_Real_Name != ''">
+            ,user_Real_Name
+        </if>
+        <if test="null != user_Id and user_Id != ''">
+            ,user_Id
+        </if>
+        <if test="null != user_Sex and user_Sex != ''">
+            ,user_Sex
+        </if>
+        <if test="null != user_Age and user_Age != ''">
+            ,user_Age
+        </if>
+        <if test="null != user_Phone and user_Phone != ''">
+            ,user_Phone
+        </if>
+        <if test="null != user_Organization_Id and user_Organization_Id != ''">
+            ,user_Organization_Id
+        </if>
+        <if test="null != user_Type and user_Type != ''">
+            ,user_Type
+        </if>
+        <if test="null != user_Company and user_Company != ''">
+            ,user_Company
+        </if>
+        <if test="null != user_Content and user_Content != ''">
+            ,user_Content
+        </if>
+        <if test="null != user_Remark and user_Remark != ''">
+            ,user_Remark
+        </if>
+        ) VALUES (
+        <if test="null != user_Name and user_Name != ''">
+            #{user_Name}
+        </if>
+        <if test="null != user_password and user_password != ''">
+            ,#{user_password}
+        </if>
+        <if test="null != user_Real_Name and user_Real_Name != ''">
+            ,#{user_Real_Name}
+        </if>
+        <if test="null != user_Id and user_Id != ''">
+            ,#{user_Id}
+        </if>
+        <if test="null != user_Sex and user_Sex != ''">
+            ,#{user_Sex}
+        </if>
+        <if test="null != user_Age and user_Age != ''">
+            ,#{user_Age}
+        </if>
+        <if test="null != user_Phone and user_Phone != ''">
+            ,#{user_Phone}
+        </if>
+        <if test="null != user_Organization_Id and user_Organization_Id != ''">
+            ,#{user_Organization_Id}
+        </if>
+        <if test="null != user_Type and user_Type != ''">
+            ,#{user_Type}
+        </if>
+        <if test="null != user_Company and user_Company != ''">
+            ,#{user_Company}
+        </if>
+        <if test="null != user_Content and user_Content != ''">
+            ,#{user_Content}
+        </if>
+        <if test="null != user_Remark and user_Remark != ''">
+            ,#{user_Remark}
+        </if>
+        )
+    </insert>
+    
+    <update id="updateInfoByid" parameterType="map">
+        UPDATE user_info
+        <include refid="setUpd"></include>
+        <where>
+            <if test="null != id and id != ''">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+    
+    <delete id="deleteByid" parameterType="map">
+      DELETE FROM user_info
+      <where>
+          AND id = #{id}
+      </where>
+
+    </delete>
+
+</mapper>
