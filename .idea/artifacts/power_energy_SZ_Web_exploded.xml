@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="power_energy_SZ:Web exploded">
+    <output-path>$PROJECT_DIR$/../../apache-tomcat-8.5.29/webapps/power_energy_SZ</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="power_energy_SZ/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="power_energy_SZ" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

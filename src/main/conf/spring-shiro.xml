@@ -41,13 +41,14 @@
                 <!--/logout.json = logout-->
                 <!--/** = authc -->
                 <!--静态资源不拦截-->
+                /authCodeImg/getAuthCodeImg = anon
                 /system/index = anon
                 /system/login = anon
                 <!--/login.jhtml = anon-->
                 /system/checkLogin = anon
                 /system/loginsuccess = authc
                 /system/logout = logout
-                /system/** = anon
+                /system/** = authc
                 <!--/system/** = authc-->
             </value>
         </property>
