@@ -198,19 +198,25 @@ a.c8:hover{
 }
 
 .c9,.c9:hover,.c9>.panel-header{
-	background: #3EB3A5;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#3EB3A5,endColorstr=#3EB3A5,GradientType=0);
+	background: #364B80;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#364B80,endColorstr=#364B80,GradientType=0);
+	/*background: #3EB3A5;*/
+	/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#3EB3A5,endColorstr=#3EB3A5,GradientType=0);*/
 	color: #fff;
-	border-color: #3EB3A5;
+	border-color: #364B80;
+	/*border-color: #3EB3A5;*/
 }
 a.c9:hover{
-	background: #4ad8c7;
+	background: #364B80;
+	/*background: #4ad8c7;*/
 	filter: none;
 }
 
 .c100,.c100:hover,.c100>.panel-header{
-	background: #028C8C;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#028C8C,endColorstr=#028C8C,GradientType=0);
+	/*background: #028C8C;*/
+	/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#028C8C,endColorstr=#028C8C,GradientType=0);*/
+	background: #364B80;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#364B80,endColorstr=#364B80,GradientType=0);
 	color: #fff;
 	padding: 0px 15px 2px 15px;
 }

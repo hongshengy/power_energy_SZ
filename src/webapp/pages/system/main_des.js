@@ -457,7 +457,7 @@ function floatShow(conts) {
  * 执行动态菜单加载
  */
 function selectRoleid() {
-    debugger;
+    // debugger;
     var Name = null;
     if (UserName.length > 6) {
         Name = UserName.substring(0, 6) + '...';

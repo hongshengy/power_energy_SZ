@@ -285,9 +285,11 @@ table.form-table-hidden .textbox-focused{
 .fangtian-mainMenu .l-btn-plain:hover,
 .fangtian-mainMenu .m-btn-plain-active
 {
-    background: #00a19e;
+    background: #364B80;
+    /*background: #00a19e;*/
     color: #000000;
-    border: 1px solid #006f6d;
+    border: 1px solid #364B80;
+    /*border: 1px solid #006f6d;*/
  }
  
 .fangtian-mainMenu .m-btn-downarrow {

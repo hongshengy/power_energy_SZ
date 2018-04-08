@@ -505,7 +505,7 @@
                             <a id="btnPassword" class="easyui-linkbutton c9 shadow" href="#" onclick="updatemmgl()">button</a>
                         </p>
                         <p>
-                            <a id="cnbwhdpt" class="easyui-linkbutton c9 shadow" href="login.jsp" >button</a>
+                            <a id="cnbwhdpt" class="easyui-linkbutton c9 shadow" href="${loginPath}" >button</a>
                         </p>
                     </div>
                 </div>
@@ -525,7 +525,7 @@
     </div>
 </div>
 <div class="footer-panel" data-options="region:'south',border:false" >
-    <span class="fangtian-text" >技术支持：江苏方天电力技术有限公司</span>
+    <span class="fangtian-text" >技术支持：深圳华睿丰盛</span>
 </div>
 <div id="main-warning-tip-panel">
     <div class="title"><span>告警信息</span><span class="close" onclick="closegg()">×</span></div>
